@@ -120,12 +120,50 @@
 
         .hero h2 {
             font-size: 2rem;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
 
         .hero p {
             font-size: 1.1rem;
             opacity: 0.9;
+        }
+
+        /* Contact Icons */
+        .contact-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.95rem;
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 25px;
+            transition: all 0.3s;
+        }
+
+        .contact-link:hover {
+            background: rgba(255,255,255,0.25);
+            transform: scale(1.05);
+        }
+
+        .contact-link i {
+            font-size: 1.2rem;
+        }
+
+        .whatsapp-link i {
+            color: #25D366;
+        }
+
+        .email-link i {
+            color: #fff;
         }
 
         /* Sections */
@@ -525,6 +563,82 @@
             display: block;
         }
 
+        /* Beach List Styles */
+        .beach-list {
+            list-style: none;
+            background: var(--white);
+            border-radius: 15px;
+            padding: 10px 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .beach-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .beach-list li:last-child {
+            border-bottom: none;
+        }
+
+        .beach-name {
+            font-weight: 500;
+            color: var(--primary-color);
+        }
+
+        .beach-description {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-top: 3px;
+        }
+
+        .beach-link {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .beach-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Map Modal */
+        .map-modal .modal-content {
+            max-width: 900px;
+            max-height: 90vh;
+        }
+
+        .map-modal .modal-body {
+            padding: 0;
+        }
+
+        .map-modal .modal-body img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 0 0 15px 15px;
+        }
+
+        .map-download-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 15px 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .map-download-btn:hover {
+            background: var(--primary-light);
+        }
+
         /* Responsive */
         @media (max-width: 600px) {
             .hero h2 {
@@ -533,6 +647,15 @@
             
             .card-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .contact-icons {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .contact-link {
+                justify-content: center;
             }
         }
     </style>
@@ -564,10 +687,27 @@
         <div class="page active" id="page-home">
             <div class="hero">
                 <h2 data-es="Hort de Sant Patrici" data-en="Hort de Sant Patrici" data-fr="Hort de Sant Patrici">Hort de Sant Patrici</h2>
-                <p data-es="Bienvenido a nuestra finca tradicional en Menorca" data-en="Welcome to our traditional farm in Menorca" data-fr="Bienvenue dans notre ferme traditionnelle à Minorque">Bienvenido a nuestra finca tradicional en Menorca</p>
+                <div class="contact-icons">
+                    <a href="https://wa.me/34971713716" target="_blank" class="contact-link whatsapp-link">
+                        <i class="fab fa-whatsapp"></i>
+                        <span>+34 971 71 37 16</span>
+                    </a>
+                    <a href="mailto:sales@santpatrici.es" class="contact-link email-link">
+                        <i class="fas fa-envelope"></i>
+                        <span>sales@santpatrici.es</span>
+                    </a>
+                </div>
             </div>
 
             <div class="menu-buttons">
+                <a href="#" class="menu-btn" onclick="openModal('snacksModal')">
+                    <i class="fas fa-cheese"></i>
+                    <span data-es="Carta Snacks Bar" data-en="Snacks Bar Menu" data-fr="Menu Collation">Carta Snacks Bar</span>
+                </a>
+                <a href="#" class="menu-btn" onclick="openModal('restaurantMenuModal')">
+                    <i class="fas fa-book-open"></i>
+                    <span data-es="Carta Restaurante" data-en="Restaurant Menu" data-fr="Menu Restaurant">Carta Restaurante</span>
+                </a>
                 <a href="#" class="menu-btn" onclick="showPage('activities')">
                     <i class="fas fa-wine-glass-alt"></i>
                     <span data-es="Actividades" data-en="Activities" data-fr="Activités">Actividades</span>
@@ -579,14 +719,6 @@
                 <a href="#" class="menu-btn" onclick="showPage('restaurants')">
                     <i class="fas fa-utensils"></i>
                     <span data-es="Restaurantes" data-en="Restaurants" data-fr="Restaurants">Restaurantes</span>
-                </a>
-                <a href="#" class="menu-btn" onclick="openModal('snacksModal')">
-                    <i class="fas fa-cheese"></i>
-                    <span data-es="Carta Snacks Bar" data-en="Snacks Bar Menu" data-fr="Menu Collation">Carta Snacks Bar</span>
-                </a>
-                <a href="#" class="menu-btn" onclick="openModal('restaurantMenuModal')">
-                    <i class="fas fa-book-open"></i>
-                    <span data-es="Carta Restaurante" data-en="Restaurant Menu" data-fr="Menu Restaurant">Carta Restaurante</span>
                 </a>
             </div>
         </div>
@@ -601,50 +733,34 @@
                 
                 <div class="card-grid">
                     <div class="card">
-                        <img src="https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?w=400" alt="Degustación" class="card-img">
+                        <img src="https://assets.isu.pub/document-structure/230728173835-5a82c920c79913e459704c6849a39dab/v1/cef0a5034fb6aefac4b64ed636b37a03.jpeg?width=1440&quality=85%2C50" alt="Degustación" class="card-img">
                         <div class="card-content">
                             <h4 class="card-title" data-es="Visita Degustación en Hort Sant Patrici" data-en="Tasting Visit at Hort Sant Patrici" data-fr="Visite Dégustation à Hort Sant Patrici">Visita Degustación en Hort Sant Patrici</h4>
                             <p class="card-description" data-es="Descubre nuestra tradición quesera con una visita guiada y degustación de nuestros quesos artesanales elaborados con leche cruda de vaca." data-en="Discover our cheese-making tradition with a guided tour and tasting of our artisan cheeses made with raw cow's milk." data-fr="Découvrez notre tradition fromagère avec une visite guidée et dégustation de nos fromages artisanaux au lait cru de vache.">Descubre nuestra tradición quesera con una visita guiada y degustación de nuestros quesos artesanales elaborados con leche cruda de vaca.</p>
-                            <a href="#" class="card-btn">
-                                <i class="fas fa-calendar-check"></i>
-                                <span data-es="Reservar" data-en="Book" data-fr="Réserver">Reservar</span>
-                            </a>
                         </div>
                     </div>
 
                     <div class="card">
-                        <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400" alt="Kayak" class="card-img">
+                        <img src="https://men.gsstatic.es/sfAttachPlugin/getCachedContent/id/1688690/width/730/height/500/crop/1" alt="Snorkel, Kayak y Paddle Surf" class="card-img">
                         <div class="card-content">
-                            <h4 class="card-title" data-es="Kayak y Paddle Surf" data-en="Kayak and Paddle Surf" data-fr="Kayak et Paddle">Kayak y Paddle Surf</h4>
+                            <h4 class="card-title" data-es="Snorkel, Kayak y Paddle Surf" data-en="Snorkel, Kayak and Paddle Surf" data-fr="Snorkel, Kayak et Paddle">Snorkel, Kayak y Paddle Surf</h4>
                             <p class="card-description" data-es="Explora las calas y cuevas de Menorca desde el mar con actividades acuáticas." data-en="Explore Menorca's coves and caves from the sea with water activities." data-fr="Explorez les criques et grottes de Minorque depuis la mer.">Explora las calas y cuevas de Menorca desde el mar con actividades acuáticas.</p>
-                            <a href="#" class="card-btn">
-                                <i class="fas fa-info-circle"></i>
-                                <span data-es="Más info" data-en="More info" data-fr="Plus d'infos">Más info</span>
-                            </a>
                         </div>
                     </div>
 
                     <div class="card">
-                        <img src="https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?w=400" alt="Rutas a caballo" class="card-img">
+                        <img src="https://hipicas.net/wp-content/uploads/2024/04/Rutas-a-Caballo-por-Menorca.jpg" alt="Rutas a caballo" class="card-img">
                         <div class="card-content">
                             <h4 class="card-title" data-es="Rutas a Caballo" data-en="Horse Riding" data-fr="Équitation">Rutas a Caballo</h4>
                             <p class="card-description" data-es="Descubre el Camí de Cavalls y los paisajes menorquines a caballo." data-en="Discover the Camí de Cavalls and Menorcan landscapes on horseback." data-fr="Découvrez le Camí de Cavalls et les paysages minorquins à cheval.">Descubre el Camí de Cavalls y los paisajes menorquines a caballo.</p>
-                            <a href="#" class="card-btn">
-                                <i class="fas fa-info-circle"></i>
-                                <span data-es="Más info" data-en="More info" data-fr="Plus d'infos">Más info</span>
-                            </a>
                         </div>
                     </div>
 
                     <div class="card">
-                        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400" alt="Senderismo" class="card-img">
+                        <img src="https://www.menorcadiferente.com/wp-content/uploads/2009/10/Tramo-7-del-Cami-de-Cavalls-De-Algaiarens-a-Cala-Pilar-scaled.jpg" alt="Camí de Cavalls" class="card-img">
                         <div class="card-content">
-                            <h4 class="card-title" data-es="Senderismo" data-en="Hiking" data-fr="Randonnée">Senderismo</h4>
+                            <h4 class="card-title" data-es="Camí de Cavalls" data-en="Camí de Cavalls" data-fr="Camí de Cavalls">Camí de Cavalls</h4>
                             <p class="card-description" data-es="Recorre las rutas del Camí de Cavalls y descubre rincones únicos de la isla." data-en="Walk the Camí de Cavalls routes and discover unique corners of the island." data-fr="Parcourez les sentiers du Camí de Cavalls et découvrez des coins uniques de l'île.">Recorre las rutas del Camí de Cavalls y descubre rincones únicos de la isla.</p>
-                            <a href="#" class="card-btn">
-                                <i class="fas fa-info-circle"></i>
-                                <span data-es="Más info" data-en="More info" data-fr="Plus d'infos">Más info</span>
-                            </a>
                         </div>
                     </div>
                 </div>
@@ -659,9 +775,9 @@
                     <span data-es="Playas de Menorca" data-en="Menorca Beaches" data-fr="Plages de Minorque">Playas de Menorca</span>
                 </h3>
 
-                <a href="#" class="download-btn" onclick="downloadMap()">
+                <a href="#" class="download-btn" onclick="openModal('mapModal')">
                     <i class="fas fa-map"></i>
-                    <span data-es="Descargar Mapa de Menorca" data-en="Download Menorca Map" data-fr="Télécharger la Carte de Minorque">Descargar Mapa de Menorca</span>
+                    <span data-es="Ver Mapa de Menorca" data-en="View Menorca Map" data-fr="Voir la Carte de Minorque">Ver Mapa de Menorca</span>
                 </a>
 
                 <!-- North Beaches -->
@@ -675,79 +791,50 @@
                         <span data-es="Arena oscura y paisaje erosionado por el viento de tramuntana. Playas más salvajes y menos concurridas." data-en="Dark sand and landscape eroded by the tramuntana wind. Wilder and less crowded beaches." data-fr="Sable foncé et paysage érodé par le vent de tramuntane. Plages plus sauvages et moins fréquentées.">Arena oscura y paisaje erosionado por el viento de tramuntana. Playas más salvajes y menos concurridas.</span>
                     </div>
 
-                    <div class="card-grid">
-                        <div class="card">
-                            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400" alt="Cala del Pilar" class="card-img">
-                            <div class="card-content">
-                                <h4 class="card-title">Cala del Pilar</h4>
-                                <p class="card-description" data-es="Impresionante cala de arena rojiza rodeada de acantilados. Acceso a pie de unos 30 minutos." data-en="Impressive cove with reddish sand surrounded by cliffs. About 30 minutes walk." data-fr="Impressionnante crique au sable rougeâtre entourée de falaises. Environ 30 minutes à pied.">Impresionante cala de arena rojiza rodeada de acantilados. Acceso a pie de unos 30 minutos.</p>
-                                <a href="https://maps.google.com/?q=Cala+del+Pilar+Menorca" target="_blank" class="card-btn">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                    <span data-es="Cómo llegar" data-en="Get directions" data-fr="Comment y aller">Cómo llegar</span>
-                                </a>
+                    <ul class="beach-list">
+                        <li>
+                            <div>
+                                <div class="beach-name">Cala del Pilar</div>
+                                <div class="beach-description" data-es="Impresionante cala de arena rojiza rodeada de acantilados. Acceso a pie de unos 30 minutos." data-en="Impressive cove with reddish sand surrounded by cliffs. About 30 minutes walk." data-fr="Impressionnante crique au sable rougeâtre entourée de falaises. Environ 30 minutes à pied.">Impresionante cala de arena rojiza rodeada de acantilados. Acceso a pie de unos 30 minutos.</div>
                             </div>
-                        </div>
-
-                        <div class="card">
-                            <img src="https://images.unsplash.com/photo-1519046904884-53103b34b206?w=400" alt="Cala Pregonda" class="card-img">
-                            <div class="card-content">
-                                <h4 class="card-title">Cala Pregonda</h4>
-                                <p class="card-description" data-es="Una de las calas más espectaculares con arena dorada y rocas rojizas." data-en="One of the most spectacular coves with golden sand and reddish rocks." data-fr="L'une des criques les plus spectaculaires avec du sable doré et des rochers rougeâtres.">Una de las calas más espectaculares con arena dorada y rocas rojizas.</p>
-                                <a href="https://maps.google.com/?q=Cala+Pregonda+Menorca" target="_blank" class="card-btn">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                    <span data-es="Cómo llegar" data-en="Get directions" data-fr="Comment y aller">Cómo llegar</span>
-                                </a>
+                            <a href="https://maps.google.com/?q=Cala+del+Pilar+Menorca" target="_blank" class="beach-link"><i class="fas fa-map-marker-alt"></i> Maps</a>
+                        </li>
+                        <li>
+                            <div>
+                                <div class="beach-name">Cala Pregonda</div>
+                                <div class="beach-description" data-es="Una de las calas más espectaculares con arena dorada y rocas rojizas." data-en="One of the most spectacular coves with golden sand and reddish rocks." data-fr="L'une des criques les plus spectaculaires avec du sable doré et des rochers rougeâtres.">Una de las calas más espectaculares con arena dorada y rocas rojizas.</div>
                             </div>
-                        </div>
-
-                        <div class="card">
-                            <img src="https://images.unsplash.com/photo-1506929562872-bb421503ef21?w=400" alt="Platja de Cavalleria" class="card-img">
-                            <div class="card-content">
-                                <h4 class="card-title">Platja de Cavalleria</h4>
-                                <p class="card-description" data-es="Playa virgen con impresionantes vistas al faro de Cavalleria." data-en="Virgin beach with stunning views of Cavalleria lighthouse." data-fr="Plage vierge avec des vues impressionnantes sur le phare de Cavalleria.">Playa virgen con impresionantes vistas al faro de Cavalleria.</p>
-                                <a href="https://maps.google.com/?q=Platja+de+Cavalleria+Menorca" target="_blank" class="card-btn">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                    <span data-es="Cómo llegar" data-en="Get directions" data-fr="Comment y aller">Cómo llegar</span>
-                                </a>
+                            <a href="https://maps.google.com/?q=Cala+Pregonda+Menorca" target="_blank" class="beach-link"><i class="fas fa-map-marker-alt"></i> Maps</a>
+                        </li>
+                        <li>
+                            <div>
+                                <div class="beach-name">Platja de Cavalleria</div>
+                                <div class="beach-description" data-es="Playa virgen con impresionantes vistas al faro de Cavalleria." data-en="Virgin beach with stunning views of Cavalleria lighthouse." data-fr="Plage vierge avec des vues impressionnantes sur le phare de Cavalleria.">Playa virgen con impresionantes vistas al faro de Cavalleria.</div>
                             </div>
-                        </div>
-
-                        <div class="card">
-                            <img src="https://images.unsplash.com/photo-1520942702018-0862200e6873?w=400" alt="Binimel-La" class="card-img">
-                            <div class="card-content">
-                                <h4 class="card-title">Binimel-La</h4>
-                                <p class="card-description" data-es="Extensa playa de arena oscura, punto de partida para llegar a Cala Pregonda." data-en="Extensive dark sand beach, starting point to reach Cala Pregonda." data-fr="Grande plage de sable foncé, point de départ pour Cala Pregonda.">Extensa playa de arena oscura, punto de partida para llegar a Cala Pregonda.</p>
-                                <a href="https://maps.google.com/?q=Binimel-la+Menorca" target="_blank" class="card-btn">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                    <span data-es="Cómo llegar" data-en="Get directions" data-fr="Comment y aller">Cómo llegar</span>
-                                </a>
+                            <a href="https://maps.google.com/?q=Platja+de+Cavalleria+Menorca" target="_blank" class="beach-link"><i class="fas fa-map-marker-alt"></i> Maps</a>
+                        </li>
+                        <li>
+                            <div>
+                                <div class="beach-name">Binimel-La</div>
+                                <div class="beach-description" data-es="Extensa playa de arena oscura, punto de partida para llegar a Cala Pregonda." data-en="Extensive dark sand beach, starting point to reach Cala Pregonda." data-fr="Grande plage de sable foncé, point de départ pour Cala Pregonda.">Extensa playa de arena oscura, punto de partida para llegar a Cala Pregonda.</div>
                             </div>
-                        </div>
-
-                        <div class="card">
-                            <img src="https://images.unsplash.com/photo-1515238152791-8216bfdf89a7?w=400" alt="Cala Calderer" class="card-img">
-                            <div class="card-content">
-                                <h4 class="card-title">Cala Calderer</h4>
-                                <p class="card-description" data-es="Pequeña cala tranquila ideal para el snorkel." data-en="Small quiet cove ideal for snorkeling." data-fr="Petite crique tranquille idéale pour le snorkeling.">Pequeña cala tranquila ideal para el snorkel.</p>
-                                <a href="https://maps.google.com/?q=Cala+Calderer+Menorca" target="_blank" class="card-btn">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                    <span data-es="Cómo llegar" data-en="Get directions" data-fr="Comment y aller">Cómo llegar</span>
-                                </a>
+                            <a href="https://maps.google.com/?q=Binimel-la+Menorca" target="_blank" class="beach-link"><i class="fas fa-map-marker-alt"></i> Maps</a>
+                        </li>
+                        <li>
+                            <div>
+                                <div class="beach-name">Cala Calderer</div>
+                                <div class="beach-description" data-es="Pequeña cala tranquila ideal para el snorkel." data-en="Small quiet cove ideal for snorkeling." data-fr="Petite crique tranquille idéale pour le snorkeling.">Pequeña cala tranquila ideal para el snorkel.</div>
                             </div>
-                        </div>
-
-                        <div class="card">
-                            <img src="https://images.unsplash.com/photo-1473116763249-2faaef81ccda?w=400" alt="Es Tancats - Algaiarens" class="card-img">
-                            <div class="card-content">
-                                <h4 class="card-title">Es Tancats - Algaiarens</h4>
-                                <p class="card-description" data-es="Conjunto de playas vírgenes conocidas como La Vall." data-en="Set of virgin beaches known as La Vall." data-fr="Ensemble de plages vierges connues sous le nom de La Vall.">Conjunto de playas vírgenes conocidas como La Vall.</p>
-                                <a href="https://maps.google.com/?q=Algaiarens+Menorca" target="_blank" class="card-btn">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                    <span data-es="Cómo llegar" data-en="Get directions" data-fr="Comment y aller">Cómo llegar</span>
-                                </a>
+                            <a href="https://maps.google.com/?q=Cala+Calderer+Menorca" target="_blank" class="beach-link"><i class="fas fa-map-marker-alt"></i> Maps</a>
+                        </li>
+                        <li>
+                            <div>
+                                <div class="beach-name">Es Tancats - Algaiarens</div>
+                                <div class="beach-description" data-es="Conjunto de playas vírgenes conocidas como La Vall." data-en="Set of virgin beaches known as La Vall." data-fr="Ensemble de plages vierges connues sous le nom de La Vall.">Conjunto de playas vírgenes conocidas como La Vall.</div>
                             </div>
-                        </div>
-                    </div>
+                            <a href="https://maps.google.com/?q=Algaiarens+Menorca" target="_blank" class="beach-link"><i class="fas fa-map-marker-alt"></i> Maps</a>
+                        </li>
+                    </ul>
                 </div>
 
                 <!-- South Beaches -->
@@ -761,91 +848,57 @@
                         <span data-es="Arena blanca y agua cristalina de color turquesa. Calas protegidas con vegetación mediterránea." data-en="White sand and crystal-clear turquoise water. Protected coves with Mediterranean vegetation." data-fr="Sable blanc et eau cristalline turquoise. Criques protégées avec végétation méditerranéenne.">Arena blanca y agua cristalina de color turquesa. Calas protegidas con vegetación mediterránea.</span>
                     </div>
 
-                    <div class="card-grid">
-                        <div class="card">
-                            <img src="https://images.unsplash.com/photo-1468413253725-0d5181091126?w=400" alt="Cala Galdana" class="card-img">
-                            <div class="card-content">
-                                <h4 class="card-title">Cala Galdana</h4>
-                                <p class="card-description" data-es="Una de las playas más famosas de Menorca con forma de herradura y aguas turquesas." data-en="One of Menorca's most famous beaches with horseshoe shape and turquoise waters." data-fr="L'une des plages les plus célèbres de Minorque en forme de fer à cheval.">Una de las playas más famosas de Menorca con forma de herradura y aguas turquesas.</p>
-                                <a href="https://maps.google.com/?q=Cala+Galdana+Menorca" target="_blank" class="card-btn">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                    <span data-es="Cómo llegar" data-en="Get directions" data-fr="Comment y aller">Cómo llegar</span>
-                                </a>
+                    <ul class="beach-list">
+                        <li>
+                            <div>
+                                <div class="beach-name">Cala Galdana</div>
+                                <div class="beach-description" data-es="Una de las playas más famosas de Menorca con forma de herradura y aguas turquesas." data-en="One of Menorca's most famous beaches with horseshoe shape and turquoise waters." data-fr="L'une des plages les plus célèbres de Minorque en forme de fer à cheval.">Una de las playas más famosas de Menorca con forma de herradura y aguas turquesas.</div>
                             </div>
-                        </div>
-
-                        <div class="card">
-                            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400" alt="Cala Mitjaneta" class="card-img">
-                            <div class="card-content">
-                                <h4 class="card-title">Cala Mitjaneta</h4>
-                                <p class="card-description" data-es="Pequeña cala paradisíaca de aguas cristalinas." data-en="Small paradise cove with crystal clear waters." data-fr="Petite crique paradisiaque aux eaux cristallines.">Pequeña cala paradisíaca de aguas cristalinas.</p>
-                                <a href="https://maps.google.com/?q=Cala+Mitjaneta+Menorca" target="_blank" class="card-btn">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                    <span data-es="Cómo llegar" data-en="Get directions" data-fr="Comment y aller">Cómo llegar</span>
-                                </a>
+                            <a href="https://maps.google.com/?q=Cala+Galdana+Menorca" target="_blank" class="beach-link"><i class="fas fa-map-marker-alt"></i> Maps</a>
+                        </li>
+                        <li>
+                            <div>
+                                <div class="beach-name">Cala Mitjaneta</div>
+                                <div class="beach-description" data-es="Pequeña cala paradisíaca de aguas cristalinas." data-en="Small paradise cove with crystal clear waters." data-fr="Petite crique paradisiaque aux eaux cristallines.">Pequeña cala paradisíaca de aguas cristalinas.</div>
                             </div>
-                        </div>
-
-                        <div class="card">
-                            <img src="https://images.unsplash.com/photo-1519046904884-53103b34b206?w=400" alt="Cala de Trebalúger" class="card-img">
-                            <div class="card-content">
-                                <h4 class="card-title">Cala de Trebalúger</h4>
-                                <p class="card-description" data-es="Cala virgen accesible solo a pie o en barco, rodeada de naturaleza." data-en="Virgin cove accessible only on foot or by boat, surrounded by nature." data-fr="Crique vierge accessible uniquement à pied ou en bateau.">Cala virgen accesible solo a pie o en barco, rodeada de naturaleza.</p>
-                                <a href="https://maps.google.com/?q=Cala+Trebaluger+Menorca" target="_blank" class="card-btn">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                    <span data-es="Cómo llegar" data-en="Get directions" data-fr="Comment y aller">Cómo llegar</span>
-                                </a>
+                            <a href="https://maps.google.com/?q=Cala+Mitjaneta+Menorca" target="_blank" class="beach-link"><i class="fas fa-map-marker-alt"></i> Maps</a>
+                        </li>
+                        <li>
+                            <div>
+                                <div class="beach-name">Cala de Trebalúger</div>
+                                <div class="beach-description" data-es="Cala virgen accesible solo a pie o en barco, rodeada de naturaleza." data-en="Virgin cove accessible only on foot or by boat, surrounded by nature." data-fr="Crique vierge accessible uniquement à pied ou en bateau.">Cala virgen accesible solo a pie o en barco, rodeada de naturaleza.</div>
                             </div>
-                        </div>
-
-                        <div class="card">
-                            <img src="https://images.unsplash.com/photo-1506929562872-bb421503ef21?w=400" alt="Cala Escorxada" class="card-img">
-                            <div class="card-content">
-                                <h4 class="card-title">Cala Escorxada</h4>
-                                <p class="card-description" data-es="Cala recóndita de difícil acceso pero de gran belleza." data-en="Hidden cove difficult to access but of great beauty." data-fr="Crique cachée difficile d'accès mais d'une grande beauté.">Cala recóndita de difícil acceso pero de gran belleza.</p>
-                                <a href="https://maps.google.com/?q=Cala+Escorxada+Menorca" target="_blank" class="card-btn">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                    <span data-es="Cómo llegar" data-en="Get directions" data-fr="Comment y aller">Cómo llegar</span>
-                                </a>
+                            <a href="https://maps.google.com/?q=Cala+Trebaluger+Menorca" target="_blank" class="beach-link"><i class="fas fa-map-marker-alt"></i> Maps</a>
+                        </li>
+                        <li>
+                            <div>
+                                <div class="beach-name">Cala Escorxada</div>
+                                <div class="beach-description" data-es="Cala recóndita de difícil acceso pero de gran belleza." data-en="Hidden cove difficult to access but of great beauty." data-fr="Crique cachée difficile d'accès mais d'une grande beauté.">Cala recóndita de difícil acceso pero de gran belleza.</div>
                             </div>
-                        </div>
-
-                        <div class="card">
-                            <img src="https://images.unsplash.com/photo-1520942702018-0862200e6873?w=400" alt="Platja Binigaus" class="card-img">
-                            <div class="card-content">
-                                <h4 class="card-title">Platja Binigaus</h4>
-                                <p class="card-description" data-es="Extensa playa virgen de arena blanca y fina." data-en="Extensive virgin beach with fine white sand." data-fr="Grande plage vierge de sable blanc et fin.">Extensa playa virgen de arena blanca y fina.</p>
-                                <a href="https://maps.google.com/?q=Platja+Binigaus+Menorca" target="_blank" class="card-btn">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                    <span data-es="Cómo llegar" data-en="Get directions" data-fr="Comment y aller">Cómo llegar</span>
-                                </a>
+                            <a href="https://maps.google.com/?q=Cala+Escorxada+Menorca" target="_blank" class="beach-link"><i class="fas fa-map-marker-alt"></i> Maps</a>
+                        </li>
+                        <li>
+                            <div>
+                                <div class="beach-name">Platja Binigaus</div>
+                                <div class="beach-description" data-es="Extensa playa virgen de arena blanca y fina." data-en="Extensive virgin beach with fine white sand." data-fr="Grande plage vierge de sable blanc et fin.">Extensa playa virgen de arena blanca y fina.</div>
                             </div>
-                        </div>
-
-                        <div class="card">
-                            <img src="https://images.unsplash.com/photo-1515238152791-8216bfdf89a7?w=400" alt="Santo Tomás" class="card-img">
-                            <div class="card-content">
-                                <h4 class="card-title">Santo Tomás</h4>
-                                <p class="card-description" data-es="Playa familiar con todos los servicios y aguas tranquilas." data-en="Family beach with all services and calm waters." data-fr="Plage familiale avec tous les services et eaux calmes.">Playa familiar con todos los servicios y aguas tranquilas.</p>
-                                <a href="https://maps.google.com/?q=Santo+Tomas+Menorca" target="_blank" class="card-btn">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                    <span data-es="Cómo llegar" data-en="Get directions" data-fr="Comment y aller">Cómo llegar</span>
-                                </a>
+                            <a href="https://maps.google.com/?q=Platja+Binigaus+Menorca" target="_blank" class="beach-link"><i class="fas fa-map-marker-alt"></i> Maps</a>
+                        </li>
+                        <li>
+                            <div>
+                                <div class="beach-name">Santo Tomás</div>
+                                <div class="beach-description" data-es="Playa familiar con todos los servicios y aguas tranquilas." data-en="Family beach with all services and calm waters." data-fr="Plage familiale avec tous les services et eaux calmes.">Playa familiar con todos los servicios y aguas tranquilas.</div>
                             </div>
-                        </div>
-
-                        <div class="card">
-                            <img src="https://images.unsplash.com/photo-1473116763249-2faaef81ccda?w=400" alt="Son Bou" class="card-img">
-                            <div class="card-content">
-                                <h4 class="card-title">Son Bou</h4>
-                                <p class="card-description" data-es="La playa más larga de Menorca con más de 2 km de arena." data-en="Menorca's longest beach with over 2 km of sand." data-fr="La plus longue plage de Minorque avec plus de 2 km de sable.">La playa más larga de Menorca con más de 2 km de arena.</p>
-                                <a href="https://maps.google.com/?q=Son+Bou+Menorca" target="_blank" class="card-btn">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                    <span data-es="Cómo llegar" data-en="Get directions" data-fr="Comment y aller">Cómo llegar</span>
-                                </a>
+                            <a href="https://maps.google.com/?q=Santo+Tomas+Menorca" target="_blank" class="beach-link"><i class="fas fa-map-marker-alt"></i> Maps</a>
+                        </li>
+                        <li>
+                            <div>
+                                <div class="beach-name">Son Bou</div>
+                                <div class="beach-description" data-es="La playa más larga de Menorca con más de 2 km de arena." data-en="Menorca's longest beach with over 2 km of sand." data-fr="La plus longue plage de Minorque avec plus de 2 km de sable.">La playa más larga de Menorca con más de 2 km de arena.</div>
                             </div>
-                        </div>
-                    </div>
+                            <a href="https://maps.google.com/?q=Son+Bou+Menorca" target="_blank" class="beach-link"><i class="fas fa-map-marker-alt"></i> Maps</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -882,9 +935,6 @@
                         <a href="https://maps.google.com/?q=Sa+Pedrera+des+Pujol+Menorca" target="_blank" class="restaurant-btn maps">
                             <i class="fas fa-map-marker-alt"></i> Maps
                         </a>
-                        <a href="tel:+34971150717" class="restaurant-btn call">
-                            <i class="fas fa-phone"></i> +34 971 15 07 17
-                        </a>
                     </div>
                 </div>
 
@@ -900,9 +950,6 @@
                     <div class="restaurant-actions">
                         <a href="https://maps.google.com/?q=Xuroy+Cala+Alcaufar+Menorca" target="_blank" class="restaurant-btn maps">
                             <i class="fas fa-map-marker-alt"></i> Maps
-                        </a>
-                        <a href="tel:+34971151820" class="restaurant-btn call">
-                            <i class="fas fa-phone"></i> +34 971 15 18 20
                         </a>
                     </div>
                 </div>
@@ -921,9 +968,6 @@
                         <a href="https://maps.google.com/?q=Ses+Forquilles+Mahon+Menorca" target="_blank" class="restaurant-btn maps">
                             <i class="fas fa-map-marker-alt"></i> Maps
                         </a>
-                        <a href="tel:+34971353260" class="restaurant-btn call">
-                            <i class="fas fa-phone"></i> +34 971 35 32 60
-                        </a>
                     </div>
                 </div>
 
@@ -939,9 +983,6 @@
                     <div class="restaurant-actions">
                         <a href="https://maps.google.com/?q=Cap+Roig+Sa+Mesquida+Menorca" target="_blank" class="restaurant-btn maps">
                             <i class="fas fa-map-marker-alt"></i> Maps
-                        </a>
-                        <a href="tel:+34971188383" class="restaurant-btn call">
-                            <i class="fas fa-phone"></i> +34 971 18 83 83
                         </a>
                     </div>
                 </div>
@@ -960,9 +1001,6 @@
                         <a href="https://maps.google.com/?q=Ca+Na+Marga+Fornells+Menorca" target="_blank" class="restaurant-btn maps">
                             <i class="fas fa-map-marker-alt"></i> Maps
                         </a>
-                        <a href="tel:+34971376410" class="restaurant-btn call">
-                            <i class="fas fa-phone"></i> +34 971 37 64 10
-                        </a>
                     </div>
                 </div>
 
@@ -978,9 +1016,6 @@
                     <div class="restaurant-actions">
                         <a href="https://maps.google.com/?q=Es+Cranc+Fornells+Menorca" target="_blank" class="restaurant-btn maps">
                             <i class="fas fa-map-marker-alt"></i> Maps
-                        </a>
-                        <a href="tel:+34971376442" class="restaurant-btn call">
-                            <i class="fas fa-phone"></i> +34 971 37 64 42
                         </a>
                     </div>
                 </div>
@@ -998,9 +1033,6 @@
                         <a href="https://maps.google.com/?q=Sa+Llagosta+Fornells+Menorca" target="_blank" class="restaurant-btn maps">
                             <i class="fas fa-map-marker-alt"></i> Maps
                         </a>
-                        <a href="tel:+34971376566" class="restaurant-btn call">
-                            <i class="fas fa-phone"></i> +34 971 37 65 66
-                        </a>
                     </div>
                 </div>
 
@@ -1016,9 +1048,6 @@
                     <div class="restaurant-actions">
                         <a href="https://maps.google.com/?q=Sa+Taula+Fornells+Menorca" target="_blank" class="restaurant-btn maps">
                             <i class="fas fa-map-marker-alt"></i> Maps
-                        </a>
-                        <a href="tel:+34971376813" class="restaurant-btn call">
-                            <i class="fas fa-phone"></i> +34 971 37 68 13
                         </a>
                     </div>
                 </div>
@@ -1037,9 +1066,6 @@
                         <a href="https://maps.google.com/?q=Ulisses+Ciutadella+Menorca" target="_blank" class="restaurant-btn maps">
                             <i class="fas fa-map-marker-alt"></i> Maps
                         </a>
-                        <a href="mailto:joan@ulissesbar.com" class="restaurant-btn call">
-                            <i class="fas fa-envelope"></i> Email
-                        </a>
                     </div>
                 </div>
 
@@ -1055,9 +1081,6 @@
                     <div class="restaurant-actions">
                         <a href="https://maps.google.com/?q=S+Amarador+Ciutadella+Menorca" target="_blank" class="restaurant-btn maps">
                             <i class="fas fa-map-marker-alt"></i> Maps
-                        </a>
-                        <a href="tel:+34971383524" class="restaurant-btn call">
-                            <i class="fas fa-phone"></i> +34 971 38 35 24
                         </a>
                     </div>
                 </div>
@@ -1075,9 +1098,6 @@
                         <a href="https://maps.google.com/?q=Cafe+Balear+Ciutadella+Menorca" target="_blank" class="restaurant-btn maps">
                             <i class="fas fa-map-marker-alt"></i> Maps
                         </a>
-                        <a href="tel:+34971380005" class="restaurant-btn call">
-                            <i class="fas fa-phone"></i> +34 971 38 00 05
-                        </a>
                     </div>
                 </div>
 
@@ -1093,9 +1113,6 @@
                     <div class="restaurant-actions">
                         <a href="https://maps.google.com/?q=Smoix+Ciutadella+Menorca" target="_blank" class="restaurant-btn maps">
                             <i class="fas fa-map-marker-alt"></i> Maps
-                        </a>
-                        <a href="tel:+34971382808" class="restaurant-btn call">
-                            <i class="fas fa-phone"></i> +34 971 38 28 08
                         </a>
                     </div>
                 </div>
@@ -1122,6 +1139,21 @@
             <span data-es="Restaurantes" data-en="Restaurants" data-fr="Restaurants">Restaurantes</span>
         </a>
     </nav>
+
+    <!-- Map Modal -->
+    <div class="modal map-modal" id="mapModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 data-es="Mapa de Menorca" data-en="Menorca Map" data-fr="Carte de Minorque">Mapa de Menorca</h3>
+                <button class="modal-close" onclick="closeModal('mapModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <img src="https://i.imgur.com/YOUR_MAP_IMAGE.jpg" alt="Mapa de Menorca" id="menorcaMap">
+                <!-- NOTA: Necesitas subir tu imagen del mapa a un servicio de hosting como Imgur, 
+                     o proporcionar la URL directa del archivo. Te explico cómo hacerlo abajo. -->
+            </div>
+        </div>
+    </div>
 
     <!-- Snacks Bar Modal -->
     <div class="modal" id="snacksModal">
@@ -1399,13 +1431,6 @@
                     card.style.display = 'none';
                 }
             });
-        }
-
-        // Download map (placeholder function)
-        function downloadMap() {
-            alert('Descargando mapa de Menorca...\n\nEn una implementación real, aquí se descargaría el archivo PDF del mapa.');
-            // In a real implementation, you would use:
-            // window.open('path/to/menorca-map.pdf', '_blank');
         }
     </script>
 </body>
