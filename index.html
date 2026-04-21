@@ -815,17 +815,31 @@
         @media (max-width: 600px) {
             .header-container { padding: 10px 16px; }
             .header-logo img { height: 40px; }
-            .language-btn { padding: 6px 12px; font-size: 0.85rem; }
+            .language-btn { padding: 6px 10px; font-size: 0.8rem; }
             
-            .hero { padding: 50px 16px 80px; }
-            .hero-logo { height: 110px; margin-bottom: 20px; }
-            .hero-subtitle { font-size: 0.95rem; margin-bottom: 25px; }
+            /* HERO móvil */
+            .hero { padding: 30px 16px 70px; }
+            .hero-logo { height: 90px; margin-bottom: 15px; }
+            .hero-subtitle { font-size: 0.9rem; margin-bottom: 20px; }
+            
+            /* Botones de contacto hero */
+            .hero .contact-icons { gap: 8px; }
+            .hero .contact-link {
+                font-size: 0.8rem;
+                padding: 10px 14px;
+                gap: 6px;
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+            .hero .contact-link i { font-size: 1rem; }
 
-            .quick-access { padding: 0 16px 40px; margin-top: -50px; }
-            .quick-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-            .quick-card { padding: 20px 12px; }
-            .quick-icon { width: 50px; height: 50px; font-size: 1.3rem; }
-            .quick-title { font-size: 0.95rem; }
+            /* QUICK ACCESS móvil */
+            .quick-access { padding: 0 12px 30px; margin-top: -40px; }
+            .quick-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+            .quick-card { padding: 18px 8px; gap: 10px; border-radius: 12px; }
+            .quick-icon { width: 44px; height: 44px; font-size: 1.1rem; }
+            .quick-title { font-size: 0.85rem; line-height: 1.2; }
             .quick-desc { display: none; }
 
             .container { padding: 0 16px; }
@@ -849,6 +863,17 @@
             .modal-header { padding: 18px 20px; }
             .modal-header h3 { font-size: 1.1rem; }
         }
+
+        @media (max-width: 380px) {
+            .hero-logo { height: 75px; }
+            .hero { padding: 20px 12px 60px; }
+            .quick-grid { gap: 8px; }
+            .quick-card { padding: 14px 6px; }
+            .quick-icon { width: 40px; height: 40px; font-size: 1rem; }
+            .quick-title { font-size: 0.78rem; }
+            .hero .contact-link { font-size: 0.75rem; padding: 9px 12px; }
+        }
+
     </style>
 </head>
 <body>
