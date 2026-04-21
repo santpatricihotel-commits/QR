@@ -6,10 +6,34 @@
     <title>Sant Patrici</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* ===== TIPOGRAFÍA ELYSIAN =====
+         * Coloca los archivos de la fuente Elysian en la carpeta 'fonts/':
+         * - Elysian-Regular.woff2 / .woff / .ttf
+         * - Elysian-Bold.woff2 / .woff / .ttf
+         */
+        @font-face {
+            font-family: 'Elysian';
+            src: url('fonts/Elysian-Regular.woff2') format('woff2'),
+                 url('fonts/Elysian-Regular.woff') format('woff'),
+                 url('fonts/Elysian-Regular.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Elysian';
+            src: url('fonts/Elysian-Bold.woff2') format('woff2'),
+                 url('fonts/Elysian-Bold.woff') format('woff'),
+                 url('fonts/Elysian-Bold.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+
         :root {
-            --primary-color: #1B4D2E;
-            --primary-light: #2D6B4A;
-            --primary-dark: #143D24;
+            --primary-color: #006D62;
+            --primary-light: #008577;
+            --primary-dark: #005B52;
             --accent-color: #C4A962;
             --text-color: #333;
             --text-light: #666;
@@ -17,24 +41,20 @@
             --white: #fff;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Elysian', Georgia, 'Times New Roman', serif;
             background-color: var(--bg-color);
             color: var(--text-color);
             line-height: 1.6;
         }
 
-        /* Header */
+        /* ===== HEADER FIJO (páginas internas) ===== */
         header {
             background-color: var(--primary-color);
             color: var(--white);
-            padding: 15px 20px;
+            padding: 12px 20px;
             position: fixed;
             width: 100%;
             top: 0;
@@ -43,25 +63,12 @@
             justify-content: space-between;
             align-items: center;
         }
+        header.hidden { display: none; }
 
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+        .header-logo img { height: 40px; }
 
-        .logo img {
-            height: 40px;
-        }
-
-        .logo h1 {
-            font-size: 1.2rem;
-            font-weight: 600;
-        }
-
-        .language-selector {
-            position: relative;
-        }
+        /* ===== SELECTOR DE IDIOMA ===== */
+        .language-selector { position: relative; }
 
         .language-btn {
             background: transparent;
@@ -73,6 +80,8 @@
             display: flex;
             align-items: center;
             gap: 5px;
+            font-family: 'Elysian', Georgia, serif;
+            font-size: 0.9rem;
         }
 
         .language-dropdown {
@@ -85,11 +94,9 @@
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             overflow: hidden;
             min-width: 120px;
+            z-index: 100;
         }
-
-        .language-dropdown.active {
-            display: block;
-        }
+        .language-dropdown.active { display: block; }
 
         .language-dropdown a {
             display: block;
@@ -98,46 +105,41 @@
             text-decoration: none;
             transition: background 0.3s;
         }
+        .language-dropdown a:hover { background: var(--bg-color); }
 
-        .language-dropdown a:hover {
-            background: var(--bg-color);
-        }
+        /* ===== MAIN ===== */
+        main { padding-bottom: 80px; }
 
-        /* Main Content */
-        main {
-            margin-top: 70px;
-            padding-bottom: 80px;
-        }
-
-        /* Hero Section */
+        /* ===== HERO (Página principal) ===== */
         .hero {
-            background: linear-gradient(rgba(27, 77, 46, 0.8), rgba(27, 77, 46, 0.9)), 
-                        url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200') center/cover;
+            background-color: var(--primary-color);
             color: var(--white);
-            padding: 60px 20px;
+            padding: 50px 20px 40px;
             text-align: center;
+            position: relative;
         }
 
-        .hero h2 {
-            font-size: 2rem;
-            margin-bottom: 15px;
+        .hero-lang-selector {
+            position: absolute;
+            top: 15px;
+            right: 15px;
         }
 
-        .hero p {
-            font-size: 1.1rem;
-            opacity: 0.9;
+        .hero-logo {
+            height: 160px;
+            margin-bottom: 30px;
         }
 
-        /* Contact Icons */
+        /* ===== ICONOS DE CONTACTO ===== */
         .contact-icons {
             display: flex;
             justify-content: center;
-            gap: 20px;
-            margin-top: 20px;
+            gap: 15px;
+            flex-wrap: wrap;
         }
 
         .contact-link {
-            display: flex;
+            display: inline-flex;
             align-items: center;
             gap: 8px;
             color: var(--white);
@@ -148,28 +150,46 @@
             border-radius: 25px;
             transition: all 0.3s;
         }
-
         .contact-link:hover {
             background: rgba(255,255,255,0.25);
             transform: scale(1.05);
         }
+        .contact-link i { font-size: 1.2rem; }
+        .whatsapp-link i { color: #25D366; }
 
-        .contact-link i {
-            font-size: 1.2rem;
+        /* ===== BOTONES DEL MENÚ PRINCIPAL ===== */
+        .menu-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            padding: 25px 20px;
         }
 
-        .whatsapp-link i {
-            color: #25D366;
+        .menu-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 18px 30px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-family: 'Elysian', Georgia, serif;
         }
+        .menu-btn:hover {
+            background: var(--primary-light);
+            transform: scale(1.02);
+        }
+        .menu-btn i { font-size: 1.2rem; }
 
-        .email-link i {
-            color: #fff;
-        }
-
-        /* Sections */
-        .section {
-            padding: 30px 20px;
-        }
+        /* ===== SECCIONES ===== */
+        .section { padding: 30px 20px; }
 
         .section-title {
             font-size: 1.5rem;
@@ -179,12 +199,40 @@
             align-items: center;
             gap: 10px;
         }
+        .section-title i { font-size: 1.3rem; }
 
-        .section-title i {
-            font-size: 1.3rem;
+        /* ===== CAJA DE CONTACTO EN SECCIONES ===== */
+        .contact-info-box {
+            background: linear-gradient(135deg, rgba(0,109,98,0.04), rgba(0,109,98,0.08));
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            text-align: center;
+            border: 1px solid rgba(0,109,98,0.12);
+        }
+        .contact-info-box p {
+            margin-bottom: 20px;
+            color: var(--text-color);
+            font-size: 1rem;
+            line-height: 1.7;
         }
 
-        /* Cards */
+        .section-contact-icons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .section-contact-icons .contact-link {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+        .section-contact-icons .contact-link:hover {
+            background: var(--primary-light);
+        }
+        .section-contact-icons .whatsapp-link i { color: #25D366; }
+
+        /* ===== TARJETAS ===== */
         .card-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -198,21 +246,14 @@
             box-shadow: 0 2px 15px rgba(0,0,0,0.08);
             transition: transform 0.3s, box-shadow 0.3s;
         }
-
         .card:hover {
             transform: translateY(-5px);
             box-shadow: 0 5px 25px rgba(0,0,0,0.15);
         }
 
-        .card-img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-        }
+        .card-img { width: 100%; height: 180px; object-fit: cover; }
 
-        .card-content {
-            padding: 20px;
-        }
+        .card-content { padding: 20px; }
 
         .card-title {
             font-size: 1.1rem;
@@ -238,49 +279,10 @@
             font-size: 0.9rem;
             transition: background 0.3s;
         }
+        .card-btn:hover { background: var(--primary-light); }
 
-        .card-btn:hover {
-            background: var(--primary-light);
-        }
-
-        /* Menu Buttons */
-        .menu-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            padding: 20px;
-        }
-
-        .menu-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            background: var(--primary-color);
-            color: var(--white);
-            padding: 18px 30px;
-            border-radius: 10px;
-            text-decoration: none;
-            font-size: 1.1rem;
-            font-weight: 500;
-            transition: all 0.3s;
-            border: none;
-            cursor: pointer;
-        }
-
-        .menu-btn:hover {
-            background: var(--primary-light);
-            transform: scale(1.02);
-        }
-
-        .menu-btn i {
-            font-size: 1.2rem;
-        }
-
-        /* Beach Tags */
-        .beach-section {
-            margin-bottom: 30px;
-        }
+        /* ===== PLAYAS ===== */
+        .beach-section { margin-bottom: 30px; }
 
         .beach-tag {
             display: inline-block;
@@ -289,16 +291,8 @@
             font-size: 0.85rem;
             margin-bottom: 15px;
         }
-
-        .beach-tag.north {
-            background: #E8D4B8;
-            color: #8B6914;
-        }
-
-        .beach-tag.south {
-            background: #D4E8F0;
-            color: #1B6B8C;
-        }
+        .beach-tag.north { background: #E8D4B8; color: #8B6914; }
+        .beach-tag.south { background: #D4E8F0; color: #1B6B8C; }
 
         .beach-info {
             font-size: 0.9rem;
@@ -310,7 +304,28 @@
             border-left: 4px solid var(--primary-color);
         }
 
-        /* Download Button */
+        .beach-list {
+            list-style: none;
+            background: var(--white);
+            border-radius: 15px;
+            padding: 10px 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .beach-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .beach-list li:last-child { border-bottom: none; }
+
+        .beach-name { font-weight: 500; color: var(--primary-color); }
+        .beach-description { font-size: 0.85rem; color: var(--text-light); margin-top: 3px; }
+
+        .beach-link { color: var(--accent-color); text-decoration: none; font-size: 0.9rem; }
+        .beach-link:hover { text-decoration: underline; }
+
         .download-btn {
             display: flex;
             align-items: center;
@@ -322,15 +337,12 @@
             border-radius: 10px;
             text-decoration: none;
             font-weight: 500;
-            margin: 20px;
+            margin: 0 0 25px 0;
             transition: all 0.3s;
         }
+        .download-btn:hover { background: #B8994D; }
 
-        .download-btn:hover {
-            background: #B8994D;
-        }
-
-        /* Restaurant List */
+        /* ===== RESTAURANTES ===== */
         .restaurant-card {
             background: var(--white);
             border-radius: 15px;
@@ -345,34 +357,12 @@
             gap: 15px;
             margin-bottom: 10px;
         }
+        .restaurant-icon { font-size: 1.5rem; }
+        .restaurant-name { font-size: 1.1rem; color: var(--primary-color); font-weight: 600; }
+        .restaurant-location { font-size: 0.85rem; color: var(--text-light); margin-bottom: 10px; }
+        .restaurant-description { font-size: 0.9rem; color: var(--text-color); margin-bottom: 15px; }
 
-        .restaurant-icon {
-            font-size: 1.5rem;
-        }
-
-        .restaurant-name {
-            font-size: 1.1rem;
-            color: var(--primary-color);
-            font-weight: 600;
-        }
-
-        .restaurant-location {
-            font-size: 0.85rem;
-            color: var(--text-light);
-            margin-bottom: 10px;
-        }
-
-        .restaurant-description {
-            font-size: 0.9rem;
-            color: var(--text-color);
-            margin-bottom: 15px;
-        }
-
-        .restaurant-actions {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
+        .restaurant-actions { display: flex; gap: 10px; flex-wrap: wrap; }
 
         .restaurant-btn {
             display: inline-flex;
@@ -384,24 +374,10 @@
             text-decoration: none;
             transition: all 0.3s;
         }
+        .restaurant-btn.maps { background: var(--primary-color); color: var(--white); }
+        .restaurant-btn.call { background: var(--bg-color); color: var(--primary-color); border: 1px solid var(--primary-color); }
+        .restaurant-btn:hover { opacity: 0.9; transform: scale(1.05); }
 
-        .restaurant-btn.maps {
-            background: var(--primary-color);
-            color: var(--white);
-        }
-
-        .restaurant-btn.call {
-            background: var(--bg-color);
-            color: var(--primary-color);
-            border: 1px solid var(--primary-color);
-        }
-
-        .restaurant-btn:hover {
-            opacity: 0.9;
-            transform: scale(1.05);
-        }
-
-        /* Location Filter */
         .location-filter {
             display: flex;
             gap: 10px;
@@ -419,14 +395,15 @@
             cursor: pointer;
             white-space: nowrap;
             transition: all 0.3s;
+            font-family: 'Elysian', Georgia, serif;
+            font-size: 0.9rem;
         }
-
         .filter-btn.active, .filter-btn:hover {
             background: var(--primary-color);
             color: var(--white);
         }
 
-        /* Bottom Navigation */
+        /* ===== NAVEGACIÓN INFERIOR ===== */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -450,34 +427,21 @@
             padding: 5px 15px;
             transition: color 0.3s;
         }
+        .nav-item i { font-size: 1.3rem; margin-bottom: 3px; }
+        .nav-item.active, .nav-item:hover { color: var(--primary-color); }
 
-        .nav-item i {
-            font-size: 1.3rem;
-            margin-bottom: 3px;
-        }
-
-        .nav-item.active, .nav-item:hover {
-            color: var(--primary-color);
-        }
-
-        /* Modal */
+        /* ===== MODALES ===== */
         .modal {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            top: 0; left: 0; right: 0; bottom: 0;
             background: rgba(0,0,0,0.5);
             z-index: 2000;
             align-items: center;
             justify-content: center;
             padding: 20px;
         }
-
-        .modal.active {
-            display: flex;
-        }
+        .modal.active { display: flex; }
 
         .modal-content {
             background: var(--white);
@@ -507,14 +471,9 @@
             cursor: pointer;
         }
 
-        .modal-body {
-            padding: 20px;
-        }
+        .modal-body { padding: 20px; }
 
-        /* Menu Card */
-        .menu-category {
-            margin-bottom: 25px;
-        }
+        .menu-category { margin-bottom: 25px; }
 
         .menu-category-title {
             font-size: 1.2rem;
@@ -531,160 +490,76 @@
             padding: 12px 0;
             border-bottom: 1px solid #eee;
         }
+        .menu-item:last-child { border-bottom: none; }
 
-        .menu-item:last-child {
-            border-bottom: none;
-        }
+        .menu-item-name { font-weight: 500; color: var(--text-color); }
+        .menu-item-description { font-size: 0.85rem; color: var(--text-light); margin-top: 3px; }
+        .menu-item-price { font-weight: 600; color: var(--primary-color); white-space: nowrap; margin-left: 15px; }
 
-        .menu-item-name {
-            font-weight: 500;
-            color: var(--text-color);
-        }
+        .map-modal .modal-content { max-width: 900px; max-height: 90vh; }
+        .map-modal .modal-body { padding: 0; }
+        .map-modal .modal-body img { width: 100%; height: auto; display: block; border-radius: 0 0 15px 15px; }
 
-        .menu-item-description {
-            font-size: 0.85rem;
-            color: var(--text-light);
-            margin-top: 3px;
-        }
+        /* ===== PÁGINAS ===== */
+        .page { display: none; }
+        .page.active { display: block; }
 
-        .menu-item-price {
-            font-weight: 600;
-            color: var(--primary-color);
-            white-space: nowrap;
-            margin-left: 15px;
-        }
-
-        /* Page visibility */
-        .page {
-            display: none;
-        }
-
-        .page.active {
-            display: block;
-        }
-
-        /* Beach List Styles */
-        .beach-list {
-            list-style: none;
-            background: var(--white);
-            border-radius: 15px;
-            padding: 10px 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-
-        .beach-list li {
-            padding: 12px 0;
-            border-bottom: 1px solid #eee;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .beach-list li:last-child {
-            border-bottom: none;
-        }
-
-        .beach-name {
-            font-weight: 500;
-            color: var(--primary-color);
-        }
-
-        .beach-description {
-            font-size: 0.85rem;
-            color: var(--text-light);
-            margin-top: 3px;
-        }
-
-        .beach-link {
-            color: var(--accent-color);
-            text-decoration: none;
-            font-size: 0.9rem;
-        }
-
-        .beach-link:hover {
-            text-decoration: underline;
-        }
-
-        /* Map Modal */
-        .map-modal .modal-content {
-            max-width: 900px;
-            max-height: 90vh;
-        }
-
-        .map-modal .modal-body {
-            padding: 0;
-        }
-
-        .map-modal .modal-body img {
-            width: 100%;
-            height: auto;
-            display: block;
-            border-radius: 0 0 15px 15px;
-        }
-
-        .map-download-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            background: var(--primary-color);
-            color: var(--white);
-            padding: 15px 30px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s;
-        }
-
-        .map-download-btn:hover {
-            background: var(--primary-light);
-        }
-
-        /* Responsive */
+        /* ===== RESPONSIVE ===== */
         @media (max-width: 600px) {
-            .hero h2 {
-                font-size: 1.5rem;
-            }
-            
-            .card-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .contact-icons {
+            .hero-logo { height: 120px; }
+            .card-grid { grid-template-columns: 1fr; }
+            .contact-icons, .section-contact-icons {
                 flex-direction: column;
+                align-items: center;
                 gap: 10px;
             }
-
-            .contact-link {
-                justify-content: center;
-            }
+            .contact-link { justify-content: center; width: 100%; max-width: 300px; }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="logo">
-    <img src="img/logo-santpatrici.png" alt="Sant Patrici Logo">
-</div>
+
+    <!-- ===== HEADER FIJO (solo páginas internas) ===== -->
+    <header id="mainHeader" class="hidden">
+        <div class="header-logo">
+            <img src="img/logo-santpatrici.png" alt="Sant Patrici">
+        </div>
         <div class="language-selector">
-            <button class="language-btn" onclick="toggleLanguageDropdown()">
+            <button class="language-btn" onclick="toggleLang(this)">
                 <i class="fas fa-globe"></i>
-                <span id="currentLang">ES</span>
+                <span class="current-lang-text">ES</span>
                 <i class="fas fa-chevron-down"></i>
             </button>
-            <div class="language-dropdown" id="langDropdown">
-                <a href="#" onclick="changeLanguage('es')">🇪🇸 Español</a>
-                <a href="#" onclick="changeLanguage('en')">🇬🇧 English</a>
-                <a href="#" onclick="changeLanguage('fr')">🇫🇷 Français</a>
+            <div class="language-dropdown">
+                <a href="#" onclick="changeLanguage('es'); return false;">🇪🇸 Español</a>
+                <a href="#" onclick="changeLanguage('en'); return false;">🇬🇧 English</a>
+                <a href="#" onclick="changeLanguage('fr'); return false;">🇫🇷 Français</a>
             </div>
         </div>
     </header>
 
-    <!-- Main Content -->
+    <!-- ===== CONTENIDO PRINCIPAL ===== -->
     <main>
-        <!-- Home Page -->
+
+        <!-- ========== PÁGINA INICIO ========== -->
         <div class="page active" id="page-home">
             <div class="hero">
+                <!-- Selector de idioma sobre el hero -->
+                <div class="hero-lang-selector language-selector">
+                    <button class="language-btn" onclick="toggleLang(this)">
+                        <i class="fas fa-globe"></i>
+                        <span class="current-lang-text">ES</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="language-dropdown">
+                        <a href="#" onclick="changeLanguage('es'); return false;">🇪🇸 Español</a>
+                        <a href="#" onclick="changeLanguage('en'); return false;">🇬🇧 English</a>
+                        <a href="#" onclick="changeLanguage('fr'); return false;">🇫🇷 Français</a>
+                    </div>
+                </div>
+
+                <img src="img/logo-santpatrici.png" alt="Sant Patrici" class="hero-logo">
+
                 <div class="contact-icons">
                     <a href="https://wa.me/34971713716" target="_blank" class="contact-link whatsapp-link">
                         <i class="fab fa-whatsapp"></i>
@@ -698,37 +573,55 @@
             </div>
 
             <div class="menu-buttons">
-                <a href="#" class="menu-btn" onclick="openModal('snacksModal')">
+                <a href="#" class="menu-btn" onclick="openModal('snacksModal'); return false;">
                     <i class="fas fa-cheese"></i>
                     <span data-es="Carta Snacks Bar" data-en="Snacks Bar Menu" data-fr="Menu Collation">Carta Snacks Bar</span>
                 </a>
-                <a href="#" class="menu-btn" onclick="openModal('restaurantMenuModal')">
+                <a href="#" class="menu-btn" onclick="openModal('restaurantMenuModal'); return false;">
                     <i class="fas fa-book-open"></i>
                     <span data-es="Carta Restaurante" data-en="Restaurant Menu" data-fr="Menu Restaurant">Carta Restaurante</span>
                 </a>
-                <a href="#" class="menu-btn" onclick="showPage('activities')">
+                <a href="#" class="menu-btn" onclick="showPage('activities'); return false;">
                     <i class="fas fa-wine-glass-alt"></i>
                     <span data-es="Actividades" data-en="Activities" data-fr="Activités">Actividades</span>
                 </a>
-                <a href="#" class="menu-btn" onclick="showPage('beaches')">
+                <a href="#" class="menu-btn" onclick="showPage('beaches'); return false;">
                     <i class="fas fa-umbrella-beach"></i>
                     <span data-es="Playas" data-en="Beaches" data-fr="Plages">Playas</span>
                 </a>
-                <a href="#" class="menu-btn" onclick="showPage('restaurants')">
+                <a href="#" class="menu-btn" onclick="showPage('restaurants'); return false;">
                     <i class="fas fa-utensils"></i>
                     <span data-es="Restaurantes" data-en="Restaurants" data-fr="Restaurants">Restaurantes</span>
                 </a>
             </div>
         </div>
 
-        <!-- Activities Page -->
+        <!-- ========== PÁGINA ACTIVIDADES ========== -->
         <div class="page" id="page-activities">
             <div class="section">
                 <h3 class="section-title">
                     <i class="fas fa-star"></i>
                     <span data-es="Actividades" data-en="Activities" data-fr="Activités">Actividades</span>
                 </h3>
-                
+
+                <div class="contact-info-box">
+                    <p data-es="Nuestro personal estará encantado de asesorarle o reservarle cualquier tipo de experiencia o actividad que desee."
+                       data-en="Our staff will be happy to advise you or book any type of experience or activity you wish."
+                       data-fr="Notre personnel sera ravi de vous conseiller ou de réserver tout type d'expérience ou d'activité que vous souhaitez.">
+                       Nuestro personal estará encantado de asesorarle o reservarle cualquier tipo de experiencia o actividad que desee.
+                    </p>
+                    <div class="section-contact-icons">
+                        <a href="https://wa.me/34971713716" target="_blank" class="contact-link whatsapp-link">
+                            <i class="fab fa-whatsapp"></i>
+                            <span>+34 971 71 37 16</span>
+                        </a>
+                        <a href="mailto:sales@santpatrici.es" class="contact-link email-link">
+                            <i class="fas fa-envelope"></i>
+                            <span>sales@santpatrici.es</span>
+                        </a>
+                    </div>
+                </div>
+
                 <div class="card-grid">
                     <div class="card">
                         <img src="https://assets.isu.pub/document-structure/230728173835-5a82c920c79913e459704c6849a39dab/v1/cef0a5034fb6aefac4b64ed636b37a03.jpeg?width=1440&quality=85%2C50" alt="Degustación" class="card-img">
@@ -765,7 +658,7 @@
             </div>
         </div>
 
-        <!-- Beaches Page -->
+        <!-- ========== PÁGINA PLAYAS ========== -->
         <div class="page" id="page-beaches">
             <div class="section">
                 <h3 class="section-title">
@@ -773,12 +666,12 @@
                     <span data-es="Playas de Menorca" data-en="Menorca Beaches" data-fr="Plages de Minorque">Playas de Menorca</span>
                 </h3>
 
-                <a href="#" class="download-btn" onclick="openModal('mapModal')">
+                <a href="#" class="download-btn" onclick="openModal('mapModal'); return false;">
                     <i class="fas fa-map"></i>
                     <span data-es="Ver Mapa de Menorca" data-en="View Menorca Map" data-fr="Voir la Carte de Minorque">Ver Mapa de Menorca</span>
                 </a>
 
-                <!-- North Beaches -->
+                <!-- Playas Norte -->
                 <div class="beach-section">
                     <span class="beach-tag north">
                         <i class="fas fa-compass"></i>
@@ -835,7 +728,7 @@
                     </ul>
                 </div>
 
-                <!-- South Beaches -->
+                <!-- Playas Sur -->
                 <div class="beach-section">
                     <span class="beach-tag south">
                         <i class="fas fa-compass"></i>
@@ -901,7 +794,7 @@
             </div>
         </div>
 
-        <!-- Restaurants Page -->
+        <!-- ========== PÁGINA RESTAURANTES ========== -->
         <div class="page" id="page-restaurants">
             <div class="section">
                 <h3 class="section-title">
@@ -909,7 +802,18 @@
                     <span data-es="Restaurantes Recomendados" data-en="Recommended Restaurants" data-fr="Restaurants Recommandés">Restaurantes Recomendados</span>
                 </h3>
 
-                <p style="margin-bottom: 20px; color: var(--text-light);" data-es="Si deseas hacer una reserva en cualquiera de estos restaurantes, no dudes en contactarnos." data-en="If you would like to make a reservation at any of these restaurants, please contact us." data-fr="Si vous souhaitez faire une réservation dans l'un de ces restaurants, n'hésitez pas à nous contacter.">Si deseas hacer una reserva en cualquiera de estos restaurantes, no dudes en contactarnos.</p>
+                <p style="margin-bottom: 15px; color: var(--text-light);" data-es="Si deseas hacer una reserva en cualquiera de estos restaurantes, no dudes en contactarnos." data-en="If you would like to make a reservation at any of these restaurants, please contact us." data-fr="Si vous souhaitez faire une réservation dans l'un de ces restaurants, n'hésitez pas à nous contacter.">Si deseas hacer una reserva en cualquiera de estos restaurantes, no dudes en contactarnos.</p>
+
+                <div class="section-contact-icons" style="margin-bottom: 25px;">
+                    <a href="https://wa.me/34971713716" target="_blank" class="contact-link whatsapp-link">
+                        <i class="fab fa-whatsapp"></i>
+                        <span>+34 971 71 37 16</span>
+                    </a>
+                    <a href="mailto:sales@santpatrici.es" class="contact-link email-link">
+                        <i class="fas fa-envelope"></i>
+                        <span>sales@santpatrici.es</span>
+                    </a>
+                </div>
 
                 <div class="location-filter">
                     <button class="filter-btn active" onclick="filterRestaurants('all')" data-es="Todos" data-en="All" data-fr="Tous">Todos</button>
@@ -930,9 +834,7 @@
                     </div>
                     <p class="restaurant-description" data-es="Dirigido por Dani Mora, destaca por sus platos clásicos. Prueba el oliaigua con higos, la raya a la mantequilla negra o la formatjada Wellington. Excelente en guisos, especialmente en invierno." data-en="Directed by Dani Mora, known for classic dishes. Try the oliaigua with figs, ray with black butter or formatjada Wellington. Excellent stews, especially in winter." data-fr="Dirigé par Dani Mora, connu pour ses plats classiques. Essayez l'oliaigua aux figues, la raie au beurre noir ou la formatjada Wellington.">Dirigido por Dani Mora, destaca por sus platos clásicos. Prueba el oliaigua con higos, la raya a la mantequilla negra o la formatjada Wellington. Excelente en guisos, especialmente en invierno.</p>
                     <div class="restaurant-actions">
-                        <a href="https://maps.google.com/?q=Sa+Pedrera+des+Pujol+Menorca" target="_blank" class="restaurant-btn maps">
-                            <i class="fas fa-map-marker-alt"></i> Maps
-                        </a>
+                        <a href="https://maps.google.com/?q=Sa+Pedrera+des+Pujol+Menorca" target="_blank" class="restaurant-btn maps"><i class="fas fa-map-marker-alt"></i> Maps</a>
                     </div>
                 </div>
 
@@ -946,9 +848,7 @@
                     </div>
                     <p class="restaurant-description" data-es="Chiringuito con encanto en la cala de Alcaufar, protegida por un puerto natural. Especializado en arroces y pescado fresco de Menorca." data-en="Charming beach bar in Alcaufar cove, protected by a natural harbor. Specialized in rice dishes and fresh Menorcan fish." data-fr="Bar de plage charmant dans la crique d'Alcaufar. Spécialisé dans les plats de riz et le poisson frais de Minorque.">Chiringuito con encanto en la cala de Alcaufar, protegida por un puerto natural. Especializado en arroces y pescado fresco de Menorca.</p>
                     <div class="restaurant-actions">
-                        <a href="https://maps.google.com/?q=Xuroy+Cala+Alcaufar+Menorca" target="_blank" class="restaurant-btn maps">
-                            <i class="fas fa-map-marker-alt"></i> Maps
-                        </a>
+                        <a href="https://maps.google.com/?q=Xuroy+Cala+Alcaufar+Menorca" target="_blank" class="restaurant-btn maps"><i class="fas fa-map-marker-alt"></i> Maps</a>
                     </div>
                 </div>
 
@@ -963,9 +863,7 @@
                     </div>
                     <p class="restaurant-description" data-es="Los platillos de Marco Collado con trufa y productos locales. Un enfoque culinario muy disfrutable." data-en="Marco Collado's dishes with truffle and local products. A very enjoyable culinary approach." data-fr="Les plats de Marco Collado avec truffe et produits locaux. Une approche culinaire très agréable.">Los platillos de Marco Collado con trufa y productos locales. Un enfoque culinario muy disfrutable.</p>
                     <div class="restaurant-actions">
-                        <a href="https://maps.google.com/?q=Ses+Forquilles+Mahon+Menorca" target="_blank" class="restaurant-btn maps">
-                            <i class="fas fa-map-marker-alt"></i> Maps
-                        </a>
+                        <a href="https://maps.google.com/?q=Ses+Forquilles+Mahon+Menorca" target="_blank" class="restaurant-btn maps"><i class="fas fa-map-marker-alt"></i> Maps</a>
                     </div>
                 </div>
 
@@ -979,9 +877,7 @@
                     </div>
                     <p class="restaurant-description" data-es="Desde 1983, con vistas a Cala Sa Mesquida. Perfecto para amantes del marisco, con pescado fresco como gallo de San Pedro, cabracho, pargo y pez emperador." data-en="Since 1983, with views of Cala Sa Mesquida. Perfect for seafood lovers, with fresh fish like John Dory, scorpionfish, sea bream and emperor fish." data-fr="Depuis 1983, avec vue sur Cala Sa Mesquida. Parfait pour les amateurs de fruits de mer.">Desde 1983, con vistas a Cala Sa Mesquida. Perfecto para amantes del marisco, con pescado fresco como gallo de San Pedro, cabracho, pargo y pez emperador.</p>
                     <div class="restaurant-actions">
-                        <a href="https://maps.google.com/?q=Cap+Roig+Sa+Mesquida+Menorca" target="_blank" class="restaurant-btn maps">
-                            <i class="fas fa-map-marker-alt"></i> Maps
-                        </a>
+                        <a href="https://maps.google.com/?q=Cap+Roig+Sa+Mesquida+Menorca" target="_blank" class="restaurant-btn maps"><i class="fas fa-map-marker-alt"></i> Maps</a>
                     </div>
                 </div>
 
@@ -996,9 +892,7 @@
                     </div>
                     <p class="restaurant-description" data-es="Tres décadas de experiencia, punto de encuentro para amantes de la carne a la brasa. Jordi Pons cría su propio ganado. También ofrece pescado fresco y marisco." data-en="Three decades of experience, meeting point for grilled meat lovers. Jordi Pons raises his own cattle. Also offers fresh fish and seafood." data-fr="Trois décennies d'expérience, point de rencontre pour les amateurs de viande grillée.">Tres décadas de experiencia, punto de encuentro para amantes de la carne a la brasa. Jordi Pons cría su propio ganado. También ofrece pescado fresco y marisco.</p>
                     <div class="restaurant-actions">
-                        <a href="https://maps.google.com/?q=Ca+Na+Marga+Fornells+Menorca" target="_blank" class="restaurant-btn maps">
-                            <i class="fas fa-map-marker-alt"></i> Maps
-                        </a>
+                        <a href="https://maps.google.com/?q=Ca+Na+Marga+Fornells+Menorca" target="_blank" class="restaurant-btn maps"><i class="fas fa-map-marker-alt"></i> Maps</a>
                     </div>
                 </div>
 
@@ -1012,9 +906,7 @@
                     </div>
                     <p class="restaurant-description" data-es="Famoso por su caldereta de langosta, elemento básico de la cocina tradicional menorquina. Las langostas se mantienen en sus propios viveros." data-en="Famous for its lobster stew, a staple of traditional Menorcan cuisine. Lobsters are kept in their own hatcheries." data-fr="Célèbre pour sa caldereta de homard, un incontournable de la cuisine traditionnelle minorquine.">Famoso por su caldereta de langosta, elemento básico de la cocina tradicional menorquina. Las langostas se mantienen en sus propios viveros.</p>
                     <div class="restaurant-actions">
-                        <a href="https://maps.google.com/?q=Es+Cranc+Fornells+Menorca" target="_blank" class="restaurant-btn maps">
-                            <i class="fas fa-map-marker-alt"></i> Maps
-                        </a>
+                        <a href="https://maps.google.com/?q=Es+Cranc+Fornells+Menorca" target="_blank" class="restaurant-btn maps"><i class="fas fa-map-marker-alt"></i> Maps</a>
                     </div>
                 </div>
 
@@ -1028,9 +920,7 @@
                     </div>
                     <p class="restaurant-description" data-es="David de Coca trabaja el marisco como nadie en la isla, ofreciendo langosta en una docena de preparaciones diferentes." data-en="David de Coca works seafood like no one else on the island, offering lobster in a dozen different preparations." data-fr="David de Coca travaille les fruits de mer comme personne sur l'île, offrant du homard en une douzaine de préparations différentes.">David de Coca trabaja el marisco como nadie en la isla, ofreciendo langosta en una docena de preparaciones diferentes.</p>
                     <div class="restaurant-actions">
-                        <a href="https://maps.google.com/?q=Sa+Llagosta+Fornells+Menorca" target="_blank" class="restaurant-btn maps">
-                            <i class="fas fa-map-marker-alt"></i> Maps
-                        </a>
+                        <a href="https://maps.google.com/?q=Sa+Llagosta+Fornells+Menorca" target="_blank" class="restaurant-btn maps"><i class="fas fa-map-marker-alt"></i> Maps</a>
                     </div>
                 </div>
 
@@ -1044,9 +934,7 @@
                     </div>
                     <p class="restaurant-description" data-es="Excelente alternativa con dos terrazas. Cocina mediterránea hecha con mucho amor." data-en="Excellent alternative with two terraces. Mediterranean cuisine made with lots of love." data-fr="Excellente alternative avec deux terrasses. Cuisine méditerranéenne faite avec beaucoup d'amour.">Excelente alternativa con dos terrazas. Cocina mediterránea hecha con mucho amor.</p>
                     <div class="restaurant-actions">
-                        <a href="https://maps.google.com/?q=Sa+Taula+Fornells+Menorca" target="_blank" class="restaurant-btn maps">
-                            <i class="fas fa-map-marker-alt"></i> Maps
-                        </a>
+                        <a href="https://maps.google.com/?q=Sa+Taula+Fornells+Menorca" target="_blank" class="restaurant-btn maps"><i class="fas fa-map-marker-alt"></i> Maps</a>
                     </div>
                 </div>
 
@@ -1061,9 +949,7 @@
                     </div>
                     <p class="restaurant-description" data-es="Cócteles de alta calidad y cocina de mercado cerca del mercado y la catedral. El chef y bartender Joan Canals trabaja con la captura de los barcos Curniola y Valldemosa Primera." data-en="High quality cocktails and market cuisine near the market and cathedral. Chef and bartender Joan Canals works with the catch from Curniola and Valldemosa Primera boats." data-fr="Cocktails de haute qualité et cuisine du marché près du marché et de la cathédrale.">Cócteles de alta calidad y cocina de mercado cerca del mercado y la catedral. El chef y bartender Joan Canals trabaja con la captura de los barcos Curniola y Valldemosa Primera.</p>
                     <div class="restaurant-actions">
-                        <a href="https://maps.google.com/?q=Ulisses+Ciutadella+Menorca" target="_blank" class="restaurant-btn maps">
-                            <i class="fas fa-map-marker-alt"></i> Maps
-                        </a>
+                        <a href="https://maps.google.com/?q=Ulisses+Ciutadella+Menorca" target="_blank" class="restaurant-btn maps"><i class="fas fa-map-marker-alt"></i> Maps</a>
                     </div>
                 </div>
 
@@ -1077,9 +963,7 @@
                     </div>
                     <p class="restaurant-description" data-es="Situado en el puerto de Ciutadella, especializado en pescado y marisco local. Destaca su capacidad para cambiar el menú según la pesca del día." data-en="Located in the port of Ciutadella, specialized in local fish and seafood. Notable for changing the menu according to the day's catch." data-fr="Situé dans le port de Ciutadella, spécialisé dans le poisson et les fruits de mer locaux.">Situado en el puerto de Ciutadella, especializado en pescado y marisco local. Destaca su capacidad para cambiar el menú según la pesca del día.</p>
                     <div class="restaurant-actions">
-                        <a href="https://maps.google.com/?q=S+Amarador+Ciutadella+Menorca" target="_blank" class="restaurant-btn maps">
-                            <i class="fas fa-map-marker-alt"></i> Maps
-                        </a>
+                        <a href="https://maps.google.com/?q=S+Amarador+Ciutadella+Menorca" target="_blank" class="restaurant-btn maps"><i class="fas fa-map-marker-alt"></i> Maps</a>
                     </div>
                 </div>
 
@@ -1093,9 +977,7 @@
                     </div>
                     <p class="restaurant-description" data-es="Lugar clásico en el puerto para gambas, rape y langosta. La pesca diaria es traída por el barco Rosa Santa Primera." data-en="Classic place in the port for prawns, monkfish and lobster. Daily catch brought by the Rosa Santa Primera boat." data-fr="Lieu classique du port pour les crevettes, la lotte et le homard.">Lugar clásico en el puerto para gambas, rape y langosta. La pesca diaria es traída por el barco Rosa Santa Primera.</p>
                     <div class="restaurant-actions">
-                        <a href="https://maps.google.com/?q=Cafe+Balear+Ciutadella+Menorca" target="_blank" class="restaurant-btn maps">
-                            <i class="fas fa-map-marker-alt"></i> Maps
-                        </a>
+                        <a href="https://maps.google.com/?q=Cafe+Balear+Ciutadella+Menorca" target="_blank" class="restaurant-btn maps"><i class="fas fa-map-marker-alt"></i> Maps</a>
                     </div>
                 </div>
 
@@ -1109,36 +991,35 @@
                     </div>
                     <p class="restaurant-description" data-es="Platos preparados con ingredientes de temporada y menús degustación servidos en un restaurante minimalista y elegante con patio. Miquel Sánchez trata los productos locales con gran cuidado." data-en="Dishes prepared with seasonal ingredients and tasting menus served in a minimalist and elegant restaurant with patio. Miquel Sánchez treats local products with great care." data-fr="Plats préparés avec des ingrédients de saison et menus dégustation servis dans un restaurant minimaliste et élégant avec patio.">Platos preparados con ingredientes de temporada y menús degustación servidos en un restaurante minimalista y elegante con patio. Miquel Sánchez trata los productos locales con gran cuidado.</p>
                     <div class="restaurant-actions">
-                        <a href="https://maps.google.com/?q=Smoix+Ciutadella+Menorca" target="_blank" class="restaurant-btn maps">
-                            <i class="fas fa-map-marker-alt"></i> Maps
-                        </a>
+                        <a href="https://maps.google.com/?q=Smoix+Ciutadella+Menorca" target="_blank" class="restaurant-btn maps"><i class="fas fa-map-marker-alt"></i> Maps</a>
                     </div>
                 </div>
             </div>
         </div>
+
     </main>
 
-    <!-- Bottom Navigation -->
+    <!-- ===== NAVEGACIÓN INFERIOR ===== -->
     <nav class="bottom-nav">
-        <a href="#" class="nav-item active" onclick="showPage('home')">
+        <a href="#" class="nav-item active" data-page="home" onclick="showPage('home'); return false;">
             <i class="fas fa-home"></i>
             <span data-es="Inicio" data-en="Home" data-fr="Accueil">Inicio</span>
         </a>
-        <a href="#" class="nav-item" onclick="showPage('activities')">
+        <a href="#" class="nav-item" data-page="activities" onclick="showPage('activities'); return false;">
             <i class="fas fa-star"></i>
             <span data-es="Actividades" data-en="Activities" data-fr="Activités">Actividades</span>
         </a>
-        <a href="#" class="nav-item" onclick="showPage('beaches')">
+        <a href="#" class="nav-item" data-page="beaches" onclick="showPage('beaches'); return false;">
             <i class="fas fa-umbrella-beach"></i>
             <span data-es="Playas" data-en="Beaches" data-fr="Plages">Playas</span>
         </a>
-        <a href="#" class="nav-item" onclick="showPage('restaurants')">
+        <a href="#" class="nav-item" data-page="restaurants" onclick="showPage('restaurants'); return false;">
             <i class="fas fa-utensils"></i>
             <span data-es="Restaurantes" data-en="Restaurants" data-fr="Restaurants">Restaurantes</span>
         </a>
     </nav>
 
-    <!-- Map Modal -->
+    <!-- ===== MODAL MAPA ===== -->
     <div class="modal map-modal" id="mapModal">
         <div class="modal-content">
             <div class="modal-header">
@@ -1146,12 +1027,12 @@
                 <button class="modal-close" onclick="closeModal('mapModal')">&times;</button>
             </div>
             <div class="modal-body">
-                <img src="https://i.imgur.com/f77Nw24.jpeg" alt="Mapa de Menorca" id="menorcaMap">
+                <img src="https://i.imgur.com/f77Nw24.jpeg" alt="Mapa de Menorca">
             </div>
         </div>
     </div>
 
-    <!-- Snacks Bar Modal -->
+    <!-- ===== MODAL SNACKS BAR ===== -->
     <div class="modal" id="snacksModal">
         <div class="modal-content">
             <div class="modal-header">
@@ -1220,7 +1101,7 @@
                 </div>
 
                 <div class="menu-category">
-                    <h4 class="menu-category-title" data-es="Cervezas" data-en="Beer" data-fr="Bière">Cervezas</h4>
+                    <h4 class="menu-category-title" data-es="Cervezas" data-en="Beer" data-fr="Bières">Cervezas</h4>
                     <div class="menu-item">
                         <div class="menu-item-name">Estrella Galicia 0.0 Tostada</div>
                         <span class="menu-item-price">4,00 €</span>
@@ -1328,7 +1209,7 @@
         </div>
     </div>
 
-    <!-- Restaurant Menu Modal -->
+    <!-- ===== MODAL CARTA RESTAURANTE ===== -->
     <div class="modal" id="restaurantMenuModal">
         <div class="modal-content">
             <div class="modal-header">
@@ -1341,67 +1222,88 @@
         </div>
     </div>
 
+    <!-- ===== JAVASCRIPT ===== -->
     <script>
-        // Current language
         let currentLang = 'es';
 
-        // Toggle language dropdown
-        function toggleLanguageDropdown() {
-            document.getElementById('langDropdown').classList.toggle('active');
+        // Abrir/cerrar dropdown de idioma
+        function toggleLang(btn) {
+            const dropdown = btn.parentElement.querySelector('.language-dropdown');
+            document.querySelectorAll('.language-dropdown').forEach(function(d) {
+                if (d !== dropdown) d.classList.remove('active');
+            });
+            dropdown.classList.toggle('active');
         }
 
-        // Close dropdown when clicking outside
+        // Cerrar dropdown al hacer clic fuera
         document.addEventListener('click', function(e) {
             if (!e.target.closest('.language-selector')) {
-                document.getElementById('langDropdown').classList.remove('active');
+                document.querySelectorAll('.language-dropdown').forEach(function(d) {
+                    d.classList.remove('active');
+                });
             }
         });
 
-        // Change language
+        // Cambiar idioma
         function changeLanguage(lang) {
             currentLang = lang;
-            document.getElementById('currentLang').textContent = lang.toUpperCase();
-            document.getElementById('langDropdown').classList.remove('active');
-
-            // Update all translatable elements
+            // Actualizar todos los textos de idioma
+            document.querySelectorAll('.current-lang-text').forEach(function(el) {
+                el.textContent = lang.toUpperCase();
+            });
+            // Cerrar todos los dropdowns
+            document.querySelectorAll('.language-dropdown').forEach(function(d) {
+                d.classList.remove('active');
+            });
+            // Traducir todos los elementos
             document.querySelectorAll('[data-' + lang + ']').forEach(function(el) {
                 el.textContent = el.getAttribute('data-' + lang);
             });
         }
 
-        // Show page
+        // Navegar entre páginas
         function showPage(pageId) {
-            // Hide all pages
+            // Ocultar todas las páginas
             document.querySelectorAll('.page').forEach(function(page) {
                 page.classList.remove('active');
             });
-
-            // Show selected page
+            // Mostrar la página seleccionada
             document.getElementById('page-' + pageId).classList.add('active');
 
-            // Update nav
+            // Alternar header fijo
+            var header = document.getElementById('mainHeader');
+            if (pageId === 'home') {
+                header.classList.add('hidden');
+                document.querySelector('main').style.marginTop = '0';
+            } else {
+                header.classList.remove('hidden');
+                document.querySelector('main').style.marginTop = '65px';
+            }
+
+            // Actualizar navegación inferior
             document.querySelectorAll('.nav-item').forEach(function(item) {
                 item.classList.remove('active');
+                if (item.getAttribute('data-page') === pageId) {
+                    item.classList.add('active');
+                }
             });
-            event.currentTarget.classList.add('active');
 
-            // Scroll to top
             window.scrollTo(0, 0);
         }
 
-        // Open modal
+        // Abrir modal
         function openModal(modalId) {
             document.getElementById(modalId).classList.add('active');
             document.body.style.overflow = 'hidden';
         }
 
-        // Close modal
+        // Cerrar modal
         function closeModal(modalId) {
             document.getElementById(modalId).classList.remove('active');
             document.body.style.overflow = 'auto';
         }
 
-        // Close modal on background click
+        // Cerrar modal al hacer clic en el fondo
         document.querySelectorAll('.modal').forEach(function(modal) {
             modal.addEventListener('click', function(e) {
                 if (e.target === modal) {
@@ -1411,15 +1313,13 @@
             });
         });
 
-        // Filter restaurants
+        // Filtrar restaurantes
         function filterRestaurants(location) {
-            // Update filter buttons
             document.querySelectorAll('.filter-btn').forEach(function(btn) {
                 btn.classList.remove('active');
             });
             event.currentTarget.classList.add('active');
 
-            // Filter restaurants
             document.querySelectorAll('.restaurant-card').forEach(function(card) {
                 if (location === 'all' || card.getAttribute('data-location') === location) {
                     card.style.display = 'block';
