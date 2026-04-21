@@ -3,14 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sant Patrici</title>
+    <title>Sant Patrici - Menorca</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* ===== TIPOGRAFÍA ELYSIAN =====
-         * Coloca los archivos de la fuente Elysian en la carpeta 'fonts/':
-         * - Elysian-Regular.woff2 / .woff / .ttf
-         * - Elysian-Bold.woff2 / .woff / .ttf
-         */
+        /* ===== TIPOGRAFÍA ELYSIAN ===== */
         @font-face {
             font-family: 'Elysian';
             src: url('fonts/Elysian-Regular.woff2') format('woff2'),
@@ -35,99 +31,219 @@
             --primary-light: #008577;
             --primary-dark: #005B52;
             --accent-color: #C4A962;
-            --text-color: #333;
+            --accent-dark: #A8924A;
+            --text-color: #2a2a2a;
             --text-light: #666;
-            --bg-color: #f5f5f0;
+            --bg-color: #faf8f3;
+            --bg-alt: #f0ede5;
             --white: #fff;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 20px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 40px rgba(0,0,0,0.15);
+            --container-max: 1280px;
+            --transition: 0.3s ease;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
 
         body {
             font-family: 'Elysian', Georgia, 'Times New Roman', serif;
             background-color: var(--bg-color);
             color: var(--text-color);
             line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
         }
 
-        /* ===== HEADER FIJO (páginas internas) ===== */
+        .container {
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ===== HEADER ===== */
         header {
             background-color: var(--primary-color);
             color: var(--white);
-            padding: 12px 20px;
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+        }
+
+        .header-container {
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 12px 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 20px;
         }
-        header.hidden { display: none; }
 
-        .header-logo img { height: 40px; }
+        .header-logo {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .header-logo:hover { opacity: 0.85; }
+        .header-logo img { height: 50px; }
+
+        /* ===== NAVEGACIÓN DESKTOP ===== */
+        .desktop-nav {
+            display: none;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .desktop-nav a {
+            color: var(--white);
+            text-decoration: none;
+            padding: 10px 18px;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+        }
+        .desktop-nav a:hover,
+        .desktop-nav a.active {
+            background: rgba(255,255,255,0.15);
+        }
+        .desktop-nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 3px;
+            background: var(--accent-color);
+            border-radius: 3px;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
 
         /* ===== SELECTOR DE IDIOMA ===== */
         .language-selector { position: relative; }
 
         .language-btn {
             background: transparent;
-            border: 1px solid var(--white);
+            border: 1px solid rgba(255,255,255,0.5);
             color: var(--white);
             padding: 8px 15px;
-            border-radius: 5px;
+            border-radius: 6px;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 8px;
             font-family: 'Elysian', Georgia, serif;
             font-size: 0.9rem;
+            transition: var(--transition);
+        }
+        .language-btn:hover {
+            background: rgba(255,255,255,0.15);
+            border-color: var(--white);
         }
 
         .language-dropdown {
             display: none;
             position: absolute;
-            top: 100%;
+            top: calc(100% + 8px);
             right: 0;
             background: var(--white);
-            border-radius: 5px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            box-shadow: var(--shadow-lg);
             overflow: hidden;
-            min-width: 120px;
+            min-width: 150px;
             z-index: 100;
         }
         .language-dropdown.active { display: block; }
 
         .language-dropdown a {
             display: block;
-            padding: 10px 15px;
+            padding: 12px 18px;
             color: var(--text-color);
             text-decoration: none;
-            transition: background 0.3s;
+            transition: background var(--transition);
+            font-size: 0.95rem;
         }
         .language-dropdown a:hover { background: var(--bg-color); }
 
-        /* ===== MAIN ===== */
-        main { padding-bottom: 80px; }
-
-        /* ===== HERO (Página principal) ===== */
-        .hero {
-            background-color: var(--primary-color);
+        /* ===== HAMBURGER (móvil) ===== */
+        .mobile-toggle {
+            display: none;
+            background: transparent;
+            border: none;
             color: var(--white);
-            padding: 50px 20px 40px;
-            text-align: center;
-            position: relative;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 8px;
         }
 
-        .hero-lang-selector {
+        /* ===== MAIN ===== */
+        main {
+            margin-top: 76px;
+            min-height: calc(100vh - 76px);
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 50%, var(--primary-light) 100%);
+            color: var(--white);
+            padding: 80px 24px 100px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
             position: absolute;
-            top: 15px;
-            right: 15px;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(196, 169, 98, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
         .hero-logo {
-            height: 160px;
+            height: 180px;
             margin-bottom: 30px;
+            filter: drop-shadow(0 6px 20px rgba(0,0,0,0.25));
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+            margin-bottom: 35px;
+            opacity: 0.95;
+            letter-spacing: 1px;
+        }
+
+        .hero-divider {
+            width: 60px;
+            height: 3px;
+            background: var(--accent-color);
+            margin: 0 auto 30px;
+            border-radius: 2px;
         }
 
         /* ===== ICONOS DE CONTACTO ===== */
@@ -141,280 +257,460 @@
         .contact-link {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             color: var(--white);
             text-decoration: none;
             font-size: 0.95rem;
-            padding: 10px 20px;
+            padding: 12px 24px;
             background: rgba(255,255,255,0.15);
-            border-radius: 25px;
-            transition: all 0.3s;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 30px;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
         }
         .contact-link:hover {
             background: rgba(255,255,255,0.25);
-            transform: scale(1.05);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
         }
         .contact-link i { font-size: 1.2rem; }
         .whatsapp-link i { color: #25D366; }
 
-        /* ===== BOTONES DEL MENÚ PRINCIPAL ===== */
-        .menu-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            padding: 25px 20px;
+        /* ===== QUICK ACCESS (home) ===== */
+        .quick-access {
+            margin-top: -60px;
+            position: relative;
+            z-index: 3;
+            padding: 0 24px 60px;
         }
 
-        .menu-btn {
+        .quick-grid {
+            max-width: var(--container-max);
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .quick-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 30px 24px;
+            text-align: center;
+            text-decoration: none;
+            color: var(--text-color);
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            cursor: pointer;
+            border: 1px solid transparent;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+        }
+        .quick-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-color);
+        }
+
+        .quick-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            color: var(--white);
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            background: var(--primary-color);
-            color: var(--white);
-            padding: 18px 30px;
-            border-radius: 10px;
-            text-decoration: none;
+            font-size: 1.6rem;
+            transition: var(--transition);
+        }
+        .quick-card:hover .quick-icon {
+            transform: scale(1.1) rotate(-5deg);
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-dark));
+        }
+
+        .quick-title {
             font-size: 1.1rem;
-            font-weight: 500;
-            transition: all 0.3s;
-            border: none;
-            cursor: pointer;
-            font-family: 'Elysian', Georgia, serif;
+            font-weight: 600;
+            color: var(--primary-color);
         }
-        .menu-btn:hover {
-            background: var(--primary-light);
-            transform: scale(1.02);
+
+        .quick-desc {
+            font-size: 0.85rem;
+            color: var(--text-light);
         }
-        .menu-btn i { font-size: 1.2rem; }
 
         /* ===== SECCIONES ===== */
-        .section { padding: 30px 20px; }
+        .section {
+            padding: 60px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
 
         .section-title {
-            font-size: 1.5rem;
+            font-size: 2.2rem;
             color: var(--primary-color);
-            margin-bottom: 20px;
-            display: flex;
+            margin-bottom: 12px;
+            display: inline-flex;
             align-items: center;
-            gap: 10px;
+            gap: 14px;
         }
-        .section-title i { font-size: 1.3rem; }
+        .section-title i { font-size: 1.8rem; color: var(--accent-color); }
+
+        .section-subtitle {
+            color: var(--text-light);
+            font-size: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
 
         /* ===== CAJA DE CONTACTO EN SECCIONES ===== */
         .contact-info-box {
-            background: linear-gradient(135deg, rgba(0,109,98,0.04), rgba(0,109,98,0.08));
-            border-radius: 15px;
-            padding: 25px;
-            margin-bottom: 30px;
+            background: linear-gradient(135deg, var(--white), var(--bg-alt));
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 50px;
             text-align: center;
-            border: 1px solid rgba(0,109,98,0.12);
+            border: 1px solid rgba(0,109,98,0.1);
+            box-shadow: var(--shadow-sm);
         }
         .contact-info-box p {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             color: var(--text-color);
-            font-size: 1rem;
+            font-size: 1.05rem;
             line-height: 1.7;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .section-contact-icons {
             display: flex;
             justify-content: center;
-            gap: 12px;
+            gap: 15px;
             flex-wrap: wrap;
         }
         .section-contact-icons .contact-link {
             background: var(--primary-color);
+            border-color: var(--primary-color);
             color: var(--white);
         }
         .section-contact-icons .contact-link:hover {
             background: var(--primary-light);
+            border-color: var(--primary-light);
         }
         .section-contact-icons .whatsapp-link i { color: #25D366; }
 
-        /* ===== TARJETAS ===== */
+        /* ===== TARJETAS ACTIVIDADES ===== */
         .card-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 28px;
         }
 
         .card {
             background: var(--white);
-            border-radius: 15px;
+            border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
-            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
         }
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 25px rgba(0,0,0,0.15);
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
         }
 
-        .card-img { width: 100%; height: 180px; object-fit: cover; }
+        .card-img-wrapper {
+            position: relative;
+            overflow: hidden;
+            height: 220px;
+        }
+        .card-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        .card:hover .card-img { transform: scale(1.08); }
 
-        .card-content { padding: 20px; }
+        .card-content {
+            padding: 24px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
 
         .card-title {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             color: var(--primary-color);
-            margin-bottom: 8px;
+            margin-bottom: 10px;
+            font-weight: 600;
         }
 
         .card-description {
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             color: var(--text-light);
-            margin-bottom: 15px;
+            line-height: 1.6;
+            flex: 1;
         }
 
-        .card-btn {
+        /* ===== PLAYAS ===== */
+        .beach-section { margin-bottom: 40px; }
+
+        .beach-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .beach-tag {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: var(--primary-color);
-            color: var(--white);
             padding: 10px 20px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: background 0.3s;
-        }
-        .card-btn:hover { background: var(--primary-light); }
-
-        /* ===== PLAYAS ===== */
-        .beach-section { margin-bottom: 30px; }
-
-        .beach-tag {
-            display: inline-block;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            margin-bottom: 15px;
+            border-radius: 30px;
+            font-size: 0.95rem;
+            font-weight: 600;
         }
         .beach-tag.north { background: #E8D4B8; color: #8B6914; }
         .beach-tag.south { background: #D4E8F0; color: #1B6B8C; }
 
         .beach-info {
-            font-size: 0.9rem;
-            color: var(--text-light);
-            margin-bottom: 20px;
-            padding: 15px;
+            font-size: 0.95rem;
+            color: var(--text-color);
+            margin-bottom: 24px;
+            padding: 20px 24px;
             background: var(--white);
-            border-radius: 10px;
-            border-left: 4px solid var(--primary-color);
+            border-radius: 12px;
+            border-left: 5px solid var(--primary-color);
+            box-shadow: var(--shadow-sm);
+        }
+        .beach-info strong { color: var(--primary-color); margin-right: 8px; }
+
+        .beach-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 16px;
         }
 
-        .beach-list {
-            list-style: none;
+        .beach-card {
             background: var(--white);
-            border-radius: 15px;
-            padding: 10px 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-        .beach-list li {
-            padding: 12px 0;
-            border-bottom: 1px solid #eee;
+            border-radius: 12px;
+            padding: 20px 24px;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-start;
+            gap: 15px;
         }
-        .beach-list li:last-child { border-bottom: none; }
+        .beach-card:hover {
+            transform: translateX(4px);
+            box-shadow: var(--shadow-md);
+        }
 
-        .beach-name { font-weight: 500; color: var(--primary-color); }
-        .beach-description { font-size: 0.85rem; color: var(--text-light); margin-top: 3px; }
+        .beach-card-content { flex: 1; }
+        .beach-name { font-weight: 600; color: var(--primary-color); font-size: 1.05rem; margin-bottom: 4px; }
+        .beach-description { font-size: 0.88rem; color: var(--text-light); line-height: 1.5; }
 
-        .beach-link { color: var(--accent-color); text-decoration: none; font-size: 0.9rem; }
-        .beach-link:hover { text-decoration: underline; }
+        .beach-link {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 6px 12px;
+            border-radius: 20px;
+            background: rgba(196, 169, 98, 0.1);
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+        .beach-link:hover {
+            background: var(--accent-color);
+            color: var(--white);
+        }
 
         .download-btn {
-            display: flex;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
             background: var(--accent-color);
             color: var(--white);
-            padding: 15px 30px;
-            border-radius: 10px;
+            padding: 14px 30px;
+            border-radius: 30px;
             text-decoration: none;
             font-weight: 500;
-            margin: 0 0 25px 0;
-            transition: all 0.3s;
+            margin: 0 auto 40px;
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
         }
-        .download-btn:hover { background: #B8994D; }
+        .download-btn:hover {
+            background: var(--accent-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .center-btn { display: flex; justify-content: center; }
 
         /* ===== RESTAURANTES ===== */
+        .restaurant-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 24px;
+        }
+
         .restaurant-card {
             background: var(--white);
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 15px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-radius: 16px;
+            padding: 28px;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+        .restaurant-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
         }
 
         .restaurant-header {
             display: flex;
             align-items: flex-start;
             gap: 15px;
-            margin-bottom: 10px;
+            margin-bottom: 16px;
         }
-        .restaurant-icon { font-size: 1.5rem; }
-        .restaurant-name { font-size: 1.1rem; color: var(--primary-color); font-weight: 600; }
-        .restaurant-location { font-size: 0.85rem; color: var(--text-light); margin-bottom: 10px; }
-        .restaurant-description { font-size: 0.9rem; color: var(--text-color); margin-bottom: 15px; }
+        .restaurant-icon {
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+        .restaurant-name {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .restaurant-location {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .restaurant-description {
+            font-size: 0.92rem;
+            color: var(--text-color);
+            margin-bottom: 20px;
+            flex: 1;
+            line-height: 1.6;
+        }
 
         .restaurant-actions { display: flex; gap: 10px; flex-wrap: wrap; }
 
         .restaurant-btn {
             display: inline-flex;
             align-items: center;
-            gap: 5px;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 0.85rem;
+            gap: 6px;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 0.88rem;
             text-decoration: none;
-            transition: all 0.3s;
+            transition: var(--transition);
+            font-weight: 500;
         }
         .restaurant-btn.maps { background: var(--primary-color); color: var(--white); }
-        .restaurant-btn.call { background: var(--bg-color); color: var(--primary-color); border: 1px solid var(--primary-color); }
-        .restaurant-btn:hover { opacity: 0.9; transform: scale(1.05); }
+        .restaurant-btn.maps:hover { background: var(--primary-light); transform: scale(1.05); }
 
         .location-filter {
             display: flex;
             gap: 10px;
             overflow-x: auto;
-            padding: 10px 0;
-            margin-bottom: 20px;
+            padding: 8px 0 20px;
+            margin-bottom: 30px;
+            justify-content: flex-start;
+            flex-wrap: wrap;
         }
 
         .filter-btn {
-            padding: 8px 20px;
-            border-radius: 20px;
-            border: 1px solid var(--primary-color);
+            padding: 10px 22px;
+            border-radius: 25px;
+            border: 2px solid var(--primary-color);
             background: transparent;
             color: var(--primary-color);
             cursor: pointer;
             white-space: nowrap;
-            transition: all 0.3s;
+            transition: var(--transition);
             font-family: 'Elysian', Georgia, serif;
             font-size: 0.9rem;
+            font-weight: 500;
         }
         .filter-btn.active, .filter-btn:hover {
             background: var(--primary-color);
             color: var(--white);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-sm);
         }
 
-        /* ===== NAVEGACIÓN INFERIOR ===== */
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--primary-dark);
+            color: var(--white);
+            padding: 50px 24px 30px;
+            margin-top: 60px;
+        }
+        .footer-container {
+            max-width: var(--container-max);
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+        .footer-col h4 {
+            color: var(--accent-color);
+            margin-bottom: 16px;
+            font-size: 1.05rem;
+        }
+        .footer-col p, .footer-col a {
+            color: rgba(255,255,255,0.85);
+            font-size: 0.9rem;
+            text-decoration: none;
+            line-height: 1.8;
+            display: block;
+            transition: var(--transition);
+        }
+        .footer-col a:hover { color: var(--accent-color); }
+        .footer-bottom {
+            max-width: var(--container-max);
+            margin: 40px auto 0;
+            padding-top: 24px;
+            border-top: 1px solid rgba(255,255,255,0.15);
+            text-align: center;
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.7);
+        }
+
+        /* ===== NAVEGACIÓN INFERIOR (móvil) ===== */
         .bottom-nav {
+            display: none;
             position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
             background: var(--white);
-            display: flex;
             justify-content: space-around;
             padding: 10px 0;
             box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
-            z-index: 1000;
+            z-index: 999;
         }
 
         .nav-item {
@@ -423,11 +719,11 @@
             align-items: center;
             text-decoration: none;
             color: var(--text-light);
-            font-size: 0.75rem;
-            padding: 5px 15px;
-            transition: color 0.3s;
+            font-size: 0.72rem;
+            padding: 5px 10px;
+            transition: color var(--transition);
         }
-        .nav-item i { font-size: 1.3rem; margin-bottom: 3px; }
+        .nav-item i { font-size: 1.2rem; margin-bottom: 3px; }
         .nav-item.active, .nav-item:hover { color: var(--primary-color); }
 
         /* ===== MODALES ===== */
@@ -435,105 +731,209 @@
             display: none;
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0,0,0,0.6);
             z-index: 2000;
             align-items: center;
             justify-content: center;
             padding: 20px;
+            backdrop-filter: blur(4px);
         }
-        .modal.active { display: flex; }
+        .modal.active { display: flex; animation: fadeIn 0.3s ease; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
 
         .modal-content {
             background: var(--white);
-            border-radius: 15px;
-            max-width: 500px;
+            border-radius: 16px;
+            max-width: 600px;
             width: 100%;
-            max-height: 80vh;
+            max-height: 85vh;
             overflow-y: auto;
             position: relative;
+            box-shadow: var(--shadow-lg);
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
         .modal-header {
-            background: var(--primary-color);
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
             color: var(--white);
-            padding: 20px;
-            border-radius: 15px 15px 0 0;
+            padding: 22px 28px;
+            border-radius: 16px 16px 0 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 10;
         }
+        .modal-header h3 { font-size: 1.3rem; }
 
         .modal-close {
-            background: transparent;
+            background: rgba(255,255,255,0.2);
             border: none;
             color: var(--white);
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             cursor: pointer;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
         }
+        .modal-close:hover { background: rgba(255,255,255,0.35); transform: rotate(90deg); }
 
-        .modal-body { padding: 20px; }
+        .modal-body { padding: 28px; }
 
-        .menu-category { margin-bottom: 25px; }
+        .menu-category { margin-bottom: 30px; }
 
         .menu-category-title {
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             color: var(--primary-color);
-            margin-bottom: 15px;
+            margin-bottom: 16px;
             padding-bottom: 10px;
-            border-bottom: 2px solid var(--primary-color);
+            border-bottom: 2px solid var(--accent-color);
+            font-weight: 600;
         }
 
         .menu-item {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            padding: 12px 0;
-            border-bottom: 1px solid #eee;
+            padding: 14px 0;
+            border-bottom: 1px solid #f0f0f0;
         }
         .menu-item:last-child { border-bottom: none; }
 
         .menu-item-name { font-weight: 500; color: var(--text-color); }
-        .menu-item-description { font-size: 0.85rem; color: var(--text-light); margin-top: 3px; }
-        .menu-item-price { font-weight: 600; color: var(--primary-color); white-space: nowrap; margin-left: 15px; }
+        .menu-item-description { font-size: 0.85rem; color: var(--text-light); margin-top: 4px; }
+        .menu-item-price { font-weight: 700; color: var(--primary-color); white-space: nowrap; margin-left: 15px; }
 
-        .map-modal .modal-content { max-width: 900px; max-height: 90vh; }
+        .map-modal .modal-content { max-width: 1000px; max-height: 92vh; }
         .map-modal .modal-body { padding: 0; }
-        .map-modal .modal-body img { width: 100%; height: auto; display: block; border-radius: 0 0 15px 15px; }
+        .map-modal .modal-body img { width: 100%; height: auto; display: block; border-radius: 0 0 16px 16px; }
 
         /* ===== PÁGINAS ===== */
         .page { display: none; }
-        .page.active { display: block; }
+        .page.active { display: block; animation: fadePage 0.4s ease; }
+
+        @keyframes fadePage {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
         /* ===== RESPONSIVE ===== */
+        @media (min-width: 992px) {
+            .desktop-nav { display: flex; }
+        }
+
+        @media (max-width: 991px) {
+            .mobile-toggle { display: block; }
+            
+            .bottom-nav { display: flex; }
+            
+            main { padding-bottom: 70px; }
+
+            .hero { padding: 60px 20px 90px; }
+            .hero-logo { height: 140px; }
+            .section-title { font-size: 1.7rem; }
+            .section-title i { font-size: 1.4rem; }
+            .section { padding: 40px 0; }
+        }
+
         @media (max-width: 600px) {
-            .hero-logo { height: 120px; }
-            .card-grid { grid-template-columns: 1fr; }
+            .header-container { padding: 10px 16px; }
+            .header-logo img { height: 40px; }
+            .language-btn { padding: 6px 12px; font-size: 0.85rem; }
+            
+            .hero { padding: 50px 16px 80px; }
+            .hero-logo { height: 110px; margin-bottom: 20px; }
+            .hero-subtitle { font-size: 0.95rem; margin-bottom: 25px; }
+
+            .quick-access { padding: 0 16px 40px; margin-top: -50px; }
+            .quick-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+            .quick-card { padding: 20px 12px; }
+            .quick-icon { width: 50px; height: 50px; font-size: 1.3rem; }
+            .quick-title { font-size: 0.95rem; }
+            .quick-desc { display: none; }
+
+            .container { padding: 0 16px; }
+            .section { padding: 30px 0; }
+            .section-title { font-size: 1.4rem; }
+            .section-header { margin-bottom: 30px; }
+
+            .contact-info-box { padding: 24px 20px; }
             .contact-icons, .section-contact-icons {
                 flex-direction: column;
                 align-items: center;
                 gap: 10px;
             }
-            .contact-link { justify-content: center; width: 100%; max-width: 300px; }
+            .contact-link { justify-content: center; width: 100%; max-width: 320px; }
+
+            .card-grid, .beach-grid, .restaurant-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-body { padding: 20px; }
+            .modal-header { padding: 18px 20px; }
+            .modal-header h3 { font-size: 1.1rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- ===== HEADER FIJO (solo páginas internas) ===== -->
-    <header id="mainHeader" class="hidden">
-        <div class="header-logo">
-            <img src="img/logo-santpatrici.png" alt="Sant Patrici">
-        </div>
-        <div class="language-selector">
-            <button class="language-btn" onclick="toggleLang(this)">
-                <i class="fas fa-globe"></i>
-                <span class="current-lang-text">ES</span>
-                <i class="fas fa-chevron-down"></i>
-            </button>
-            <div class="language-dropdown">
-                <a href="#" onclick="changeLanguage('es'); return false;">🇪🇸 Español</a>
-                <a href="#" onclick="changeLanguage('en'); return false;">🇬🇧 English</a>
-                <a href="#" onclick="changeLanguage('fr'); return false;">🇫🇷 Français</a>
+    <!-- ===== HEADER ===== -->
+    <header id="mainHeader">
+        <div class="header-container">
+            <div class="header-logo" onclick="showPage('home')">
+                <img src="img/logo-santpatrici.png" alt="Sant Patrici" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=&quot;color:white;font-size:1.4rem;font-weight:bold;letter-spacing:2px;&quot;>SANT PATRICI</span>';">
+            </div>
+
+            <nav class="desktop-nav" id="desktopNav">
+                <a href="#" class="nav-link active" data-page="home" onclick="showPage('home'); return false;">
+                    <i class="fas fa-home"></i>
+                    <span data-es="Inicio" data-en="Home" data-fr="Accueil">Inicio</span>
+                </a>
+                <a href="#" class="nav-link" data-page="activities" onclick="showPage('activities'); return false;">
+                    <i class="fas fa-star"></i>
+                    <span data-es="Actividades" data-en="Activities" data-fr="Activités">Actividades</span>
+                </a>
+                <a href="#" class="nav-link" data-page="beaches" onclick="showPage('beaches'); return false;">
+                    <i class="fas fa-umbrella-beach"></i>
+                    <span data-es="Playas" data-en="Beaches" data-fr="Plages">Playas</span>
+                </a>
+                <a href="#" class="nav-link" data-page="restaurants" onclick="showPage('restaurants'); return false;">
+                    <i class="fas fa-utensils"></i>
+                    <span data-es="Restaurantes" data-en="Restaurants" data-fr="Restaurants">Restaurantes</span>
+                </a>
+                <a href="#" class="nav-link" onclick="openModal('snacksModal'); return false;">
+                    <i class="fas fa-cheese"></i>
+                    <span data-es="Snack Bar" data-en="Snack Bar" data-fr="Snack Bar">Snack Bar</span>
+                </a>
+            </nav>
+
+            <div class="header-right">
+                <div class="language-selector">
+                    <button class="language-btn" onclick="toggleLang(this)">
+                        <i class="fas fa-globe"></i>
+                        <span class="current-lang-text">ES</span>
+                        <i class="fas fa-chevron-down" style="font-size: 0.7rem;"></i>
+                    </button>
+                    <div class="language-dropdown">
+                        <a href="#" onclick="changeLanguage('es'); return false;">🇪🇸 Español</a>
+                        <a href="#" onclick="changeLanguage('en'); return false;">🇬🇧 English</a>
+                        <a href="#" onclick="changeLanguage('fr'); return false;">🇫🇷 Français</a>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
@@ -544,73 +944,11 @@
         <!-- ========== PÁGINA INICIO ========== -->
         <div class="page active" id="page-home">
             <div class="hero">
-                <!-- Selector de idioma sobre el hero -->
-                <div class="hero-lang-selector language-selector">
-                    <button class="language-btn" onclick="toggleLang(this)">
-                        <i class="fas fa-globe"></i>
-                        <span class="current-lang-text">ES</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="language-dropdown">
-                        <a href="#" onclick="changeLanguage('es'); return false;">🇪🇸 Español</a>
-                        <a href="#" onclick="changeLanguage('en'); return false;">🇬🇧 English</a>
-                        <a href="#" onclick="changeLanguage('fr'); return false;">🇫🇷 Français</a>
-                    </div>
-                </div>
-
-                <img src="img/logo-santpatrici.png" alt="Sant Patrici" class="hero-logo">
-
-                <div class="contact-icons">
-                    <a href="https://wa.me/34971713716" target="_blank" class="contact-link whatsapp-link">
-                        <i class="fab fa-whatsapp"></i>
-                        <span>+34 971 71 37 16</span>
-                    </a>
-                    <a href="mailto:sales@santpatrici.es" class="contact-link email-link">
-                        <i class="fas fa-envelope"></i>
-                        <span>sales@santpatrici.es</span>
-                    </a>
-                </div>
-            </div>
-
-            <div class="menu-buttons">
-                <a href="#" class="menu-btn" onclick="openModal('snacksModal'); return false;">
-                    <i class="fas fa-cheese"></i>
-                    <span data-es="Carta Snacks Bar" data-en="Snacks Bar Menu" data-fr="Menu Collation">Carta Snacks Bar</span>
-                </a>
-                <a href="#" class="menu-btn" onclick="openModal('restaurantMenuModal'); return false;">
-                    <i class="fas fa-book-open"></i>
-                    <span data-es="Carta Restaurante" data-en="Restaurant Menu" data-fr="Menu Restaurant">Carta Restaurante</span>
-                </a>
-                <a href="#" class="menu-btn" onclick="showPage('activities'); return false;">
-                    <i class="fas fa-wine-glass-alt"></i>
-                    <span data-es="Actividades" data-en="Activities" data-fr="Activités">Actividades</span>
-                </a>
-                <a href="#" class="menu-btn" onclick="showPage('beaches'); return false;">
-                    <i class="fas fa-umbrella-beach"></i>
-                    <span data-es="Playas" data-en="Beaches" data-fr="Plages">Playas</span>
-                </a>
-                <a href="#" class="menu-btn" onclick="showPage('restaurants'); return false;">
-                    <i class="fas fa-utensils"></i>
-                    <span data-es="Restaurantes" data-en="Restaurants" data-fr="Restaurants">Restaurantes</span>
-                </a>
-            </div>
-        </div>
-
-        <!-- ========== PÁGINA ACTIVIDADES ========== -->
-        <div class="page" id="page-activities">
-            <div class="section">
-                <h3 class="section-title">
-                    <i class="fas fa-star"></i>
-                    <span data-es="Actividades" data-en="Activities" data-fr="Activités">Actividades</span>
-                </h3>
-
-                <div class="contact-info-box">
-                    <p data-es="Nuestro personal estará encantado de asesorarle o reservarle cualquier tipo de experiencia o actividad que desee."
-                       data-en="Our staff will be happy to advise you or book any type of experience or activity you wish."
-                       data-fr="Notre personnel sera ravi de vous conseiller ou de réserver tout type d'expérience ou d'activité que vous souhaitez.">
-                       Nuestro personal estará encantado de asesorarle o reservarle cualquier tipo de experiencia o actividad que desee.
-                    </p>
-                    <div class="section-contact-icons">
+                <div class="hero-content">
+                    <img src="img/logo-santpatrici.png" alt="Sant Patrici" class="hero-logo" onerror="this.style.display='none';">
+                    <div class="hero-divider"></div>
+                    <p class="hero-subtitle" data-es="Tu guía para descubrir Menorca" data-en="Your guide to discover Menorca" data-fr="Votre guide pour découvrir Minorque">Tu guía para descubrir Menorca</p>
+                    <div class="contact-icons">
                         <a href="https://wa.me/34971713716" target="_blank" class="contact-link whatsapp-link">
                             <i class="fab fa-whatsapp"></i>
                             <span>+34 971 71 37 16</span>
@@ -621,37 +959,108 @@
                         </a>
                     </div>
                 </div>
+            </div>
 
-                <div class="card-grid">
-                    <div class="card">
-                        <img src="https://assets.isu.pub/document-structure/230728173835-5a82c920c79913e459704c6849a39dab/v1/cef0a5034fb6aefac4b64ed636b37a03.jpeg?width=1440&quality=85%2C50" alt="Degustación" class="card-img">
-                        <div class="card-content">
-                            <h4 class="card-title" data-es="Visita Degustación en Sant Patrici" data-en="Tasting Visit at Sant Patrici" data-fr="Visite Dégustation à Sant Patrici">Visita Degustación en Sant Patrici</h4>
-                            <p class="card-description" data-es="Descubre nuestra tradición quesera con una visita guiada y degustación de nuestros quesos artesanales elaborados con leche cruda de vaca." data-en="Discover our cheese-making tradition with a guided tour and tasting of our artisan cheeses made with raw cow's milk." data-fr="Découvrez notre tradition fromagère avec une visite guidée et dégustation de nos fromages artisanaux au lait cru de vache.">Descubre nuestra tradición quesera con una visita guiada y degustación de nuestros quesos artesanales elaborados con leche cruda de vaca.</p>
+            <div class="quick-access">
+                <div class="quick-grid">
+                    <a href="#" class="quick-card" onclick="openModal('snacksModal'); return false;">
+                        <div class="quick-icon"><i class="fas fa-cheese"></i></div>
+                        <div class="quick-title" data-es="Snack Bar" data-en="Snack Bar" data-fr="Snack Bar">Snack Bar</div>
+                        <div class="quick-desc" data-es="Nuestra carta" data-en="Our menu" data-fr="Notre carte">Nuestra carta</div>
+                    </a>
+                    <a href="#" class="quick-card" onclick="openModal('restaurantMenuModal'); return false;">
+                        <div class="quick-icon"><i class="fas fa-book-open"></i></div>
+                        <div class="quick-title" data-es="Restaurante" data-en="Restaurant" data-fr="Restaurant">Restaurante</div>
+                        <div class="quick-desc" data-es="Carta completa" data-en="Full menu" data-fr="Menu complet">Carta completa</div>
+                    </a>
+                    <a href="#" class="quick-card" onclick="showPage('activities'); return false;">
+                        <div class="quick-icon"><i class="fas fa-star"></i></div>
+                        <div class="quick-title" data-es="Actividades" data-en="Activities" data-fr="Activités">Actividades</div>
+                        <div class="quick-desc" data-es="Experiencias únicas" data-en="Unique experiences" data-fr="Expériences uniques">Experiencias únicas</div>
+                    </a>
+                    <a href="#" class="quick-card" onclick="showPage('beaches'); return false;">
+                        <div class="quick-icon"><i class="fas fa-umbrella-beach"></i></div>
+                        <div class="quick-title" data-es="Playas" data-en="Beaches" data-fr="Plages">Playas</div>
+                        <div class="quick-desc" data-es="Las mejores calas" data-en="The best coves" data-fr="Les meilleures criques">Las mejores calas</div>
+                    </a>
+                    <a href="#" class="quick-card" onclick="showPage('restaurants'); return false;">
+                        <div class="quick-icon"><i class="fas fa-utensils"></i></div>
+                        <div class="quick-title" data-es="Restaurantes" data-en="Restaurants" data-fr="Restaurants">Restaurantes</div>
+                        <div class="quick-desc" data-es="Recomendaciones" data-en="Recommendations" data-fr="Recommandations">Recomendaciones</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== PÁGINA ACTIVIDADES ========== -->
+        <div class="page" id="page-activities">
+            <div class="container">
+                <div class="section">
+                    <div class="section-header">
+                        <h3 class="section-title">
+                            <i class="fas fa-star"></i>
+                            <span data-es="Actividades" data-en="Activities" data-fr="Activités">Actividades</span>
+                        </h3>
+                        <p class="section-subtitle" data-es="Descubre las mejores experiencias en Menorca" data-en="Discover the best experiences in Menorca" data-fr="Découvrez les meilleures expériences à Minorque">Descubre las mejores experiencias en Menorca</p>
+                    </div>
+
+                    <div class="contact-info-box">
+                        <p data-es="Nuestro personal estará encantado de asesorarle o reservarle cualquier tipo de experiencia o actividad que desee."
+                           data-en="Our staff will be happy to advise you or book any type of experience or activity you wish."
+                           data-fr="Notre personnel sera ravi de vous conseiller ou de réserver tout type d'expérience ou d'activité que vous souhaitez.">
+                           Nuestro personal estará encantado de asesorarle o reservarle cualquier tipo de experiencia o actividad que desee.
+                        </p>
+                        <div class="section-contact-icons">
+                            <a href="https://wa.me/34971713716" target="_blank" class="contact-link whatsapp-link">
+                                <i class="fab fa-whatsapp"></i>
+                                <span>+34 971 71 37 16</span>
+                            </a>
+                            <a href="mailto:sales@santpatrici.es" class="contact-link email-link">
+                                <i class="fas fa-envelope"></i>
+                                <span>sales@santpatrici.es</span>
+                            </a>
                         </div>
                     </div>
 
-                    <div class="card">
-                        <img src="https://men.gsstatic.es/sfAttachPlugin/getCachedContent/id/1688690/width/730/height/500/crop/1" alt="Snorkel, Kayak y Paddle Surf" class="card-img">
-                        <div class="card-content">
-                            <h4 class="card-title" data-es="Snorkel, Kayak y Paddle Surf" data-en="Snorkel, Kayak and Paddle Surf" data-fr="Snorkel, Kayak et Paddle">Snorkel, Kayak y Paddle Surf</h4>
-                            <p class="card-description" data-es="Explora las calas y cuevas de Menorca desde el mar con actividades acuáticas." data-en="Explore Menorca's coves and caves from the sea with water activities." data-fr="Explorez les criques et grottes de Minorque depuis la mer.">Explora las calas y cuevas de Menorca desde el mar con actividades acuáticas.</p>
+                    <div class="card-grid">
+                        <div class="card">
+                            <div class="card-img-wrapper">
+                                <img src="https://assets.isu.pub/document-structure/230728173835-5a82c920c79913e459704c6849a39dab/v1/cef0a5034fb6aefac4b64ed636b37a03.jpeg?width=1440&quality=85%2C50" alt="Degustación" class="card-img">
+                            </div>
+                            <div class="card-content">
+                                <h4 class="card-title" data-es="Visita Degustación en Sant Patrici" data-en="Tasting Visit at Sant Patrici" data-fr="Visite Dégustation à Sant Patrici">Visita Degustación en Sant Patrici</h4>
+                                <p class="card-description" data-es="Descubre nuestra tradición quesera con una visita guiada y degustación de nuestros quesos artesanales elaborados con leche cruda de vaca." data-en="Discover our cheese-making tradition with a guided tour and tasting of our artisan cheeses made with raw cow's milk." data-fr="Découvrez notre tradition fromagère avec une visite guidée et dégustation de nos fromages artisanaux au lait cru de vache.">Descubre nuestra tradición quesera con una visita guiada y degustación de nuestros quesos artesanales elaborados con leche cruda de vaca.</p>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="card">
-                        <img src="https://hipicas.net/wp-content/uploads/2024/04/Rutas-a-Caballo-por-Menorca.jpg" alt="Rutas a caballo" class="card-img">
-                        <div class="card-content">
-                            <h4 class="card-title" data-es="Rutas a Caballo" data-en="Horse Riding" data-fr="Équitation">Rutas a Caballo</h4>
-                            <p class="card-description" data-es="Descubre el Camí de Cavalls y los paisajes menorquines a caballo." data-en="Discover the Camí de Cavalls and Menorcan landscapes on horseback." data-fr="Découvrez le Camí de Cavalls et les paysages minorquins à cheval.">Descubre el Camí de Cavalls y los paisajes menorquines a caballo.</p>
+                        <div class="card">
+                            <div class="card-img-wrapper">
+                                <img src="https://men.gsstatic.es/sfAttachPlugin/getCachedContent/id/1688690/width/730/height/500/crop/1" alt="Snorkel, Kayak y Paddle Surf" class="card-img">
+                            </div>
+                            <div class="card-content">
+                                <h4 class="card-title" data-es="Snorkel, Kayak y Paddle Surf" data-en="Snorkel, Kayak and Paddle Surf" data-fr="Snorkel, Kayak et Paddle">Snorkel, Kayak y Paddle Surf</h4>
+                                <p class="card-description" data-es="Explora las calas y cuevas de Menorca desde el mar con actividades acuáticas." data-en="Explore Menorca's coves and caves from the sea with water activities." data-fr="Explorez les criques et grottes de Minorque depuis la mer.">Explora las calas y cuevas de Menorca desde el mar con actividades acuáticas.</p>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="card">
-                        <img src="https://www.menorcadiferente.com/wp-content/uploads/2009/10/Tramo-7-del-Cami-de-Cavalls-De-Algaiarens-a-Cala-Pilar-scaled.jpg" alt="Camí de Cavalls" class="card-img">
-                        <div class="card-content">
-                            <h4 class="card-title" data-es="Camí de Cavalls" data-en="Camí de Cavalls" data-fr="Camí de Cavalls">Camí de Cavalls</h4>
-                            <p class="card-description" data-es="Recorre las rutas del Camí de Cavalls y descubre rincones únicos de la isla." data-en="Walk the Camí de Cavalls routes and discover unique corners of the island." data-fr="Parcourez les sentiers du Camí de Cavalls et découvrez des coins uniques de l'île.">Recorre las rutas del Camí de Cavalls y descubre rincones únicos de la isla.</p>
+                        <div class="card">
+                            <div class="card-img-wrapper">
+                                <img src="https://hipicas.net/wp-content/uploads/2024/04/Rutas-a-Caballo-por-Menorca.jpg" alt="Rutas a caballo" class="card-img">
+                            </div>
+                            <div class="card-content">
+                                <h4 class="card-title" data-es="Rutas a Caballo" data-en="Horse Riding" data-fr="Équitation">Rutas a Caballo</h4>
+                                <p class="card-description" data-es="Descubre el Camí de Cavalls y los paisajes menorquines a caballo." data-en="Discover the Camí de Cavalls and Menorcan landscapes on horseback." data-fr="Découvrez le Camí de Cavalls et les paysages minorquins à cheval.">Descubre el Camí de Cavalls y los paisajes menorquines a caballo.</p>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-img-wrapper">
+                                <img src="https://www.menorcadiferente.com/wp-content/uploads/2009/10/Tramo-7-del-Cami-de-Cavalls-De-Algaiarens-a-Cala-Pilar-scaled.jpg" alt="Camí de Cavalls" class="card-img">
+                            </div>
+                            <div class="card-content">
+                                <h4 class="card-title" data-es="Camí de Cavalls" data-en="Camí de Cavalls" data-fr="Camí de Cavalls">Camí de Cavalls</h4>
+                                <p class="card-description" data-es="Recorre las rutas del Camí de Cavalls y descubre rincones únicos de la isla." data-en="Walk the Camí de Cavalls routes and discover unique corners of the island." data-fr="Parcourez les sentiers du Camí de Cavalls et découvrez des coins uniques de l'île.">Recorre las rutas del Camí de Cavalls y descubre rincones únicos de la isla.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -660,338 +1069,357 @@
 
         <!-- ========== PÁGINA PLAYAS ========== -->
         <div class="page" id="page-beaches">
-            <div class="section">
-                <h3 class="section-title">
-                    <i class="fas fa-umbrella-beach"></i>
-                    <span data-es="Playas de Menorca" data-en="Menorca Beaches" data-fr="Plages de Minorque">Playas de Menorca</span>
-                </h3>
-
-                <a href="#" class="download-btn" onclick="openModal('mapModal'); return false;">
-                    <i class="fas fa-map"></i>
-                    <span data-es="Ver Mapa de Menorca" data-en="View Menorca Map" data-fr="Voir la Carte de Minorque">Ver Mapa de Menorca</span>
-                </a>
-
-                <!-- Playas Norte -->
-                <div class="beach-section">
-                    <span class="beach-tag north">
-                        <i class="fas fa-compass"></i>
-                        <span data-es="Norte / North / Nord" data-en="North / Norte / Nord" data-fr="Nord / North / Norte">Norte / North / Nord</span>
-                    </span>
-                    <div class="beach-info">
-                        <strong data-es="Características:" data-en="Features:" data-fr="Caractéristiques:">Características:</strong>
-                        <span data-es="Arena oscura y paisaje erosionado por el viento de tramuntana. Playas más salvajes y menos concurridas." data-en="Dark sand and landscape eroded by the tramuntana wind. Wilder and less crowded beaches." data-fr="Sable foncé et paysage érodé par le vent de tramuntane. Plages plus sauvages et moins fréquentées.">Arena oscura y paisaje erosionado por el viento de tramuntana. Playas más salvajes y menos concurridas.</span>
+            <div class="container">
+                <div class="section">
+                    <div class="section-header">
+                        <h3 class="section-title">
+                            <i class="fas fa-umbrella-beach"></i>
+                            <span data-es="Playas de Menorca" data-en="Menorca Beaches" data-fr="Plages de Minorque">Playas de Menorca</span>
+                        </h3>
+                        <p class="section-subtitle" data-es="Un paraíso de calas vírgenes y aguas cristalinas" data-en="A paradise of virgin coves and crystal clear waters" data-fr="Un paradis de criques vierges et d'eaux cristallines">Un paraíso de calas vírgenes y aguas cristalinas</p>
                     </div>
 
-                    <ul class="beach-list">
-                        <li>
-                            <div>
-                                <div class="beach-name">Cala del Pilar</div>
-                                <div class="beach-description" data-es="Impresionante cala de arena rojiza rodeada de acantilados. Acceso a pie de unos 30 minutos." data-en="Impressive cove with reddish sand surrounded by cliffs. About 30 minutes walk." data-fr="Impressionnante crique au sable rougeâtre entourée de falaises. Environ 30 minutes à pied.">Impresionante cala de arena rojiza rodeada de acantilados. Acceso a pie de unos 30 minutos.</div>
-                            </div>
-                            <a href="https://maps.google.com/?q=Cala+del+Pilar+Menorca" target="_blank" class="beach-link"><i class="fas fa-map-marker-alt"></i> Maps</a>
-                        </li>
-                        <li>
-                            <div>
-                                <div class="beach-name">Cala Pregonda</div>
-                                <div class="beach-description" data-es="Una de las calas más espectaculares con arena dorada y rocas rojizas." data-en="One of the most spectacular coves with golden sand and reddish rocks." data-fr="L'une des criques les plus spectaculaires avec du sable doré et des rochers rougeâtres.">Una de las calas más espectaculares con arena dorada y rocas rojizas.</div>
-                            </div>
-                            <a href="https://maps.google.com/?q=Cala+Pregonda+Menorca" target="_blank" class="beach-link"><i class="fas fa-map-marker-alt"></i> Maps</a>
-                        </li>
-                        <li>
-                            <div>
-                                <div class="beach-name">Platja de Cavalleria</div>
-                                <div class="beach-description" data-es="Playa virgen con impresionantes vistas al faro de Cavalleria." data-en="Virgin beach with stunning views of Cavalleria lighthouse." data-fr="Plage vierge avec des vues impressionnantes sur le phare de Cavalleria.">Playa virgen con impresionantes vistas al faro de Cavalleria.</div>
-                            </div>
-                            <a href="https://maps.google.com/?q=Platja+de+Cavalleria+Menorca" target="_blank" class="beach-link"><i class="fas fa-map-marker-alt"></i> Maps</a>
-                        </li>
-                        <li>
-                            <div>
-                                <div class="beach-name">Binimel-La</div>
-                                <div class="beach-description" data-es="Extensa playa de arena oscura, punto de partida para llegar a Cala Pregonda." data-en="Extensive dark sand beach, starting point to reach Cala Pregonda." data-fr="Grande plage de sable foncé, point de départ pour Cala Pregonda.">Extensa playa de arena oscura, punto de partida para llegar a Cala Pregonda.</div>
-                            </div>
-                            <a href="https://maps.google.com/?q=Binimel-la+Menorca" target="_blank" class="beach-link"><i class="fas fa-map-marker-alt"></i> Maps</a>
-                        </li>
-                        <li>
-                            <div>
-                                <div class="beach-name">Cala Calderer</div>
-                                <div class="beach-description" data-es="Pequeña cala tranquila ideal para el snorkel." data-en="Small quiet cove ideal for snorkeling." data-fr="Petite crique tranquille idéale pour le snorkeling.">Pequeña cala tranquila ideal para el snorkel.</div>
-                            </div>
-                            <a href="https://maps.google.com/?q=Cala+Calderer+Menorca" target="_blank" class="beach-link"><i class="fas fa-map-marker-alt"></i> Maps</a>
-                        </li>
-                        <li>
-                            <div>
-                                <div class="beach-name">Es Tancats - Algaiarens</div>
-                                <div class="beach-description" data-es="Conjunto de playas vírgenes conocidas como La Vall." data-en="Set of virgin beaches known as La Vall." data-fr="Ensemble de plages vierges connues sous le nom de La Vall.">Conjunto de playas vírgenes conocidas como La Vall.</div>
-                            </div>
-                            <a href="https://maps.google.com/?q=Algaiarens+Menorca" target="_blank" class="beach-link"><i class="fas fa-map-marker-alt"></i> Maps</a>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Playas Sur -->
-                <div class="beach-section">
-                    <span class="beach-tag south">
-                        <i class="fas fa-compass"></i>
-                        <span data-es="Sur / South / Sud" data-en="South / Sur / Sud" data-fr="Sud / South / Sur">Sur / South / Sud</span>
-                    </span>
-                    <div class="beach-info">
-                        <strong data-es="Características:" data-en="Features:" data-fr="Caractéristiques:">Características:</strong>
-                        <span data-es="Arena blanca y agua cristalina de color turquesa. Calas protegidas con vegetación mediterránea." data-en="White sand and crystal-clear turquoise water. Protected coves with Mediterranean vegetation." data-fr="Sable blanc et eau cristalline turquoise. Criques protégées avec végétation méditerranéenne.">Arena blanca y agua cristalina de color turquesa. Calas protegidas con vegetación mediterránea.</span>
+                    <div class="center-btn">
+                        <a href="#" class="download-btn" onclick="openModal('mapModal'); return false;">
+                            <i class="fas fa-map"></i>
+                            <span data-es="Ver Mapa de Menorca" data-en="View Menorca Map" data-fr="Voir la Carte de Minorque">Ver Mapa de Menorca</span>
+                        </a>
                     </div>
 
-                    <ul class="beach-list">
-                        <li>
-                            <div>
-                                <div class="beach-name">Cala Galdana</div>
-                                <div class="beach-description" data-es="Una de las playas más famosas de Menorca con forma de herradura y aguas turquesas." data-en="One of Menorca's most famous beaches with horseshoe shape and turquoise waters." data-fr="L'une des plages les plus célèbres de Minorque en forme de fer à cheval.">Una de las playas más famosas de Menorca con forma de herradura y aguas turquesas.</div>
+                    <!-- Playas Norte -->
+                    <div class="beach-section">
+                        <div class="beach-header">
+                            <span class="beach-tag north">
+                                <i class="fas fa-compass"></i>
+                                <span data-es="Norte" data-en="North" data-fr="Nord">Norte</span>
+                            </span>
+                        </div>
+                        <div class="beach-info">
+                            <strong data-es="Características:" data-en="Features:" data-fr="Caractéristiques:">Características:</strong>
+                            <span data-es="Arena oscura y paisaje erosionado por el viento de tramuntana. Playas más salvajes y menos concurridas." data-en="Dark sand and landscape eroded by the tramuntana wind. Wilder and less crowded beaches." data-fr="Sable foncé et paysage érodé par le vent de tramuntane. Plages plus sauvages et moins fréquentées.">Arena oscura y paisaje erosionado por el viento de tramuntana. Playas más salvajes y menos concurridas.</span>
+                        </div>
+
+                        <div class="beach-grid">
+                            <div class="beach-card">
+                                <div class="beach-card-content">
+                                    <div class="beach-name">Cala del Pilar</div>
+                                    <div class="beach-description" data-es="Impresionante cala de arena rojiza rodeada de acantilados. Acceso a pie de unos 30 minutos." data-en="Impressive cove with reddish sand surrounded by cliffs. About 30 minutes walk." data-fr="Impressionnante crique au sable rougeâtre entourée de falaises.">Impresionante cala de arena rojiza rodeada de acantilados. Acceso a pie de unos 30 minutos.</div>
+                                </div>
+                                <a href="https://maps.google.com/?q=Cala+del+Pilar+Menorca" target="_blank" class="beach-link"><i class="fas fa-map-marker-alt"></i> Maps</a>
                             </div>
-                            <a href="https://maps.google.com/?q=Cala+Galdana+Menorca" target="_blank" class="beach-link"><i class="fas fa-map-marker-alt"></i> Maps</a>
-                        </li>
-                        <li>
-                            <div>
-                                <div class="beach-name">Cala Mitjaneta</div>
-                                <div class="beach-description" data-es="Pequeña cala paradisíaca de aguas cristalinas." data-en="Small paradise cove with crystal clear waters." data-fr="Petite crique paradisiaque aux eaux cristallines.">Pequeña cala paradisíaca de aguas cristalinas.</div>
+                            <div class="beach-card">
+                                <div class="beach-card-content">
+                                    <div class="beach-name">Cala Pregonda</div>
+                                    <div class="beach-description" data-es="Una de las calas más espectaculares con arena dorada y rocas rojizas." data-en="One of the most spectacular coves with golden sand and reddish rocks." data-fr="L'une des criques les plus spectaculaires avec du sable doré et des rochers rougeâtres.">Una de las calas más espectaculares con arena dorada y rocas rojizas.</div>
+                                </div>
+                                <a href="https://maps.google.com/?q=Cala+Pregonda+Menorca" target="_blank" class="beach-link"><i class="fas fa-map-marker-alt"></i> Maps</a>
                             </div>
-                            <a href="https://maps.google.com/?q=Cala+Mitjaneta+Menorca" target="_blank" class="beach-link"><i class="fas fa-map-marker-alt"></i> Maps</a>
-                        </li>
-                        <li>
-                            <div>
-                                <div class="beach-name">Cala de Trebalúger</div>
-                                <div class="beach-description" data-es="Cala virgen accesible solo a pie o en barco, rodeada de naturaleza." data-en="Virgin cove accessible only on foot or by boat, surrounded by nature." data-fr="Crique vierge accessible uniquement à pied ou en bateau.">Cala virgen accesible solo a pie o en barco, rodeada de naturaleza.</div>
+                            <div class="beach-card">
+                                <div class="beach-card-content">
+                                    <div class="beach-name">Platja de Cavalleria</div>
+                                    <div class="beach-description" data-es="Playa virgen con impresionantes vistas al faro de Cavalleria." data-en="Virgin beach with stunning views of Cavalleria lighthouse." data-fr="Plage vierge avec des vues impressionnantes sur le phare de Cavalleria.">Playa virgen con impresionantes vistas al faro de Cavalleria.</div>
+                                </div>
+                                <a href="https://maps.google.com/?q=Platja+de+Cavalleria+Menorca" target="_blank" class="beach-link"><i class="fas fa-map-marker-alt"></i> Maps</a>
                             </div>
-                            <a href="https://maps.google.com/?q=Cala+Trebaluger+Menorca" target="_blank" class="beach-link"><i class="fas fa-map-marker-alt"></i> Maps</a>
-                        </li>
-                        <li>
-                            <div>
-                                <div class="beach-name">Cala Escorxada</div>
-                                <div class="beach-description" data-es="Cala recóndita de difícil acceso pero de gran belleza." data-en="Hidden cove difficult to access but of great beauty." data-fr="Crique cachée difficile d'accès mais d'une grande beauté.">Cala recóndita de difícil acceso pero de gran belleza.</div>
+                            <div class="beach-card">
+                                <div class="beach-card-content">
+                                    <div class="beach-name">Binimel-La</div>
+                                    <div class="beach-description" data-es="Extensa playa de arena oscura, punto de partida para llegar a Cala Pregonda." data-en="Extensive dark sand beach, starting point to reach Cala Pregonda." data-fr="Grande plage de sable foncé, point de départ pour Cala Pregonda.">Extensa playa de arena oscura, punto de partida para llegar a Cala Pregonda.</div>
+                                </div>
+                                <a href="https://maps.google.com/?q=Binimel-la+Menorca" target="_blank" class="beach-link"><i class="fas fa-map-marker-alt"></i> Maps</a>
                             </div>
-                            <a href="https://maps.google.com/?q=Cala+Escorxada+Menorca" target="_blank" class="beach-link"><i class="fas fa-map-marker-alt"></i> Maps</a>
-                        </li>
-                        <li>
-                            <div>
-                                <div class="beach-name">Platja Binigaus</div>
-                                <div class="beach-description" data-es="Extensa playa virgen de arena blanca y fina." data-en="Extensive virgin beach with fine white sand." data-fr="Grande plage vierge de sable blanc et fin.">Extensa playa virgen de arena blanca y fina.</div>
+                            <div class="beach-card">
+                                <div class="beach-card-content">
+                                    <div class="beach-name">Cala Calderer</div>
+                                    <div class="beach-description" data-es="Pequeña cala tranquila ideal para el snorkel." data-en="Small quiet cove ideal for snorkeling." data-fr="Petite crique tranquille idéale pour le snorkeling.">Pequeña cala tranquila ideal para el snorkel.</div>
+                                </div>
+                                <a href="https://maps.google.com/?q=Cala+Calderer+Menorca" target="_blank" class="beach-link"><i class="fas fa-map-marker-alt"></i> Maps</a>
                             </div>
-                            <a href="https://maps.google.com/?q=Platja+Binigaus+Menorca" target="_blank" class="beach-link"><i class="fas fa-map-marker-alt"></i> Maps</a>
-                        </li>
-                        <li>
-                            <div>
-                                <div class="beach-name">Santo Tomás</div>
-                                <div class="beach-description" data-es="Playa familiar con todos los servicios y aguas tranquilas." data-en="Family beach with all services and calm waters." data-fr="Plage familiale avec tous les services et eaux calmes.">Playa familiar con todos los servicios y aguas tranquilas.</div>
+                            <div class="beach-card">
+                                <div class="beach-card-content">
+                                    <div class="beach-name">Es Tancats - Algaiarens</div>
+                                    <div class="beach-description" data-es="Conjunto de playas vírgenes conocidas como La Vall." data-en="Set of virgin beaches known as La Vall." data-fr="Ensemble de plages vierges connues sous le nom de La Vall.">Conjunto de playas vírgenes conocidas como La Vall.</div>
+                                </div>
+                                <a href="https://maps.google.com/?q=Algaiarens+Menorca" target="_blank" class="beach-link"><i class="fas fa-map-marker-alt"></i> Maps</a>
                             </div>
-                            <a href="https://maps.google.com/?q=Santo+Tomas+Menorca" target="_blank" class="beach-link"><i class="fas fa-map-marker-alt"></i> Maps</a>
-                        </li>
-                        <li>
-                            <div>
-                                <div class="beach-name">Son Bou</div>
-                                <div class="beach-description" data-es="La playa más larga de Menorca con más de 2 km de arena." data-en="Menorca's longest beach with over 2 km of sand." data-fr="La plus longue plage de Minorque avec plus de 2 km de sable.">La playa más larga de Menorca con más de 2 km de arena.</div>
+                        </div>
+                    </div>
+
+                    <!-- Playas Sur -->
+                    <div class="beach-section">
+                        <div class="beach-header">
+                            <span class="beach-tag south">
+                                <i class="fas fa-compass"></i>
+                                <span data-es="Sur" data-en="South" data-fr="Sud">Sur</span>
+                            </span>
+                        </div>
+                        <div class="beach-info">
+                            <strong data-es="Características:" data-en="Features:" data-fr="Caractéristiques:">Características:</strong>
+                            <span data-es="Arena blanca y agua cristalina de color turquesa. Calas protegidas con vegetación mediterránea." data-en="White sand and crystal-clear turquoise water. Protected coves with Mediterranean vegetation." data-fr="Sable blanc et eau cristalline turquoise. Criques protégées avec végétation méditerranéenne.">Arena blanca y agua cristalina de color turquesa. Calas protegidas con vegetación mediterránea.</span>
+                        </div>
+
+                        <div class="beach-grid">
+                            <div class="beach-card">
+                                <div class="beach-card-content">
+                                    <div class="beach-name">Cala Galdana</div>
+                                    <div class="beach-description" data-es="Una de las playas más famosas de Menorca con forma de herradura y aguas turquesas." data-en="One of Menorca's most famous beaches with horseshoe shape and turquoise waters." data-fr="L'une des plages les plus célèbres de Minorque en forme de fer à cheval.">Una de las playas más famosas de Menorca con forma de herradura y aguas turquesas.</div>
+                                </div>
+                                <a href="https://maps.google.com/?q=Cala+Galdana+Menorca" target="_blank" class="beach-link"><i class="fas fa-map-marker-alt"></i> Maps</a>
                             </div>
-                            <a href="https://maps.google.com/?q=Son+Bou+Menorca" target="_blank" class="beach-link"><i class="fas fa-map-marker-alt"></i> Maps</a>
-                        </li>
-                    </ul>
+                            <div class="beach-card">
+                                <div class="beach-card-content">
+                                    <div class="beach-name">Cala Mitjaneta</div>
+                                    <div class="beach-description" data-es="Pequeña cala paradisíaca de aguas cristalinas." data-en="Small paradise cove with crystal clear waters." data-fr="Petite crique paradisiaque aux eaux cristallines.">Pequeña cala paradisíaca de aguas cristalinas.</div>
+                                </div>
+                                <a href="https://maps.google.com/?q=Cala+Mitjaneta+Menorca" target="_blank" class="beach-link"><i class="fas fa-map-marker-alt"></i> Maps</a>
+                            </div>
+                            <div class="beach-card">
+                                <div class="beach-card-content">
+                                    <div class="beach-name">Cala de Trebalúger</div>
+                                    <div class="beach-description" data-es="Cala virgen accesible solo a pie o en barco, rodeada de naturaleza." data-en="Virgin cove accessible only on foot or by boat, surrounded by nature." data-fr="Crique vierge accessible uniquement à pied ou en bateau.">Cala virgen accesible solo a pie o en barco, rodeada de naturaleza.</div>
+                                </div>
+                                <a href="https://maps.google.com/?q=Cala+Trebaluger+Menorca" target="_blank" class="beach-link"><i class="fas fa-map-marker-alt"></i> Maps</a>
+                            </div>
+                            <div class="beach-card">
+                                <div class="beach-card-content">
+                                    <div class="beach-name">Cala Escorxada</div>
+                                    <div class="beach-description" data-es="Cala recóndita de difícil acceso pero de gran belleza." data-en="Hidden cove difficult to access but of great beauty." data-fr="Crique cachée difficile d'accès mais d'une grande beauté.">Cala recóndita de difícil acceso pero de gran belleza.</div>
+                                </div>
+                                <a href="https://maps.google.com/?q=Cala+Escorxada+Menorca" target="_blank" class="beach-link"><i class="fas fa-map-marker-alt"></i> Maps</a>
+                            </div>
+                            <div class="beach-card">
+                                <div class="beach-card-content">
+                                    <div class="beach-name">Platja Binigaus</div>
+                                    <div class="beach-description" data-es="Extensa playa virgen de arena blanca y fina." data-en="Extensive virgin beach with fine white sand." data-fr="Grande plage vierge de sable blanc et fin.">Extensa playa virgen de arena blanca y fina.</div>
+                                </div>
+                                <a href="https://maps.google.com/?q=Platja+Binigaus+Menorca" target="_blank" class="beach-link"><i class="fas fa-map-marker-alt"></i> Maps</a>
+                            </div>
+                            <div class="beach-card">
+                                <div class="beach-card-content">
+                                    <div class="beach-name">Santo Tomás</div>
+                                    <div class="beach-description" data-es="Playa familiar con todos los servicios y aguas tranquilas." data-en="Family beach with all services and calm waters." data-fr="Plage familiale avec tous les services et eaux calmes.">Playa familiar con todos los servicios y aguas tranquilas.</div>
+                                </div>
+                                <a href="https://maps.google.com/?q=Santo+Tomas+Menorca" target="_blank" class="beach-link"><i class="fas fa-map-marker-alt"></i> Maps</a>
+                            </div>
+                            <div class="beach-card">
+                                <div class="beach-card-content">
+                                    <div class="beach-name">Son Bou</div>
+                                    <div class="beach-description" data-es="La playa más larga de Menorca con más de 2 km de arena." data-en="Menorca's longest beach with over 2 km of sand." data-fr="La plus longue plage de Minorque avec plus de 2 km de sable.">La playa más larga de Menorca con más de 2 km de arena.</div>
+                                </div>
+                                <a href="https://maps.google.com/?q=Son+Bou+Menorca" target="_blank" class="beach-link"><i class="fas fa-map-marker-alt"></i> Maps</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- ========== PÁGINA RESTAURANTES ========== -->
         <div class="page" id="page-restaurants">
-            <div class="section">
-                <h3 class="section-title">
-                    <i class="fas fa-utensils"></i>
-                    <span data-es="Restaurantes Recomendados" data-en="Recommended Restaurants" data-fr="Restaurants Recommandés">Restaurantes Recomendados</span>
-                </h3>
+            <div class="container">
+                <div class="section">
+                    <div class="section-header">
+                        <h3 class="section-title">
+                            <i class="fas fa-utensils"></i>
+                            <span data-es="Restaurantes Recomendados" data-en="Recommended Restaurants" data-fr="Restaurants Recommandés">Restaurantes Recomendados</span>
+                        </h3>
+                        <p class="section-subtitle" data-es="Nuestra selección de los mejores restaurantes de la isla" data-en="Our selection of the best restaurants on the island" data-fr="Notre sélection des meilleurs restaurants de l'île">Nuestra selección de los mejores restaurantes de la isla</p>
+                    </div>
 
-                <p style="margin-bottom: 15px; color: var(--text-light);" data-es="Si deseas hacer una reserva en cualquiera de estos restaurantes, no dudes en contactarnos." data-en="If you would like to make a reservation at any of these restaurants, please contact us." data-fr="Si vous souhaitez faire une réservation dans l'un de ces restaurants, n'hésitez pas à nous contacter.">Si deseas hacer una reserva en cualquiera de estos restaurantes, no dudes en contactarnos.</p>
-
-                <div class="section-contact-icons" style="margin-bottom: 25px;">
-                    <a href="https://wa.me/34971713716" target="_blank" class="contact-link whatsapp-link">
-                        <i class="fab fa-whatsapp"></i>
-                        <span>+34 971 71 37 16</span>
-                    </a>
-                    <a href="mailto:sales@santpatrici.es" class="contact-link email-link">
-                        <i class="fas fa-envelope"></i>
-                        <span>sales@santpatrici.es</span>
-                    </a>
-                </div>
-
-                <div class="location-filter">
-                    <button class="filter-btn active" onclick="filterRestaurants('all')" data-es="Todos" data-en="All" data-fr="Tous">Todos</button>
-                    <button class="filter-btn" onclick="filterRestaurants('sant-lluis')">Sant Lluís</button>
-                    <button class="filter-btn" onclick="filterRestaurants('mahon')">Mahón</button>
-                    <button class="filter-btn" onclick="filterRestaurants('fornells')">Fornells</button>
-                    <button class="filter-btn" onclick="filterRestaurants('ciutadella')">Ciutadella</button>
-                </div>
-
-                <!-- Sant Lluís -->
-                <div class="restaurant-card" data-location="sant-lluis">
-                    <div class="restaurant-header">
-                        <span class="restaurant-icon">🍴</span>
-                        <div>
-                            <h4 class="restaurant-name">Sa Pedrera d'es Pujol</h4>
-                            <p class="restaurant-location">Sant Lluís · Camí des Pujol, 14</p>
+                    <div class="contact-info-box">
+                        <p data-es="Si deseas hacer una reserva en cualquiera de estos restaurantes, no dudes en contactarnos." data-en="If you would like to make a reservation at any of these restaurants, please contact us." data-fr="Si vous souhaitez faire une réservation dans l'un de ces restaurants, n'hésitez pas à nous contacter.">Si deseas hacer una reserva en cualquiera de estos restaurantes, no dudes en contactarnos.</p>
+                        <div class="section-contact-icons">
+                            <a href="https://wa.me/34971713716" target="_blank" class="contact-link whatsapp-link">
+                                <i class="fab fa-whatsapp"></i>
+                                <span>+34 971 71 37 16</span>
+                            </a>
+                            <a href="mailto:sales@santpatrici.es" class="contact-link email-link">
+                                <i class="fas fa-envelope"></i>
+                                <span>sales@santpatrici.es</span>
+                            </a>
                         </div>
                     </div>
-                    <p class="restaurant-description" data-es="Dirigido por Dani Mora, destaca por sus platos clásicos. Prueba el oliaigua con higos, la raya a la mantequilla negra o la formatjada Wellington. Excelente en guisos, especialmente en invierno." data-en="Directed by Dani Mora, known for classic dishes. Try the oliaigua with figs, ray with black butter or formatjada Wellington. Excellent stews, especially in winter." data-fr="Dirigé par Dani Mora, connu pour ses plats classiques. Essayez l'oliaigua aux figues, la raie au beurre noir ou la formatjada Wellington.">Dirigido por Dani Mora, destaca por sus platos clásicos. Prueba el oliaigua con higos, la raya a la mantequilla negra o la formatjada Wellington. Excelente en guisos, especialmente en invierno.</p>
-                    <div class="restaurant-actions">
-                        <a href="https://maps.google.com/?q=Sa+Pedrera+des+Pujol+Menorca" target="_blank" class="restaurant-btn maps"><i class="fas fa-map-marker-alt"></i> Maps</a>
-                    </div>
-                </div>
 
-                <div class="restaurant-card" data-location="sant-lluis">
-                    <div class="restaurant-header">
-                        <span class="restaurant-icon">🦐</span>
-                        <div>
-                            <h4 class="restaurant-name">Xuroy</h4>
-                            <p class="restaurant-location">Sant Lluís · Cala Alcaufar</p>
-                        </div>
+                    <div class="location-filter">
+                        <button class="filter-btn active" onclick="filterRestaurants('all', event)" data-es="Todos" data-en="All" data-fr="Tous">Todos</button>
+                        <button class="filter-btn" onclick="filterRestaurants('sant-lluis', event)">Sant Lluís</button>
+                        <button class="filter-btn" onclick="filterRestaurants('mahon', event)">Mahón</button>
+                        <button class="filter-btn" onclick="filterRestaurants('fornells', event)">Fornells</button>
+                        <button class="filter-btn" onclick="filterRestaurants('ciutadella', event)">Ciutadella</button>
                     </div>
-                    <p class="restaurant-description" data-es="Chiringuito con encanto en la cala de Alcaufar, protegida por un puerto natural. Especializado en arroces y pescado fresco de Menorca." data-en="Charming beach bar in Alcaufar cove, protected by a natural harbor. Specialized in rice dishes and fresh Menorcan fish." data-fr="Bar de plage charmant dans la crique d'Alcaufar. Spécialisé dans les plats de riz et le poisson frais de Minorque.">Chiringuito con encanto en la cala de Alcaufar, protegida por un puerto natural. Especializado en arroces y pescado fresco de Menorca.</p>
-                    <div class="restaurant-actions">
-                        <a href="https://maps.google.com/?q=Xuroy+Cala+Alcaufar+Menorca" target="_blank" class="restaurant-btn maps"><i class="fas fa-map-marker-alt"></i> Maps</a>
-                    </div>
-                </div>
 
-                <!-- Mahón -->
-                <div class="restaurant-card" data-location="mahon">
-                    <div class="restaurant-header">
-                        <span class="restaurant-icon">🍷</span>
-                        <div>
-                            <h4 class="restaurant-name">Ses Forquilles</h4>
-                            <p class="restaurant-location">Mahón · San Fernando, 12</p>
+                    <div class="restaurant-grid">
+                        <!-- Sant Lluís -->
+                        <div class="restaurant-card" data-location="sant-lluis">
+                            <div class="restaurant-header">
+                                <span class="restaurant-icon">🍴</span>
+                                <div>
+                                    <h4 class="restaurant-name">Sa Pedrera d'es Pujol</h4>
+                                    <p class="restaurant-location"><i class="fas fa-map-marker-alt"></i> Sant Lluís · Camí des Pujol, 14</p>
+                                </div>
+                            </div>
+                            <p class="restaurant-description" data-es="Dirigido por Dani Mora, destaca por sus platos clásicos. Prueba el oliaigua con higos, la raya a la mantequilla negra o la formatjada Wellington." data-en="Directed by Dani Mora, known for classic dishes. Try the oliaigua with figs, ray with black butter or formatjada Wellington." data-fr="Dirigé par Dani Mora, connu pour ses plats classiques.">Dirigido por Dani Mora, destaca por sus platos clásicos. Prueba el oliaigua con higos, la raya a la mantequilla negra o la formatjada Wellington.</p>
+                            <div class="restaurant-actions">
+                                <a href="https://maps.google.com/?q=Sa+Pedrera+des+Pujol+Menorca" target="_blank" class="restaurant-btn maps"><i class="fas fa-map-marker-alt"></i> Maps</a>
+                            </div>
                         </div>
-                    </div>
-                    <p class="restaurant-description" data-es="Los platillos de Marco Collado con trufa y productos locales. Un enfoque culinario muy disfrutable." data-en="Marco Collado's dishes with truffle and local products. A very enjoyable culinary approach." data-fr="Les plats de Marco Collado avec truffe et produits locaux. Une approche culinaire très agréable.">Los platillos de Marco Collado con trufa y productos locales. Un enfoque culinario muy disfrutable.</p>
-                    <div class="restaurant-actions">
-                        <a href="https://maps.google.com/?q=Ses+Forquilles+Mahon+Menorca" target="_blank" class="restaurant-btn maps"><i class="fas fa-map-marker-alt"></i> Maps</a>
-                    </div>
-                </div>
 
-                <div class="restaurant-card" data-location="mahon">
-                    <div class="restaurant-header">
-                        <span class="restaurant-icon">🐟</span>
-                        <div>
-                            <h4 class="restaurant-name">Cap-Roig</h4>
-                            <p class="restaurant-location">Mahón · Carretera Sa Mesquida, 13</p>
+                        <div class="restaurant-card" data-location="sant-lluis">
+                            <div class="restaurant-header">
+                                <span class="restaurant-icon">🦐</span>
+                                <div>
+                                    <h4 class="restaurant-name">Xuroy</h4>
+                                    <p class="restaurant-location"><i class="fas fa-map-marker-alt"></i> Sant Lluís · Cala Alcaufar</p>
+                                </div>
+                            </div>
+                            <p class="restaurant-description" data-es="Chiringuito con encanto en la cala de Alcaufar, protegida por un puerto natural. Especializado en arroces y pescado fresco de Menorca." data-en="Charming beach bar in Alcaufar cove. Specialized in rice dishes and fresh Menorcan fish." data-fr="Bar de plage charmant dans la crique d'Alcaufar.">Chiringuito con encanto en la cala de Alcaufar, protegida por un puerto natural. Especializado en arroces y pescado fresco de Menorca.</p>
+                            <div class="restaurant-actions">
+                                <a href="https://maps.google.com/?q=Xuroy+Cala+Alcaufar+Menorca" target="_blank" class="restaurant-btn maps"><i class="fas fa-map-marker-alt"></i> Maps</a>
+                            </div>
                         </div>
-                    </div>
-                    <p class="restaurant-description" data-es="Desde 1983, con vistas a Cala Sa Mesquida. Perfecto para amantes del marisco, con pescado fresco como gallo de San Pedro, cabracho, pargo y pez emperador." data-en="Since 1983, with views of Cala Sa Mesquida. Perfect for seafood lovers, with fresh fish like John Dory, scorpionfish, sea bream and emperor fish." data-fr="Depuis 1983, avec vue sur Cala Sa Mesquida. Parfait pour les amateurs de fruits de mer.">Desde 1983, con vistas a Cala Sa Mesquida. Perfecto para amantes del marisco, con pescado fresco como gallo de San Pedro, cabracho, pargo y pez emperador.</p>
-                    <div class="restaurant-actions">
-                        <a href="https://maps.google.com/?q=Cap+Roig+Sa+Mesquida+Menorca" target="_blank" class="restaurant-btn maps"><i class="fas fa-map-marker-alt"></i> Maps</a>
-                    </div>
-                </div>
 
-                <!-- Fornells -->
-                <div class="restaurant-card" data-location="fornells">
-                    <div class="restaurant-header">
-                        <span class="restaurant-icon">🥩</span>
-                        <div>
-                            <h4 class="restaurant-name">Ca Na Marga</h4>
-                            <p class="restaurant-location">Fornells · Sa Barrera, 24, Urb. Ses Salines</p>
+                        <!-- Mahón -->
+                        <div class="restaurant-card" data-location="mahon">
+                            <div class="restaurant-header">
+                                <span class="restaurant-icon">🍷</span>
+                                <div>
+                                    <h4 class="restaurant-name">Ses Forquilles</h4>
+                                    <p class="restaurant-location"><i class="fas fa-map-marker-alt"></i> Mahón · San Fernando, 12</p>
+                                </div>
+                            </div>
+                            <p class="restaurant-description" data-es="Los platillos de Marco Collado con trufa y productos locales. Un enfoque culinario muy disfrutable." data-en="Marco Collado's dishes with truffle and local products." data-fr="Les plats de Marco Collado avec truffe et produits locaux.">Los platillos de Marco Collado con trufa y productos locales. Un enfoque culinario muy disfrutable.</p>
+                            <div class="restaurant-actions">
+                                <a href="https://maps.google.com/?q=Ses+Forquilles+Mahon+Menorca" target="_blank" class="restaurant-btn maps"><i class="fas fa-map-marker-alt"></i> Maps</a>
+                            </div>
                         </div>
-                    </div>
-                    <p class="restaurant-description" data-es="Tres décadas de experiencia, punto de encuentro para amantes de la carne a la brasa. Jordi Pons cría su propio ganado. También ofrece pescado fresco y marisco." data-en="Three decades of experience, meeting point for grilled meat lovers. Jordi Pons raises his own cattle. Also offers fresh fish and seafood." data-fr="Trois décennies d'expérience, point de rencontre pour les amateurs de viande grillée.">Tres décadas de experiencia, punto de encuentro para amantes de la carne a la brasa. Jordi Pons cría su propio ganado. También ofrece pescado fresco y marisco.</p>
-                    <div class="restaurant-actions">
-                        <a href="https://maps.google.com/?q=Ca+Na+Marga+Fornells+Menorca" target="_blank" class="restaurant-btn maps"><i class="fas fa-map-marker-alt"></i> Maps</a>
-                    </div>
-                </div>
 
-                <div class="restaurant-card" data-location="fornells">
-                    <div class="restaurant-header">
-                        <span class="restaurant-icon">🦞</span>
-                        <div>
-                            <h4 class="restaurant-name">Es Cranc</h4>
-                            <p class="restaurant-location">Fornells · Ses Escoles, 31</p>
+                        <div class="restaurant-card" data-location="mahon">
+                            <div class="restaurant-header">
+                                <span class="restaurant-icon">🐟</span>
+                                <div>
+                                    <h4 class="restaurant-name">Cap-Roig</h4>
+                                    <p class="restaurant-location"><i class="fas fa-map-marker-alt"></i> Mahón · Carretera Sa Mesquida, 13</p>
+                                </div>
+                            </div>
+                            <p class="restaurant-description" data-es="Desde 1983, con vistas a Cala Sa Mesquida. Perfecto para amantes del marisco, con pescado fresco como gallo de San Pedro, cabracho, pargo y pez emperador." data-en="Since 1983, with views of Cala Sa Mesquida. Perfect for seafood lovers." data-fr="Depuis 1983, avec vue sur Cala Sa Mesquida.">Desde 1983, con vistas a Cala Sa Mesquida. Perfecto para amantes del marisco, con pescado fresco como gallo de San Pedro, cabracho, pargo y pez emperador.</p>
+                            <div class="restaurant-actions">
+                                <a href="https://maps.google.com/?q=Cap+Roig+Sa+Mesquida+Menorca" target="_blank" class="restaurant-btn maps"><i class="fas fa-map-marker-alt"></i> Maps</a>
+                            </div>
                         </div>
-                    </div>
-                    <p class="restaurant-description" data-es="Famoso por su caldereta de langosta, elemento básico de la cocina tradicional menorquina. Las langostas se mantienen en sus propios viveros." data-en="Famous for its lobster stew, a staple of traditional Menorcan cuisine. Lobsters are kept in their own hatcheries." data-fr="Célèbre pour sa caldereta de homard, un incontournable de la cuisine traditionnelle minorquine.">Famoso por su caldereta de langosta, elemento básico de la cocina tradicional menorquina. Las langostas se mantienen en sus propios viveros.</p>
-                    <div class="restaurant-actions">
-                        <a href="https://maps.google.com/?q=Es+Cranc+Fornells+Menorca" target="_blank" class="restaurant-btn maps"><i class="fas fa-map-marker-alt"></i> Maps</a>
-                    </div>
-                </div>
 
-                <div class="restaurant-card" data-location="fornells">
-                    <div class="restaurant-header">
-                        <span class="restaurant-icon">🍲</span>
-                        <div>
-                            <h4 class="restaurant-name">Sa Llagosta</h4>
-                            <p class="restaurant-location">Fornells · Gabriel Gelabert, 12</p>
+                        <!-- Fornells -->
+                        <div class="restaurant-card" data-location="fornells">
+                            <div class="restaurant-header">
+                                <span class="restaurant-icon">🥩</span>
+                                <div>
+                                    <h4 class="restaurant-name">Ca Na Marga</h4>
+                                    <p class="restaurant-location"><i class="fas fa-map-marker-alt"></i> Fornells · Sa Barrera, 24</p>
+                                </div>
+                            </div>
+                            <p class="restaurant-description" data-es="Tres décadas de experiencia, punto de encuentro para amantes de la carne a la brasa. Jordi Pons cría su propio ganado." data-en="Three decades of experience, meeting point for grilled meat lovers." data-fr="Trois décennies d'expérience.">Tres décadas de experiencia, punto de encuentro para amantes de la carne a la brasa. Jordi Pons cría su propio ganado.</p>
+                            <div class="restaurant-actions">
+                                <a href="https://maps.google.com/?q=Ca+Na+Marga+Fornells+Menorca" target="_blank" class="restaurant-btn maps"><i class="fas fa-map-marker-alt"></i> Maps</a>
+                            </div>
                         </div>
-                    </div>
-                    <p class="restaurant-description" data-es="David de Coca trabaja el marisco como nadie en la isla, ofreciendo langosta en una docena de preparaciones diferentes." data-en="David de Coca works seafood like no one else on the island, offering lobster in a dozen different preparations." data-fr="David de Coca travaille les fruits de mer comme personne sur l'île, offrant du homard en une douzaine de préparations différentes.">David de Coca trabaja el marisco como nadie en la isla, ofreciendo langosta en una docena de preparaciones diferentes.</p>
-                    <div class="restaurant-actions">
-                        <a href="https://maps.google.com/?q=Sa+Llagosta+Fornells+Menorca" target="_blank" class="restaurant-btn maps"><i class="fas fa-map-marker-alt"></i> Maps</a>
-                    </div>
-                </div>
 
-                <div class="restaurant-card" data-location="fornells">
-                    <div class="restaurant-header">
-                        <span class="restaurant-icon">🍽️</span>
-                        <div>
-                            <h4 class="restaurant-name">Sa Taula</h4>
-                            <p class="restaurant-location">Fornells · Major, 2</p>
+                        <div class="restaurant-card" data-location="fornells">
+                            <div class="restaurant-header">
+                                <span class="restaurant-icon">🦞</span>
+                                <div>
+                                    <h4 class="restaurant-name">Es Cranc</h4>
+                                    <p class="restaurant-location"><i class="fas fa-map-marker-alt"></i> Fornells · Ses Escoles, 31</p>
+                                </div>
+                            </div>
+                            <p class="restaurant-description" data-es="Famoso por su caldereta de langosta, elemento básico de la cocina tradicional menorquina. Las langostas se mantienen en sus propios viveros." data-en="Famous for its lobster stew, a staple of traditional Menorcan cuisine." data-fr="Célèbre pour sa caldereta de homard.">Famoso por su caldereta de langosta, elemento básico de la cocina tradicional menorquina. Las langostas se mantienen en sus propios viveros.</p>
+                            <div class="restaurant-actions">
+                                <a href="https://maps.google.com/?q=Es+Cranc+Fornells+Menorca" target="_blank" class="restaurant-btn maps"><i class="fas fa-map-marker-alt"></i> Maps</a>
+                            </div>
                         </div>
-                    </div>
-                    <p class="restaurant-description" data-es="Excelente alternativa con dos terrazas. Cocina mediterránea hecha con mucho amor." data-en="Excellent alternative with two terraces. Mediterranean cuisine made with lots of love." data-fr="Excellente alternative avec deux terrasses. Cuisine méditerranéenne faite avec beaucoup d'amour.">Excelente alternativa con dos terrazas. Cocina mediterránea hecha con mucho amor.</p>
-                    <div class="restaurant-actions">
-                        <a href="https://maps.google.com/?q=Sa+Taula+Fornells+Menorca" target="_blank" class="restaurant-btn maps"><i class="fas fa-map-marker-alt"></i> Maps</a>
-                    </div>
-                </div>
 
-                <!-- Ciutadella -->
-                <div class="restaurant-card" data-location="ciutadella">
-                    <div class="restaurant-header">
-                        <span class="restaurant-icon">🍹</span>
-                        <div>
-                            <h4 class="restaurant-name">Ulisses</h4>
-                            <p class="restaurant-location">Ciutadella · Plaça de la Llibertat, 22</p>
+                        <div class="restaurant-card" data-location="fornells">
+                            <div class="restaurant-header">
+                                <span class="restaurant-icon">🍲</span>
+                                <div>
+                                    <h4 class="restaurant-name">Sa Llagosta</h4>
+                                    <p class="restaurant-location"><i class="fas fa-map-marker-alt"></i> Fornells · Gabriel Gelabert, 12</p>
+                                </div>
+                            </div>
+                            <p class="restaurant-description" data-es="David de Coca trabaja el marisco como nadie en la isla, ofreciendo langosta en una docena de preparaciones diferentes." data-en="David de Coca works seafood like no one else on the island." data-fr="David de Coca travaille les fruits de mer comme personne sur l'île.">David de Coca trabaja el marisco como nadie en la isla, ofreciendo langosta en una docena de preparaciones diferentes.</p>
+                            <div class="restaurant-actions">
+                                <a href="https://maps.google.com/?q=Sa+Llagosta+Fornells+Menorca" target="_blank" class="restaurant-btn maps"><i class="fas fa-map-marker-alt"></i> Maps</a>
+                            </div>
                         </div>
-                    </div>
-                    <p class="restaurant-description" data-es="Cócteles de alta calidad y cocina de mercado cerca del mercado y la catedral. El chef y bartender Joan Canals trabaja con la captura de los barcos Curniola y Valldemosa Primera." data-en="High quality cocktails and market cuisine near the market and cathedral. Chef and bartender Joan Canals works with the catch from Curniola and Valldemosa Primera boats." data-fr="Cocktails de haute qualité et cuisine du marché près du marché et de la cathédrale.">Cócteles de alta calidad y cocina de mercado cerca del mercado y la catedral. El chef y bartender Joan Canals trabaja con la captura de los barcos Curniola y Valldemosa Primera.</p>
-                    <div class="restaurant-actions">
-                        <a href="https://maps.google.com/?q=Ulisses+Ciutadella+Menorca" target="_blank" class="restaurant-btn maps"><i class="fas fa-map-marker-alt"></i> Maps</a>
-                    </div>
-                </div>
 
-                <div class="restaurant-card" data-location="ciutadella">
-                    <div class="restaurant-header">
-                        <span class="restaurant-icon">🐙</span>
-                        <div>
-                            <h4 class="restaurant-name">S'Amarador</h4>
-                            <p class="restaurant-location">Ciutadella · Pere Capllonch, 42</p>
+                        <div class="restaurant-card" data-location="fornells">
+                            <div class="restaurant-header">
+                                <span class="restaurant-icon">🍽️</span>
+                                <div>
+                                    <h4 class="restaurant-name">Sa Taula</h4>
+                                    <p class="restaurant-location"><i class="fas fa-map-marker-alt"></i> Fornells · Major, 2</p>
+                                </div>
+                            </div>
+                            <p class="restaurant-description" data-es="Excelente alternativa con dos terrazas. Cocina mediterránea hecha con mucho amor." data-en="Excellent alternative with two terraces. Mediterranean cuisine made with lots of love." data-fr="Excellente alternative avec deux terrasses.">Excelente alternativa con dos terrazas. Cocina mediterránea hecha con mucho amor.</p>
+                            <div class="restaurant-actions">
+                                <a href="https://maps.google.com/?q=Sa+Taula+Fornells+Menorca" target="_blank" class="restaurant-btn maps"><i class="fas fa-map-marker-alt"></i> Maps</a>
+                            </div>
                         </div>
-                    </div>
-                    <p class="restaurant-description" data-es="Situado en el puerto de Ciutadella, especializado en pescado y marisco local. Destaca su capacidad para cambiar el menú según la pesca del día." data-en="Located in the port of Ciutadella, specialized in local fish and seafood. Notable for changing the menu according to the day's catch." data-fr="Situé dans le port de Ciutadella, spécialisé dans le poisson et les fruits de mer locaux.">Situado en el puerto de Ciutadella, especializado en pescado y marisco local. Destaca su capacidad para cambiar el menú según la pesca del día.</p>
-                    <div class="restaurant-actions">
-                        <a href="https://maps.google.com/?q=S+Amarador+Ciutadella+Menorca" target="_blank" class="restaurant-btn maps"><i class="fas fa-map-marker-alt"></i> Maps</a>
-                    </div>
-                </div>
 
-                <div class="restaurant-card" data-location="ciutadella">
-                    <div class="restaurant-header">
-                        <span class="restaurant-icon">🦐</span>
-                        <div>
-                            <h4 class="restaurant-name">Cafè Balear</h4>
-                            <p class="restaurant-location">Ciutadella · Passeig des Moll, 15</p>
+                        <!-- Ciutadella -->
+                        <div class="restaurant-card" data-location="ciutadella">
+                            <div class="restaurant-header">
+                                <span class="restaurant-icon">🍹</span>
+                                <div>
+                                    <h4 class="restaurant-name">Ulisses</h4>
+                                    <p class="restaurant-location"><i class="fas fa-map-marker-alt"></i> Ciutadella · Plaça de la Llibertat, 22</p>
+                                </div>
+                            </div>
+                            <p class="restaurant-description" data-es="Cócteles de alta calidad y cocina de mercado cerca del mercado y la catedral. El chef y bartender Joan Canals trabaja con la captura de los barcos Curniola y Valldemosa Primera." data-en="High quality cocktails and market cuisine near the market and cathedral." data-fr="Cocktails de haute qualité et cuisine du marché.">Cócteles de alta calidad y cocina de mercado cerca del mercado y la catedral. El chef y bartender Joan Canals trabaja con la captura de los barcos Curniola y Valldemosa Primera.</p>
+                            <div class="restaurant-actions">
+                                <a href="https://maps.google.com/?q=Ulisses+Ciutadella+Menorca" target="_blank" class="restaurant-btn maps"><i class="fas fa-map-marker-alt"></i> Maps</a>
+                            </div>
                         </div>
-                    </div>
-                    <p class="restaurant-description" data-es="Lugar clásico en el puerto para gambas, rape y langosta. La pesca diaria es traída por el barco Rosa Santa Primera." data-en="Classic place in the port for prawns, monkfish and lobster. Daily catch brought by the Rosa Santa Primera boat." data-fr="Lieu classique du port pour les crevettes, la lotte et le homard.">Lugar clásico en el puerto para gambas, rape y langosta. La pesca diaria es traída por el barco Rosa Santa Primera.</p>
-                    <div class="restaurant-actions">
-                        <a href="https://maps.google.com/?q=Cafe+Balear+Ciutadella+Menorca" target="_blank" class="restaurant-btn maps"><i class="fas fa-map-marker-alt"></i> Maps</a>
-                    </div>
-                </div>
 
-                <div class="restaurant-card" data-location="ciutadella">
-                    <div class="restaurant-header">
-                        <span class="restaurant-icon">🍲</span>
-                        <div>
-                            <h4 class="restaurant-name">Smoix</h4>
-                            <p class="restaurant-location">Ciutadella · Hotel Rural Sant Ignasi, Ronda Nord</p>
+                        <div class="restaurant-card" data-location="ciutadella">
+                            <div class="restaurant-header">
+                                <span class="restaurant-icon">🐙</span>
+                                <div>
+                                    <h4 class="restaurant-name">S'Amarador</h4>
+                                    <p class="restaurant-location"><i class="fas fa-map-marker-alt"></i> Ciutadella · Pere Capllonch, 42</p>
+                                </div>
+                            </div>
+                            <p class="restaurant-description" data-es="Situado en el puerto de Ciutadella, especializado en pescado y marisco local. Destaca su capacidad para cambiar el menú según la pesca del día." data-en="Located in the port of Ciutadella, specialized in local fish and seafood." data-fr="Situé dans le port de Ciutadella.">Situado en el puerto de Ciutadella, especializado en pescado y marisco local. Destaca su capacidad para cambiar el menú según la pesca del día.</p>
+                            <div class="restaurant-actions">
+                                <a href="https://maps.google.com/?q=S+Amarador+Ciutadella+Menorca" target="_blank" class="restaurant-btn maps"><i class="fas fa-map-marker-alt"></i> Maps</a>
+                            </div>
                         </div>
-                    </div>
-                    <p class="restaurant-description" data-es="Platos preparados con ingredientes de temporada y menús degustación servidos en un restaurante minimalista y elegante con patio. Miquel Sánchez trata los productos locales con gran cuidado." data-en="Dishes prepared with seasonal ingredients and tasting menus served in a minimalist and elegant restaurant with patio. Miquel Sánchez treats local products with great care." data-fr="Plats préparés avec des ingrédients de saison et menus dégustation servis dans un restaurant minimaliste et élégant avec patio.">Platos preparados con ingredientes de temporada y menús degustación servidos en un restaurante minimalista y elegante con patio. Miquel Sánchez trata los productos locales con gran cuidado.</p>
-                    <div class="restaurant-actions">
-                        <a href="https://maps.google.com/?q=Smoix+Ciutadella+Menorca" target="_blank" class="restaurant-btn maps"><i class="fas fa-map-marker-alt"></i> Maps</a>
+
+                        <div class="restaurant-card" data-location="ciutadella">
+                            <div class="restaurant-header">
+                                <span class="restaurant-icon">🦐</span>
+                                <div>
+                                    <h4 class="restaurant-name">Cafè Balear</h4>
+                                    <p class="restaurant-location"><i class="fas fa-map-marker-alt"></i> Ciutadella · Passeig des Moll, 15</p>
+                                </div>
+                            </div>
+                            <p class="restaurant-description" data-es="Lugar clásico en el puerto para gambas, rape y langosta. La pesca diaria es traída por el barco Rosa Santa Primera." data-en="Classic place in the port for prawns, monkfish and lobster." data-fr="Lieu classique du port.">Lugar clásico en el puerto para gambas, rape y langosta. La pesca diaria es traída por el barco Rosa Santa Primera.</p>
+                            <div class="restaurant-actions">
+                                <a href="https://maps.google.com/?q=Cafe+Balear+Ciutadella+Menorca" target="_blank" class="restaurant-btn maps"><i class="fas fa-map-marker-alt"></i> Maps</a>
+                            </div>
+                        </div>
+
+                        <div class="restaurant-card" data-location="ciutadella">
+                            <div class="restaurant-header">
+                                <span class="restaurant-icon">🍲</span>
+                                <div>
+                                    <h4 class="restaurant-name">Smoix</h4>
+                                    <p class="restaurant-location"><i class="fas fa-map-marker-alt"></i> Ciutadella · Hotel Rural Sant Ignasi</p>
+                                </div>
+                            </div>
+                            <p class="restaurant-description" data-es="Platos preparados con ingredientes de temporada y menús degustación servidos en un restaurante minimalista y elegante con patio." data-en="Dishes prepared with seasonal ingredients and tasting menus." data-fr="Plats préparés avec des ingrédients de saison.">Platos preparados con ingredientes de temporada y menús degustación servidos en un restaurante minimalista y elegante con patio.</p>
+                            <div class="restaurant-actions">
+                                <a href="https://maps.google.com/?q=Smoix+Ciutadella+Menorca" target="_blank" class="restaurant-btn maps"><i class="fas fa-map-marker-alt"></i> Maps</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -999,7 +1427,31 @@
 
     </main>
 
-    <!-- ===== NAVEGACIÓN INFERIOR ===== -->
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col">
+                <h4>Sant Patrici</h4>
+                <p data-es="Tradición quesera artesanal en el corazón de Menorca." data-en="Artisan cheese tradition in the heart of Menorca." data-fr="Tradition fromagère artisanale au cœur de Minorque.">Tradición quesera artesanal en el corazón de Menorca.</p>
+            </div>
+            <div class="footer-col">
+                <h4 data-es="Contacto" data-en="Contact" data-fr="Contact">Contacto</h4>
+                <a href="https://wa.me/34971713716" target="_blank"><i class="fab fa-whatsapp"></i> +34 971 71 37 16</a>
+                <a href="mailto:sales@santpatrici.es"><i class="fas fa-envelope"></i> sales@santpatrici.es</a>
+            </div>
+            <div class="footer-col">
+                <h4 data-es="Enlaces" data-en="Links" data-fr="Liens">Enlaces</h4>
+                <a href="#" onclick="showPage('activities'); return false;" data-es="Actividades" data-en="Activities" data-fr="Activités">Actividades</a>
+                <a href="#" onclick="showPage('beaches'); return false;" data-es="Playas" data-en="Beaches" data-fr="Plages">Playas</a>
+                <a href="#" onclick="showPage('restaurants'); return false;" data-es="Restaurantes" data-en="Restaurants" data-fr="Restaurants">Restaurantes</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            © 2026 Sant Patrici · <span data-es="Todos los derechos reservados" data-en="All rights reserved" data-fr="Tous droits réservés">Todos los derechos reservados</span>
+        </div>
+    </footer>
+
+    <!-- ===== NAVEGACIÓN INFERIOR (móvil) ===== -->
     <nav class="bottom-nav">
         <a href="#" class="nav-item active" data-page="home" onclick="showPage('home'); return false;">
             <i class="fas fa-home"></i>
@@ -1102,108 +1554,40 @@
 
                 <div class="menu-category">
                     <h4 class="menu-category-title" data-es="Cervezas" data-en="Beer" data-fr="Bières">Cervezas</h4>
-                    <div class="menu-item">
-                        <div class="menu-item-name">Estrella Galicia 0.0 Tostada</div>
-                        <span class="menu-item-price">4,00 €</span>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-item-name">Estrella Galicia</div>
-                        <span class="menu-item-price">4,50 €</span>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-item-name">Grahame Pearce Lager 33cl</div>
-                        <span class="menu-item-price">4,50 €</span>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-item-name">Grahame Pearce Talaiótica 33cl</div>
-                        <span class="menu-item-price">5,20 €</span>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-item-name">Grahame Pearce IPA 33cl</div>
-                        <span class="menu-item-price">5,80 €</span>
-                    </div>
+                    <div class="menu-item"><div class="menu-item-name">Estrella Galicia 0.0 Tostada</div><span class="menu-item-price">4,00 €</span></div>
+                    <div class="menu-item"><div class="menu-item-name">Estrella Galicia</div><span class="menu-item-price">4,50 €</span></div>
+                    <div class="menu-item"><div class="menu-item-name">Grahame Pearce Lager 33cl</div><span class="menu-item-price">4,50 €</span></div>
+                    <div class="menu-item"><div class="menu-item-name">Grahame Pearce Talaiótica 33cl</div><span class="menu-item-price">5,20 €</span></div>
+                    <div class="menu-item"><div class="menu-item-name">Grahame Pearce IPA 33cl</div><span class="menu-item-price">5,80 €</span></div>
                 </div>
 
                 <div class="menu-category">
                     <h4 class="menu-category-title" data-es="Refrescos" data-en="Soft Drinks" data-fr="Sodas">Refrescos</h4>
-                    <div class="menu-item">
-                        <div class="menu-item-name">Coca-cola</div>
-                        <span class="menu-item-price">3,40 €</span>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-item-name">Coca-cola Zero</div>
-                        <span class="menu-item-price">3,40 €</span>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-item-name" data-es="Kas de limón" data-en="Lemon Kas" data-fr="Kas Citron">Kas de limón</div>
-                        <span class="menu-item-price">3,40 €</span>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-item-name">Sprite</div>
-                        <span class="menu-item-price">3,40 €</span>
-                    </div>
+                    <div class="menu-item"><div class="menu-item-name">Coca-cola</div><span class="menu-item-price">3,40 €</span></div>
+                    <div class="menu-item"><div class="menu-item-name">Coca-cola Zero</div><span class="menu-item-price">3,40 €</span></div>
+                    <div class="menu-item"><div class="menu-item-name" data-es="Kas de limón" data-en="Lemon Kas" data-fr="Kas Citron">Kas de limón</div><span class="menu-item-price">3,40 €</span></div>
+                    <div class="menu-item"><div class="menu-item-name">Sprite</div><span class="menu-item-price">3,40 €</span></div>
                 </div>
 
                 <div class="menu-category">
                     <h4 class="menu-category-title" data-es="Vinos" data-en="Wines" data-fr="Vins">Vinos</h4>
-                    <div class="menu-item">
-                        <div class="menu-item-name" data-es="Vermut Tinto 25cl" data-en="Red Vermut 25cl" data-fr="Vermouth Rouge 25cl">Vermut Tinto 25cl</div>
-                        <span class="menu-item-price">3,80 €</span>
-                    </div>
-                    <div class="menu-item">
-                        <div>
-                            <div class="menu-item-name" data-es="Torralbenc Tinto" data-en="Torralbenc Red" data-fr="Torralbenc Rouge">Torralbenc Tinto</div>
-                        </div>
-                        <span class="menu-item-price">6,50 € / 31,40 €</span>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-item-name">Es Moll Rosado</div>
-                        <span class="menu-item-price">5,00 € / 24,00 €</span>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-item-name">Torralbenc Rosado</div>
-                        <span class="menu-item-price">6,00 € / 24,20 €</span>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-item-name">Sa Caterina Rosado</div>
-                        <span class="menu-item-price">30,90 €</span>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-item-name" data-es="Torralbenc Blanco" data-en="Torralbenc White" data-fr="Torralbenc Blanc">Torralbenc Blanco</div>
-                        <span class="menu-item-price">6,00 € / 26,60 €</span>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-item-name" data-es="Sa Caterina Blanco" data-en="Sa Caterina White" data-fr="Sa Caterina Blanc">Sa Caterina Blanco</div>
-                        <span class="menu-item-price">38,00 €</span>
-                    </div>
+                    <div class="menu-item"><div class="menu-item-name" data-es="Vermut Tinto 25cl" data-en="Red Vermut 25cl" data-fr="Vermouth Rouge 25cl">Vermut Tinto 25cl</div><span class="menu-item-price">3,80 €</span></div>
+                    <div class="menu-item"><div class="menu-item-name" data-es="Torralbenc Tinto" data-en="Torralbenc Red" data-fr="Torralbenc Rouge">Torralbenc Tinto</div><span class="menu-item-price">6,50 € / 31,40 €</span></div>
+                    <div class="menu-item"><div class="menu-item-name">Es Moll Rosado</div><span class="menu-item-price">5,00 € / 24,00 €</span></div>
+                    <div class="menu-item"><div class="menu-item-name">Torralbenc Rosado</div><span class="menu-item-price">6,00 € / 24,20 €</span></div>
+                    <div class="menu-item"><div class="menu-item-name">Sa Caterina Rosado</div><span class="menu-item-price">30,90 €</span></div>
+                    <div class="menu-item"><div class="menu-item-name" data-es="Torralbenc Blanco" data-en="Torralbenc White" data-fr="Torralbenc Blanc">Torralbenc Blanco</div><span class="menu-item-price">6,00 € / 26,60 €</span></div>
+                    <div class="menu-item"><div class="menu-item-name" data-es="Sa Caterina Blanco" data-en="Sa Caterina White" data-fr="Sa Caterina Blanc">Sa Caterina Blanco</div><span class="menu-item-price">38,00 €</span></div>
                 </div>
 
                 <div class="menu-category">
                     <h4 class="menu-category-title" data-es="Otros Vinos" data-en="Other Wines" data-fr="Autres Vins">Otros Vinos</h4>
-                    <div class="menu-item">
-                        <div class="menu-item-name">Alba Rosado</div>
-                        <span class="menu-item-price">29,40 €</span>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-item-name" data-es="Sa Forana Blanco" data-en="Sa Forana White" data-fr="Sa Forana Blanc">Sa Forana Blanco</div>
-                        <span class="menu-item-price">25,70 €</span>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-item-name" data-es="Alba Garnacha Blanco" data-en="Alba Garnacha White" data-fr="Alba Garnacha Blanc">Alba Garnacha Blanco</div>
-                        <span class="menu-item-price">32,00 €</span>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-item-name" data-es="Alba Malvasía Blanco" data-en="Alba Malvasía White" data-fr="Alba Malvasía Blanc">Alba Malvasía Blanco</div>
-                        <span class="menu-item-price">32,00 €</span>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-item-name" data-es="Vinya Sa Cudia Blanco" data-en="Vinya Sa Cudia White" data-fr="Vinya Sa Cudia Blanc">Vinya Sa Cudia Blanco</div>
-                        <span class="menu-item-price">39,00 €</span>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-item-name" data-es="Sa Cudia Blanco" data-en="Sa Cudia White" data-fr="Sa Cudia Blanc">Sa Cudia Blanco</div>
-                        <span class="menu-item-price">34,90 €</span>
-                    </div>
+                    <div class="menu-item"><div class="menu-item-name">Alba Rosado</div><span class="menu-item-price">29,40 €</span></div>
+                    <div class="menu-item"><div class="menu-item-name" data-es="Sa Forana Blanco" data-en="Sa Forana White" data-fr="Sa Forana Blanc">Sa Forana Blanco</div><span class="menu-item-price">25,70 €</span></div>
+                    <div class="menu-item"><div class="menu-item-name" data-es="Alba Garnacha Blanco" data-en="Alba Garnacha White" data-fr="Alba Garnacha Blanc">Alba Garnacha Blanco</div><span class="menu-item-price">32,00 €</span></div>
+                    <div class="menu-item"><div class="menu-item-name" data-es="Alba Malvasía Blanco" data-en="Alba Malvasía White" data-fr="Alba Malvasía Blanc">Alba Malvasía Blanco</div><span class="menu-item-price">32,00 €</span></div>
+                    <div class="menu-item"><div class="menu-item-name" data-es="Vinya Sa Cudia Blanco" data-en="Vinya Sa Cudia White" data-fr="Vinya Sa Cudia Blanc">Vinya Sa Cudia Blanco</div><span class="menu-item-price">39,00 €</span></div>
+                    <div class="menu-item"><div class="menu-item-name" data-es="Sa Cudia Blanco" data-en="Sa Cudia White" data-fr="Sa Cudia Blanc">Sa Cudia Blanco</div><span class="menu-item-price">34,90 €</span></div>
                 </div>
             </div>
         </div>
@@ -1226,7 +1610,6 @@
     <script>
         let currentLang = 'es';
 
-        // Abrir/cerrar dropdown de idioma
         function toggleLang(btn) {
             const dropdown = btn.parentElement.querySelector('.language-dropdown');
             document.querySelectorAll('.language-dropdown').forEach(function(d) {
@@ -1235,7 +1618,6 @@
             dropdown.classList.toggle('active');
         }
 
-        // Cerrar dropdown al hacer clic fuera
         document.addEventListener('click', function(e) {
             if (!e.target.closest('.language-selector')) {
                 document.querySelectorAll('.language-dropdown').forEach(function(d) {
@@ -1244,66 +1626,56 @@
             }
         });
 
-        // Cambiar idioma
         function changeLanguage(lang) {
             currentLang = lang;
-            // Actualizar todos los textos de idioma
+            document.documentElement.lang = lang;
             document.querySelectorAll('.current-lang-text').forEach(function(el) {
                 el.textContent = lang.toUpperCase();
             });
-            // Cerrar todos los dropdowns
             document.querySelectorAll('.language-dropdown').forEach(function(d) {
                 d.classList.remove('active');
             });
-            // Traducir todos los elementos
             document.querySelectorAll('[data-' + lang + ']').forEach(function(el) {
                 el.textContent = el.getAttribute('data-' + lang);
             });
         }
 
-        // Navegar entre páginas
         function showPage(pageId) {
-            // Ocultar todas las páginas
             document.querySelectorAll('.page').forEach(function(page) {
                 page.classList.remove('active');
             });
-            // Mostrar la página seleccionada
-            document.getElementById('page-' + pageId).classList.add('active');
+            const targetPage = document.getElementById('page-' + pageId);
+            if (targetPage) targetPage.classList.add('active');
 
-            // Alternar header fijo
-            var header = document.getElementById('mainHeader');
-            if (pageId === 'home') {
-                header.classList.add('hidden');
-                document.querySelector('main').style.marginTop = '0';
-            } else {
-                header.classList.remove('hidden');
-                document.querySelector('main').style.marginTop = '65px';
-            }
+            // Actualizar navegación desktop
+            document.querySelectorAll('.desktop-nav .nav-link').forEach(function(link) {
+                link.classList.remove('active');
+                if (link.getAttribute('data-page') === pageId) {
+                    link.classList.add('active');
+                }
+            });
 
             // Actualizar navegación inferior
-            document.querySelectorAll('.nav-item').forEach(function(item) {
+            document.querySelectorAll('.bottom-nav .nav-item').forEach(function(item) {
                 item.classList.remove('active');
                 if (item.getAttribute('data-page') === pageId) {
                     item.classList.add('active');
                 }
             });
 
-            window.scrollTo(0, 0);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Abrir modal
         function openModal(modalId) {
             document.getElementById(modalId).classList.add('active');
             document.body.style.overflow = 'hidden';
         }
 
-        // Cerrar modal
         function closeModal(modalId) {
             document.getElementById(modalId).classList.remove('active');
             document.body.style.overflow = 'auto';
         }
 
-        // Cerrar modal al hacer clic en el fondo
         document.querySelectorAll('.modal').forEach(function(modal) {
             modal.addEventListener('click', function(e) {
                 if (e.target === modal) {
@@ -1313,16 +1685,25 @@
             });
         });
 
-        // Filtrar restaurantes
-        function filterRestaurants(location) {
+        // Cerrar modal con ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.modal.active').forEach(function(m) {
+                    m.classList.remove('active');
+                });
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        function filterRestaurants(location, event) {
             document.querySelectorAll('.filter-btn').forEach(function(btn) {
                 btn.classList.remove('active');
             });
-            event.currentTarget.classList.add('active');
+            if (event && event.currentTarget) event.currentTarget.classList.add('active');
 
             document.querySelectorAll('.restaurant-card').forEach(function(card) {
                 if (location === 'all' || card.getAttribute('data-location') === location) {
-                    card.style.display = 'block';
+                    card.style.display = 'flex';
                 } else {
                     card.style.display = 'none';
                 }
