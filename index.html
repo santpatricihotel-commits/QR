@@ -78,7 +78,7 @@
         .header-container {
             max-width: var(--container-max);
             margin: 0 auto;
-            padding: 12px 24px;
+            padding: 24px 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -92,7 +92,7 @@
             transition: var(--transition);
         }
         .header-logo:hover { opacity: 0.85; }
-        .header-logo img { height: 50px; }
+        .header-logo img { height: 90px; }
 
         /* ===== NAVEGACIÓN DESKTOP ===== */
         .desktop-nav {
@@ -194,19 +194,19 @@
 
         /* ===== MAIN ===== */
         main {
-            margin-top: 76px;
-            min-height: calc(100vh - 76px);
+            margin-top: 138px;
+            min-height: calc(100vh - 138px);
         }
 
         /* ===== HERO ===== */
         .hero {
             background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 50%, var(--primary-light) 100%);
             color: var(--white);
-            padding: 140px 24px 180px;
+            padding: 60px 24px 110px;
             text-align: center;
             position: relative;
             overflow: hidden;
-            min-height: 85vh;
+            min-height: auto;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -230,8 +230,8 @@
         }
 
         .hero-logo {
-            height: 320px;
-            margin-bottom: 30px;
+            height: 200px;
+            margin-bottom: 25px;
             filter: drop-shadow(0 6px 20px rgba(0,0,0,0.25));
         }
 
@@ -1118,8 +1118,8 @@
             
             main { padding-bottom: 70px; }
 
-            .hero { padding: 100px 20px 140px; }
-            .hero-logo { height: 240px; }
+            .hero { padding: 40px 20px 80px; }
+            .hero-logo { height: 160px; }
             .section-title { font-size: 1.7rem; }
             .section-title i { font-size: 1.4rem; }
             .section { padding: 40px 0; }
@@ -1127,19 +1127,19 @@
 
         @media (max-width: 600px) {
             /* HEADER más grande en móvil */
-            .header-container { padding: 16px 16px; }
-            .header-logo img { height: 70px; }
+            .header-container { padding: 20px 16px; }
+            .header-logo img { height: 110px; }
             .language-btn { padding: 8px 12px; font-size: 0.85rem; }
             
             /* Ajustar margen del main por header más alto */
-            main { margin-top: 102px; }
+            main { margin-top: 150px; }
             
             /* HERO más pequeño en móvil */
             .hero { 
-                padding: 30px 16px 80px; 
+                padding: 20px 16px 60px; 
                 min-height: auto;
             }
-            .hero-logo { height: 130px; margin-bottom: 20px; }
+            .hero-logo { height: 90px; margin-bottom: 15px; }
             .hero-subtitle { font-size: 0.9rem; margin-bottom: 20px; }
             
             /* Botones de contacto hero */
@@ -1203,10 +1203,10 @@
         }
 
         @media (max-width: 380px) {
-            .header-logo img { height: 60px; }
-            .hero-logo { height: 110px; }
-            .hero { padding: 25px 12px 70px; }
-            main { margin-top: 92px; }
+            .header-logo img { height: 95px; }
+            .hero-logo { height: 80px; }
+            .hero { padding: 18px 12px 55px; }
+            main { margin-top: 138px; }
             .quick-grid { gap: 8px; }
             .quick-card { padding: 14px 6px; }
             .quick-icon { width: 40px; height: 40px; font-size: 1rem; }
