@@ -200,13 +200,17 @@
 
         /* ===== HERO ===== */
         .hero {
-            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 50%, var(--primary-light) 100%);
-            color: var(--white);
-            padding: 80px 24px 100px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 50%, var(--primary-light) 100%);
+    color: var(--white);
+    padding: 140px 24px 180px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    min-height: 85vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
         .hero::before {
             content: '';
@@ -226,7 +230,7 @@
         }
 
         .hero-logo {
-            height: 180px;
+            height: 320px;
             margin-bottom: 30px;
             filter: drop-shadow(0 6px 20px rgba(0,0,0,0.25));
         }
@@ -805,8 +809,8 @@
             
             main { padding-bottom: 70px; }
 
-            .hero { padding: 60px 20px 90px; }
-            .hero-logo { height: 140px; }
+            .hero { padding: 100px 20px 140px; }
+            .hero-logo { height: 240px; }
             .section-title { font-size: 1.7rem; }
             .section-title i { font-size: 1.4rem; }
             .section { padding: 40px 0; }
@@ -818,8 +822,8 @@
             .language-btn { padding: 6px 10px; font-size: 0.8rem; }
             
             /* HERO móvil */
-            .hero { padding: 30px 16px 70px; }
-            .hero-logo { height: 90px; margin-bottom: 15px; }
+            .hero { padding: 70px 16px 120px; }
+            .hero-logo { height: 200px; margin-bottom: 30px; }
             .hero-subtitle { font-size: 0.9rem; margin-bottom: 20px; }
             
             /* Botones de contacto hero */
@@ -865,8 +869,8 @@
         }
 
         @media (max-width: 380px) {
-            .hero-logo { height: 75px; }
-            .hero { padding: 20px 12px 60px; }
+            .hero-logo { height: 170px; }
+            .hero { padding: 50px 12px 110px; }
             .quick-grid { gap: 8px; }
             .quick-card { padding: 14px 6px; }
             .quick-icon { width: 40px; height: 40px; font-size: 1rem; }
