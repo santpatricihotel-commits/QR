@@ -98,19 +98,19 @@
         .desktop-nav {
             display: none;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
         }
 
         .desktop-nav a {
             color: var(--white);
             text-decoration: none;
-            padding: 10px 18px;
+            padding: 10px 14px;
             border-radius: 6px;
-            font-size: 0.95rem;
+            font-size: 0.92rem;
             transition: var(--transition);
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 7px;
             position: relative;
         }
         .desktop-nav a:hover,
@@ -200,17 +200,17 @@
 
         /* ===== HERO ===== */
         .hero {
-    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 50%, var(--primary-light) 100%);
-    color: var(--white);
-    padding: 140px 24px 180px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-    min-height: 85vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 50%, var(--primary-light) 100%);
+            color: var(--white);
+            padding: 140px 24px 180px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
         .hero::before {
             content: '';
@@ -292,7 +292,7 @@
             max-width: var(--container-max);
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 20px;
         }
 
@@ -311,11 +311,38 @@
             flex-direction: column;
             align-items: center;
             gap: 14px;
+            position: relative;
+            overflow: hidden;
         }
         .quick-card:hover {
             transform: translateY(-6px);
             box-shadow: var(--shadow-lg);
             border-color: var(--primary-color);
+        }
+
+        /* Tarjeta destacada (Guía) */
+        .quick-card.featured {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            color: var(--white);
+            grid-column: span 2;
+        }
+        .quick-card.featured .quick-title { color: var(--white); }
+        .quick-card.featured .quick-desc { color: rgba(255,255,255,0.92); }
+        .quick-card.featured .quick-icon {
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-dark));
+        }
+        .quick-card.featured:hover .quick-icon {
+            background: linear-gradient(135deg, var(--accent-dark), var(--accent-color));
+        }
+        .quick-card.featured::after {
+            content: '';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(196,169,98,0.3) 0%, transparent 70%);
+            pointer-events: none;
         }
 
         .quick-icon {
@@ -558,6 +585,10 @@
             margin: 0 auto 40px;
             transition: var(--transition);
             box-shadow: var(--shadow-sm);
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+            font-size: 1rem;
         }
         .download-btn:hover {
             background: var(--accent-dark);
@@ -665,6 +696,282 @@
             box-shadow: var(--shadow-sm);
         }
 
+        /* ===== GUÍA DEL HUÉSPED ===== */
+        .guide-intro {
+            background: linear-gradient(135deg, var(--white), var(--bg-alt));
+            border-radius: 20px;
+            padding: 36px 32px;
+            text-align: center;
+            margin-bottom: 40px;
+            border: 1px solid rgba(0,109,98,0.1);
+            box-shadow: var(--shadow-sm);
+        }
+        .guide-intro p {
+            color: var(--text-color);
+            font-size: 1.05rem;
+            line-height: 1.7;
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .guide-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 50px;
+        }
+
+        .guide-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 26px;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            border-top: 4px solid var(--primary-color);
+        }
+        .guide-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .guide-card-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 16px;
+        }
+
+        .guide-card-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            color: var(--white);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .guide-card h4 {
+            color: var(--primary-color);
+            font-size: 1.15rem;
+            font-weight: 600;
+        }
+
+        .guide-info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 0.92rem;
+            gap: 10px;
+        }
+        .guide-info-row:last-child { border-bottom: none; }
+        .guide-info-row strong { color: var(--text-color); white-space: nowrap; font-weight: 600; }
+        .guide-info-row span { color: var(--text-light); text-align: right; }
+        .guide-info-row .highlight { font-weight: 700; color: var(--primary-color); }
+
+        .guide-card-text {
+            font-size: 0.92rem;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Acordeón */
+        .section-title-small {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .section-title-small i { color: var(--accent-color); font-size: 1.3rem; }
+
+        .accordion {
+            background: var(--white);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 12px;
+            transition: var(--transition);
+        }
+        .accordion:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .accordion-header {
+            padding: 20px 26px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--white);
+            transition: background var(--transition);
+            gap: 15px;
+        }
+        .accordion-header:hover { background: var(--bg-alt); }
+
+        .accordion-header-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex: 1;
+        }
+        .accordion-header-left .acc-icon {
+            color: var(--accent-color);
+            font-size: 1.25rem;
+            width: 26px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+        .accordion-header h4 {
+            color: var(--primary-color);
+            font-size: 1.05rem;
+            font-weight: 600;
+        }
+
+        .accordion-chevron {
+            transition: transform var(--transition);
+            color: var(--primary-color);
+            flex-shrink: 0;
+        }
+        .accordion.open .accordion-chevron { transform: rotate(180deg); }
+
+        .accordion-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+        .accordion.open .accordion-body { max-height: 1500px; }
+
+        .accordion-body-inner {
+            padding: 0 26px 24px;
+            color: var(--text-light);
+            line-height: 1.75;
+            font-size: 0.95rem;
+        }
+        .accordion-body-inner p { margin-bottom: 12px; }
+        .accordion-body-inner ol, .accordion-body-inner ul {
+            padding-left: 22px;
+            margin: 12px 0;
+        }
+        .accordion-body-inner li { margin-bottom: 8px; }
+        .accordion-body-inner strong { color: var(--primary-color); }
+
+        .accordion-note {
+            background: rgba(196, 169, 98, 0.12);
+            border-left: 4px solid var(--accent-color);
+            padding: 14px 18px;
+            border-radius: 8px;
+            margin-top: 14px;
+            font-size: 0.92rem;
+            color: var(--text-color);
+        }
+
+        /* Caja de ayuda / contacto destacada */
+        .guide-help-box {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            color: var(--white);
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: center;
+            margin-top: 40px;
+            box-shadow: var(--shadow-md);
+            position: relative;
+            overflow: hidden;
+        }
+        .guide-help-box::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                radial-gradient(circle at 10% 20%, rgba(196,169,98,0.2) 0%, transparent 50%),
+                radial-gradient(circle at 90% 80%, rgba(255,255,255,0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        .guide-help-box > * { position: relative; z-index: 1; }
+        .guide-help-box h3 {
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .guide-help-box > p {
+            opacity: 0.95;
+            margin-bottom: 24px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 1rem;
+        }
+        .guide-help-box .contact-icons .contact-link {
+            background: rgba(255,255,255,0.2);
+            border-color: rgba(255,255,255,0.3);
+        }
+        .guide-help-box .contact-icons .contact-link:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        /* Social icons */
+        .social-icons {
+            display: flex;
+            gap: 12px;
+            margin-top: 14px;
+            flex-wrap: wrap;
+        }
+        .social-icon-link {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            color: var(--white);
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 1.05rem;
+        }
+        .social-icon-link:hover {
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-dark));
+            transform: translateY(-3px) scale(1.08);
+        }
+
+        .social-handle {
+            margin-top: 14px;
+            font-size: 0.95rem;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .inline-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--accent-color);
+            color: var(--white);
+            padding: 11px 22px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            font-size: 0.92rem;
+            margin-top: 8px;
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+        }
+        .inline-btn:hover {
+            background: var(--accent-dark);
+            transform: translateY(-2px);
+        }
+
         /* ===== NAVEGACIÓN INFERIOR (móvil) ===== */
         .bottom-nav {
             display: none;
@@ -685,11 +992,13 @@
             align-items: center;
             text-decoration: none;
             color: var(--text-light);
-            font-size: 0.72rem;
-            padding: 5px 10px;
+            font-size: 0.7rem;
+            padding: 5px 6px;
             transition: color var(--transition);
+            flex: 1;
+            text-align: center;
         }
-        .nav-item i { font-size: 1.2rem; margin-bottom: 3px; }
+        .nav-item i { font-size: 1.15rem; margin-bottom: 3px; }
         .nav-item.active, .nav-item:hover { color: var(--primary-color); }
 
         /* ===== MODALES ===== */
@@ -817,76 +1126,95 @@
         }
 
         @media (max-width: 600px) {
-    /* HEADER más grande en móvil */
-    .header-container { padding: 16px 16px; }
-    .header-logo img { height: 70px; }
-    .language-btn { padding: 8px 12px; font-size: 0.85rem; }
-    
-    /* Ajustar margen del main por header más alto */
-    main { margin-top: 102px; }
-    
-    /* HERO más pequeño en móvil */
-    .hero { 
-        padding: 30px 16px 80px; 
-        min-height: auto;
-    }
-    .hero-logo { height: 130px; margin-bottom: 20px; }
-    .hero-subtitle { font-size: 0.9rem; margin-bottom: 20px; }
-    
-    /* Botones de contacto hero */
-    .hero .contact-icons { gap: 8px; }
-    .hero .contact-link {
-        font-size: 0.8rem;
-        padding: 10px 14px;
-        gap: 6px;
-        width: 100%;
-        max-width: 300px;
-        justify-content: center;
-    }
-    .hero .contact-link i { font-size: 1rem; }
+            /* HEADER más grande en móvil */
+            .header-container { padding: 16px 16px; }
+            .header-logo img { height: 70px; }
+            .language-btn { padding: 8px 12px; font-size: 0.85rem; }
+            
+            /* Ajustar margen del main por header más alto */
+            main { margin-top: 102px; }
+            
+            /* HERO más pequeño en móvil */
+            .hero { 
+                padding: 30px 16px 80px; 
+                min-height: auto;
+            }
+            .hero-logo { height: 130px; margin-bottom: 20px; }
+            .hero-subtitle { font-size: 0.9rem; margin-bottom: 20px; }
+            
+            /* Botones de contacto hero */
+            .hero .contact-icons { gap: 8px; }
+            .hero .contact-link {
+                font-size: 0.8rem;
+                padding: 10px 14px;
+                gap: 6px;
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+            .hero .contact-link i { font-size: 1rem; }
 
-    /* QUICK ACCESS móvil */
-    .quick-access { padding: 0 12px 30px; margin-top: -40px; }
-    .quick-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-    .quick-card { padding: 18px 8px; gap: 10px; border-radius: 12px; }
-    .quick-icon { width: 44px; height: 44px; font-size: 1.1rem; }
-    .quick-title { font-size: 0.85rem; line-height: 1.2; }
-    .quick-desc { display: none; }
+            /* QUICK ACCESS móvil */
+            .quick-access { padding: 0 12px 30px; margin-top: -40px; }
+            .quick-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+            .quick-card { padding: 18px 8px; gap: 10px; border-radius: 12px; }
+            .quick-card.featured { grid-column: span 2; padding: 22px 14px; }
+            .quick-icon { width: 44px; height: 44px; font-size: 1.1rem; }
+            .quick-title { font-size: 0.85rem; line-height: 1.2; }
+            .quick-desc { display: none; }
+            .quick-card.featured .quick-desc { display: block; font-size: 0.78rem; }
+            .quick-card.featured .quick-title { font-size: 0.98rem; }
 
-    .container { padding: 0 16px; }
-    .section { padding: 30px 0; }
-    .section-title { font-size: 1.4rem; }
-    .section-header { margin-bottom: 30px; }
+            .container { padding: 0 16px; }
+            .section { padding: 30px 0; }
+            .section-title { font-size: 1.4rem; }
+            .section-header { margin-bottom: 30px; }
 
-    .contact-info-box { padding: 24px 20px; }
-    .contact-icons, .section-contact-icons {
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-    }
-    .contact-link { justify-content: center; width: 100%; max-width: 320px; }
+            .contact-info-box { padding: 24px 20px; }
+            .contact-icons, .section-contact-icons {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+            .contact-link { justify-content: center; width: 100%; max-width: 320px; }
 
-    .card-grid, .beach-grid, .restaurant-grid {
-        grid-template-columns: 1fr;
-    }
+            .card-grid, .beach-grid, .restaurant-grid {
+                grid-template-columns: 1fr;
+            }
 
-    .modal-body { padding: 20px; }
-    .modal-header { padding: 18px 20px; }
-    .modal-header h3 { font-size: 1.1rem; }
-}
+            .modal-body { padding: 20px; }
+            .modal-header { padding: 18px 20px; }
+            .modal-header h3 { font-size: 1.1rem; }
 
-@media (max-width: 380px) {
-    .header-logo img { height: 60px; }
-    .hero-logo { height: 110px; }
-    .hero { padding: 25px 12px 70px; }
-    main { margin-top: 92px; }
-    .quick-grid { gap: 8px; }
-    .quick-card { padding: 14px 6px; }
-    .quick-icon { width: 40px; height: 40px; font-size: 1rem; }
-    .quick-title { font-size: 0.78rem; }
-    .hero .contact-link { font-size: 0.75rem; padding: 9px 12px; }
-}
+            /* Guía responsive */
+            .guide-grid { grid-template-columns: 1fr; gap: 14px; }
+            .guide-card { padding: 22px 20px; }
+            .guide-intro { padding: 26px 20px; }
+            .accordion-header { padding: 18px 20px; }
+            .accordion-header h4 { font-size: 1rem; }
+            .accordion-body-inner { padding: 0 20px 20px; font-size: 0.9rem; }
+            .guide-help-box { padding: 32px 22px; }
+            .guide-help-box h3 { font-size: 1.2rem; }
+            .section-title-small { font-size: 1.25rem; }
 
+            /* Bottom nav con 5 items */
+            .nav-item { font-size: 0.65rem; padding: 5px 2px; }
+            .nav-item i { font-size: 1.05rem; }
+        }
+
+        @media (max-width: 380px) {
+            .header-logo img { height: 60px; }
+            .hero-logo { height: 110px; }
+            .hero { padding: 25px 12px 70px; }
+            main { margin-top: 92px; }
+            .quick-grid { gap: 8px; }
+            .quick-card { padding: 14px 6px; }
+            .quick-icon { width: 40px; height: 40px; font-size: 1rem; }
+            .quick-title { font-size: 0.78rem; }
+            .hero .contact-link { font-size: 0.75rem; padding: 9px 12px; }
+            .nav-item { font-size: 0.6rem; }
+            .nav-item i { font-size: 0.95rem; }
+        }
     </style>
 </head>
 <body>
@@ -902,6 +1230,10 @@
                 <a href="#" class="nav-link active" data-page="home" onclick="showPage('home'); return false;">
                     <i class="fas fa-home"></i>
                     <span data-es="Inicio" data-en="Home" data-fr="Accueil">Inicio</span>
+                </a>
+                <a href="#" class="nav-link" data-page="guide" onclick="showPage('guide'); return false;">
+                    <i class="fas fa-book-open"></i>
+                    <span data-es="Guía" data-en="Guide" data-fr="Guide">Guía</span>
                 </a>
                 <a href="#" class="nav-link" data-page="activities" onclick="showPage('activities'); return false;">
                     <i class="fas fa-star"></i>
@@ -961,6 +1293,11 @@
 
             <div class="quick-access">
                 <div class="quick-grid">
+                    <a href="#" class="quick-card featured" onclick="showPage('guide'); return false;">
+                        <div class="quick-icon"><i class="fas fa-book-open"></i></div>
+                        <div class="quick-title" data-es="Guía del Huésped" data-en="Guest Guide" data-fr="Guide du Client">Guía del Huésped</div>
+                        <div class="quick-desc" data-es="Toda la información de su estancia" data-en="All the information for your stay" data-fr="Toutes les infos de votre séjour">Toda la información de su estancia</div>
+                    </a>
                     <a href="#" class="quick-card" onclick="openModal('snacksModal'); return false;">
                         <div class="quick-icon"><i class="fas fa-cheese"></i></div>
                         <div class="quick-title" data-es="Snack Bar" data-en="Snack Bar" data-fr="Snack Bar">Snack Bar</div>
@@ -986,6 +1323,327 @@
                         <div class="quick-title" data-es="Restaurantes" data-en="Restaurants" data-fr="Restaurants">Restaurantes</div>
                         <div class="quick-desc" data-es="Recomendaciones" data-en="Recommendations" data-fr="Recommandations">Recomendaciones</div>
                     </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== PÁGINA GUÍA DEL HUÉSPED ========== -->
+        <div class="page" id="page-guide">
+            <div class="container">
+                <div class="section">
+                    <div class="section-header">
+                        <h3 class="section-title">
+                            <i class="fas fa-book-open"></i>
+                            <span data-es="Guía del Huésped" data-en="Guest Guide" data-fr="Guide du Client">Guía del Huésped</span>
+                        </h3>
+                        <p class="section-subtitle" data-es="Toda la información que necesita para disfrutar de su estancia" data-en="All the information you need to enjoy your stay" data-fr="Toutes les informations dont vous avez besoin pour profiter de votre séjour">Toda la información que necesita para disfrutar de su estancia</p>
+                    </div>
+
+                    <div class="guide-intro">
+                        <p data-es="¡Bienvenido a Sant Patrici! Nos alegra mucho tenerle con nosotros. Es importante que lea atentamente toda la información a continuación para garantizar una estancia cómoda y segura."
+                           data-en="Welcome to Sant Patrici! We are delighted to have you with us. Please read all the information below carefully to ensure a comfortable and safe stay."
+                           data-fr="Bienvenue à Sant Patrici ! Nous sommes ravis de vous accueillir. Veuillez lire attentivement toutes les informations ci-dessous pour garantir un séjour confortable et sûr.">
+                            ¡Bienvenido a Sant Patrici! Nos alegra mucho tenerle con nosotros. Es importante que lea atentamente toda la información a continuación para garantizar una estancia cómoda y segura.
+                        </p>
+                    </div>
+
+                    <!-- Quick info cards -->
+                    <div class="guide-grid">
+                        <!-- Desayuno -->
+                        <div class="guide-card">
+                            <div class="guide-card-header">
+                                <div class="guide-card-icon"><i class="fas fa-utensils"></i></div>
+                                <h4 data-es="Desayuno" data-en="Breakfast" data-fr="Petit-déjeuner">Desayuno</h4>
+                            </div>
+                            <div class="guide-info-row">
+                                <strong data-es="Horario" data-en="Hours" data-fr="Horaire">Horario</strong>
+                                <span class="highlight">8:00 - 10:30</span>
+                            </div>
+                            <div class="guide-info-row">
+                                <strong data-es="Ubicación" data-en="Location" data-fr="Lieu">Ubicación</strong>
+                                <span data-es="Salón" data-en="Dining room" data-fr="Salon">Salón</span>
+                            </div>
+                            <p class="guide-card-text" style="margin-top:12px;" data-es="Delicioso buffet disponible todos los días." data-en="Delicious buffet available every day." data-fr="Délicieux buffet disponible tous les jours.">Delicioso buffet disponible todos los días.</p>
+                        </div>
+
+                        <!-- Atención cliente -->
+                        <div class="guide-card">
+                            <div class="guide-card-header">
+                                <div class="guide-card-icon"><i class="fas fa-concierge-bell"></i></div>
+                                <h4 data-es="Atención al Cliente" data-en="Customer Service" data-fr="Service Client">Atención al Cliente</h4>
+                            </div>
+                            <div class="guide-info-row">
+                                <strong data-es="Horario" data-en="Hours" data-fr="Horaire">Horario</strong>
+                                <span class="highlight">8:00 - 19:00</span>
+                            </div>
+                            <div class="guide-info-row">
+                                <strong>WhatsApp</strong>
+                                <span>+34 971 71 37 16</span>
+                            </div>
+                        </div>
+
+                        <!-- Wi-Fi -->
+                        <div class="guide-card">
+                            <div class="guide-card-header">
+                                <div class="guide-card-icon"><i class="fas fa-wifi"></i></div>
+                                <h4>Wi-Fi</h4>
+                            </div>
+                            <p class="guide-card-text" data-es="Wi-Fi gratuito en todas las áreas del hotel. Encontrará el nombre de usuario y la contraseña en una tarjeta en su habitación." data-en="Free Wi-Fi throughout the hotel. You will find the username and password on a card in your room." data-fr="Wi-Fi gratuit dans toutes les zones de l'hôtel. Vous trouverez l'identifiant et le mot de passe sur une carte dans votre chambre.">
+                                Wi-Fi gratuito en todas las áreas del hotel. Encontrará el nombre de usuario y la contraseña en una tarjeta en su habitación.
+                            </p>
+                        </div>
+
+                        <!-- Parking -->
+                        <div class="guide-card">
+                            <div class="guide-card-header">
+                                <div class="guide-card-icon"><i class="fas fa-car"></i></div>
+                                <h4>Parking</h4>
+                            </div>
+                            <div class="guide-info-row">
+                                <strong data-es="Precio" data-en="Price" data-fr="Prix">Precio</strong>
+                                <span data-es="Gratuito" data-en="Free" data-fr="Gratuit">Gratuito</span>
+                            </div>
+                            <div class="guide-info-row">
+                                <strong data-es="Código" data-en="Code" data-fr="Code">Código</strong>
+                                <span class="highlight">2207A</span>
+                            </div>
+                        </div>
+
+                        <!-- Check-out -->
+                        <div class="guide-card">
+                            <div class="guide-card-header">
+                                <div class="guide-card-icon"><i class="fas fa-suitcase-rolling"></i></div>
+                                <h4>Check-out</h4>
+                            </div>
+                            <div class="guide-info-row">
+                                <strong data-es="Salida" data-en="Departure" data-fr="Départ">Salida</strong>
+                                <span class="highlight" data-es="Antes 12:00h" data-en="Before 12:00" data-fr="Avant 12h00">Antes 12:00h</span>
+                            </div>
+                            <p class="guide-card-text" style="margin-top:12px;" data-es="Si su salida es antes de las 8:00h, por favor infórmenos previamente." data-en="If your departure is before 8:00, please inform us in advance." data-fr="Si votre départ est avant 8h00, veuillez nous en informer à l'avance.">Si su salida es antes de las 8:00h, por favor infórmenos previamente.</p>
+                        </div>
+
+                        <!-- Limpieza -->
+                        <div class="guide-card">
+                            <div class="guide-card-header">
+                                <div class="guide-card-icon"><i class="fas fa-bed"></i></div>
+                                <h4 data-es="Limpieza" data-en="Housekeeping" data-fr="Ménage">Limpieza</h4>
+                            </div>
+                            <div class="guide-info-row">
+                                <strong data-es="Habitación" data-en="Room" data-fr="Chambre">Habitación</strong>
+                                <span data-es="Diaria" data-en="Daily" data-fr="Quotidien">Diaria</span>
+                            </div>
+                            <div class="guide-info-row">
+                                <strong data-es="Sábanas" data-en="Sheets" data-fr="Draps">Sábanas</strong>
+                                <span data-es="Tras 3ª noche" data-en="After 3rd night" data-fr="Après 3e nuit">Tras 3ª noche</span>
+                            </div>
+                            <div class="guide-info-row">
+                                <strong data-es="Toallas piscina" data-en="Pool towels" data-fr="Serviettes piscine">Toallas piscina</strong>
+                                <span data-es="Diario" data-en="Daily" data-fr="Quotidien">Diario</span>
+                            </div>
+                        </div>
+
+                        <!-- Agua -->
+                        <div class="guide-card">
+                            <div class="guide-card-header">
+                                <div class="guide-card-icon"><i class="fas fa-tint"></i></div>
+                                <h4 data-es="Agua gratuita" data-en="Free water" data-fr="Eau gratuite">Agua gratuita</h4>
+                            </div>
+                            <p class="guide-card-text" data-es="En el vestíbulo encontrará dos frigoríficos con agua con y sin gas, disponibles para nuestros huéspedes." data-en="In the lobby you will find two refrigerators with sparkling and still water, available for our guests." data-fr="Dans le hall, vous trouverez deux réfrigérateurs avec eau gazeuse et plate, disponibles pour nos clients.">
+                                En el vestíbulo encontrará dos frigoríficos con agua con y sin gas, disponibles para nuestros huéspedes.
+                            </p>
+                        </div>
+
+                        <!-- No fumadores -->
+                        <div class="guide-card">
+                            <div class="guide-card-header">
+                                <div class="guide-card-icon"><i class="fas fa-smoking-ban"></i></div>
+                                <h4 data-es="No fumadores" data-en="No smoking" data-fr="Non-fumeurs">No fumadores</h4>
+                            </div>
+                            <p class="guide-card-text" data-es="Está totalmente prohibido fumar dentro de las habitaciones y del hotel." data-en="Smoking is strictly prohibited inside the rooms and the hotel." data-fr="Il est strictement interdit de fumer à l'intérieur des chambres et de l'hôtel.">
+                                Está totalmente prohibido fumar dentro de las habitaciones y del hotel.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Información detallada (Acordeones) -->
+                    <h3 class="section-title-small">
+                        <i class="fas fa-info-circle"></i>
+                        <span data-es="Información detallada" data-en="Detailed information" data-fr="Informations détaillées">Información detallada</span>
+                    </h3>
+
+                    <!-- Caja fuerte -->
+                    <div class="accordion" onclick="toggleAccordion(this)">
+                        <div class="accordion-header">
+                            <div class="accordion-header-left">
+                                <i class="fas fa-lock acc-icon"></i>
+                                <h4 data-es="Caja fuerte" data-en="Safe box" data-fr="Coffre-fort">Caja fuerte</h4>
+                            </div>
+                            <i class="fas fa-chevron-down accordion-chevron"></i>
+                        </div>
+                        <div class="accordion-body">
+                            <div class="accordion-body-inner">
+                                <p data-es="Programe fácilmente su código personal siguiendo estos pasos:" data-en="Easily program your personal code by following these steps:" data-fr="Programmez facilement votre code personnel en suivant ces étapes :">Programe fácilmente su código personal siguiendo estos pasos:</p>
+                                <ol>
+                                    <li data-es="Presione RESET en la parte superior de la tapa de la puerta; sonará una señal acústica." data-en="Press RESET at the top of the door cover; an acoustic signal will sound." data-fr="Appuyez sur RESET en haut du couvercle de la porte ; un signal sonore retentira.">Presione RESET en la parte superior de la tapa de la puerta; sonará una señal acústica.</li>
+                                    <li data-es="Introduzca su código de usuario (de 2 a 8 dígitos) seguido de la tecla almohadilla (#). El LED amarillo se apagará, confirmando que el nuevo código ha sido aceptado." data-en="Enter your user code (2 to 8 digits) followed by the hash key (#). The yellow LED will turn off, confirming that the new code has been accepted." data-fr="Saisissez votre code utilisateur (2 à 8 chiffres) suivi de la touche dièse (#). Le voyant jaune s'éteindra, confirmant que le nouveau code a été accepté.">Introduzca su código de usuario (de 2 a 8 dígitos) seguido de la tecla almohadilla (#). El LED amarillo se apagará, confirmando que el nuevo código ha sido aceptado.</li>
+                                </ol>
+                                <div class="accordion-note">
+                                    📅 <strong data-es="Importante:" data-en="Important:" data-fr="Important :">Importante:</strong>
+                                    <span data-es=" El día de su salida, por favor, deje la puerta de la caja fuerte abierta." data-en=" On your day of departure, please leave the safe box door open." data-fr=" Le jour de votre départ, veuillez laisser la porte du coffre-fort ouverte."> El día de su salida, por favor, deje la puerta de la caja fuerte abierta.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Snack Bar -->
+                    <div class="accordion" onclick="toggleAccordion(this)">
+                        <div class="accordion-header">
+                            <div class="accordion-header-left">
+                                <i class="fas fa-cheese acc-icon"></i>
+                                <h4 data-es="Snacks y bebidas" data-en="Snacks and drinks" data-fr="Snacks et boissons">Snacks y bebidas</h4>
+                            </div>
+                            <i class="fas fa-chevron-down accordion-chevron"></i>
+                        </div>
+                        <div class="accordion-body">
+                            <div class="accordion-body-inner">
+                                <p data-es="Durante nuestro horario de atención al cliente, le ofrecemos un servicio de snacks y bebidas que podrá solicitar en su habitación, en la piscina, terraza o lobby del hotel." data-en="During our customer service hours, we offer a snack and drinks service that you can request in your room, at the pool, terrace or hotel lobby." data-fr="Pendant nos heures de service client, nous proposons un service de collations et de boissons que vous pouvez demander dans votre chambre, à la piscine, sur la terrasse ou dans le hall de l'hôtel.">
+                                    Durante nuestro horario de atención al cliente, le ofrecemos un servicio de snacks y bebidas que podrá solicitar en su habitación, en la piscina, terraza o lobby del hotel.
+                                </p>
+                                <button class="inline-btn" onclick="event.stopPropagation(); openModal('snacksModal');">
+                                    <i class="fas fa-book-open"></i>
+                                    <span data-es="Ver carta completa" data-en="View full menu" data-fr="Voir la carte complète">Ver carta completa</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Visita Guiada -->
+                    <div class="accordion" onclick="toggleAccordion(this)">
+                        <div class="accordion-header">
+                            <div class="accordion-header-left">
+                                <i class="fas fa-wine-glass-alt acc-icon"></i>
+                                <h4 data-es="Visita Guiada: Queso y Vino" data-en="Guided Tour: Cheese and Wine" data-fr="Visite Guidée : Fromage et Vin">Visita Guiada: Queso y Vino</h4>
+                            </div>
+                            <i class="fas fa-chevron-down accordion-chevron"></i>
+                        </div>
+                        <div class="accordion-body">
+                            <div class="accordion-body-inner">
+                                <p data-es="¿Sabía que Sant Patrici es la única finca productora de Queso y Vino en Menorca? Conozca de cerca cómo se elabora el Queso Mahón–Menorca y el Vino de Menorca." data-en="Did you know that Sant Patrici is the only farm producing Cheese and Wine in Menorca? Discover up close how Mahón-Menorca Cheese and Menorca Wine are made." data-fr="Saviez-vous que Sant Patrici est la seule finca productrice de Fromage et de Vin à Minorque ? Découvrez de près comment sont élaborés le Fromage Mahón–Menorca et le Vin de Minorque.">
+                                    ¿Sabía que Sant Patrici es la única finca productora de Queso y Vino en Menorca? Conozca de cerca cómo se elabora el Queso Mahón–Menorca y el Vino de Menorca.
+                                </p>
+                                <button class="inline-btn" onclick="event.stopPropagation(); showPage('activities');">
+                                    <i class="fas fa-star"></i>
+                                    <span data-es="Ver actividades" data-en="View activities" data-fr="Voir les activités">Ver actividades</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Equipaje -->
+                    <div class="accordion" onclick="toggleAccordion(this)">
+                        <div class="accordion-header">
+                            <div class="accordion-header-left">
+                                <i class="fas fa-suitcase acc-icon"></i>
+                                <h4 data-es="Guardado de equipaje" data-en="Luggage storage" data-fr="Consigne à bagages">Guardado de equipaje</h4>
+                            </div>
+                            <i class="fas fa-chevron-down accordion-chevron"></i>
+                        </div>
+                        <div class="accordion-body">
+                            <div class="accordion-body-inner">
+                                <p data-es="Posibilidad de dejar el equipaje en recepción antes del check-in o tras el check-out." data-en="Possibility to leave luggage at reception before check-in or after check-out." data-fr="Possibilité de laisser les bagages à la réception avant le check-in ou après le check-out.">
+                                    Posibilidad de dejar el equipaje en recepción antes del check-in o tras el check-out.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Frigoríficos -->
+                    <div class="accordion" onclick="toggleAccordion(this)">
+                        <div class="accordion-header">
+                            <div class="accordion-header-left">
+                                <i class="fas fa-tint acc-icon"></i>
+                                <h4 data-es="Frigoríficos del vestíbulo" data-en="Lobby refrigerators" data-fr="Réfrigérateurs du hall">Frigoríficos del vestíbulo</h4>
+                            </div>
+                            <i class="fas fa-chevron-down accordion-chevron"></i>
+                        </div>
+                        <div class="accordion-body">
+                            <div class="accordion-body-inner">
+                                <p data-es="En el vestíbulo del hotel hay dos frigoríficos con agua con y sin gas, disponibles para nuestros huéspedes." data-en="In the hotel lobby there are two refrigerators with still and sparkling water, available for our guests." data-fr="Dans le hall de l'hôtel, il y a deux réfrigérateurs avec eau plate et gazeuse, disponibles pour nos clients.">
+                                    En el vestíbulo del hotel hay dos frigoríficos con agua con y sin gas, disponibles para nuestros huéspedes.
+                                </p>
+                                <div class="accordion-note">
+                                    <strong data-es="Importante:" data-en="Important:" data-fr="Important :">Importante:</strong>
+                                    <span data-es=" Estos frigoríficos son para uso EXCLUSIVO del hotel y NO para uso personal." data-en=" These refrigerators are for EXCLUSIVE hotel use and NOT for personal use." data-fr=" Ces réfrigérateurs sont à usage EXCLUSIF de l'hôtel et NON à usage personnel."> Estos frigoríficos son para uso EXCLUSIVO del hotel y NO para uso personal.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sostenibilidad -->
+                    <div class="accordion" onclick="toggleAccordion(this)">
+                        <div class="accordion-header">
+                            <div class="accordion-header-left">
+                                <i class="fas fa-leaf acc-icon"></i>
+                                <h4 data-es="Compromiso con la sostenibilidad" data-en="Sustainability commitment" data-fr="Engagement durable">Compromiso con la sostenibilidad</h4>
+                            </div>
+                            <i class="fas fa-chevron-down accordion-chevron"></i>
+                        </div>
+                        <div class="accordion-body">
+                            <div class="accordion-body-inner">
+                                <p data-es="En Sant Patrici cuidamos del entorno que nos rodea, y su colaboración es fundamental. Pequeños gestos como reutilizar las toallas, apagar las luces o el aire acondicionado al salir de la habitación tienen un impacto muy significativo en el medio ambiente." data-en="At Sant Patrici we care for our surroundings, and your cooperation is essential. Small gestures such as reusing towels, turning off lights or air conditioning when leaving the room have a very significant impact on the environment." data-fr="À Sant Patrici, nous prenons soin de l'environnement qui nous entoure, et votre collaboration est fondamentale. De petits gestes comme réutiliser les serviettes, éteindre les lumières ou la climatisation en quittant la chambre ont un impact très significatif sur l'environnement.">
+                                    En Sant Patrici cuidamos del entorno que nos rodea, y su colaboración es fundamental. Pequeños gestos como reutilizar las toallas, apagar las luces o el aire acondicionado al salir de la habitación tienen un impacto muy significativo en el medio ambiente.
+                                </p>
+                                <div class="accordion-note">
+                                    🌿 <span data-es="Si desea reutilizar sus toallas, déjelas colgadas; si prefiere que se cambien, déjelas en el suelo. ¡Gracias por ayudarnos a cuidar nuestra isla!" data-en="If you wish to reuse your towels, leave them hanging; if you prefer them changed, leave them on the floor. Thank you for helping us take care of our island!" data-fr="Si vous souhaitez réutiliser vos serviettes, laissez-les suspendues ; si vous préférez qu'elles soient changées, laissez-les sur le sol. Merci de nous aider à prendre soin de notre île !">Si desea reutilizar sus toallas, déjelas colgadas; si prefiere que se cambien, déjelas en el suelo. ¡Gracias por ayudarnos a cuidar nuestra isla!</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Redes sociales -->
+                    <div class="accordion" onclick="toggleAccordion(this)">
+                        <div class="accordion-header">
+                            <div class="accordion-header-left">
+                                <i class="fas fa-hashtag acc-icon"></i>
+                                <h4 data-es="Síganos en redes sociales" data-en="Follow us on social media" data-fr="Suivez-nous sur les réseaux sociaux">Síganos en redes sociales</h4>
+                            </div>
+                            <i class="fas fa-chevron-down accordion-chevron"></i>
+                        </div>
+                        <div class="accordion-body">
+                            <div class="accordion-body-inner">
+                                <p data-es="Nos encantaría seguir en contacto con usted. Síganos en nuestras redes sociales para estar al día de nuestras novedades, eventos, tienda web y ofertas especiales. ¡No olvide etiquetarnos en sus publicaciones!" data-en="We would love to keep in touch with you. Follow us on our social media to stay up to date with our news, events, web store and special offers. Don't forget to tag us in your posts!" data-fr="Nous aimerions rester en contact avec vous. Suivez-nous sur nos réseaux sociaux pour être au courant de nos nouveautés, événements, boutique en ligne et offres spéciales. N'oubliez pas de nous identifier dans vos publications !">
+                                    Nos encantaría seguir en contacto con usted. Síganos en nuestras redes sociales para estar al día de nuestras novedades, eventos, tienda web y ofertas especiales. ¡No olvide etiquetarnos en sus publicaciones!
+                                </p>
+                                <div class="social-icons">
+                                    <a href="https://instagram.com/sant_patrici_hotel" target="_blank" class="social-icon-link" title="Instagram" onclick="event.stopPropagation();">
+                                        <i class="fab fa-instagram"></i>
+                                    </a>
+                                    <a href="https://facebook.com/santpatrici" target="_blank" class="social-icon-link" title="Facebook" onclick="event.stopPropagation();">
+                                        <i class="fab fa-facebook-f"></i>
+                                    </a>
+                                </div>
+                                <p class="social-handle">@sant_patrici_hotel</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Caja de ayuda -->
+                    <div class="guide-help-box">
+                        <h3><i class="fas fa-headset"></i> <span data-es="¿Necesita ayuda?" data-en="Need help?" data-fr="Besoin d'aide ?">¿Necesita ayuda?</span></h3>
+                        <p data-es="Nuestro equipo está disponible de 8:00 a 19:00. Para emergencias, contáctenos por WhatsApp." data-en="Our team is available from 8:00 to 19:00. For emergencies, contact us via WhatsApp." data-fr="Notre équipe est disponible de 8h00 à 19h00. Pour les urgences, contactez-nous par WhatsApp.">
+                            Nuestro equipo está disponible de 8:00 a 19:00. Para emergencias, contáctenos por WhatsApp.
+                        </p>
+                        <div class="contact-icons">
+                            <a href="https://wa.me/34971713716" target="_blank" class="contact-link whatsapp-link">
+                                <i class="fab fa-whatsapp"></i>
+                                <span>+34 971 71 37 16</span>
+                            </a>
+                            <a href="mailto:sales@santpatrici.es" class="contact-link email-link">
+                                <i class="fas fa-envelope"></i>
+                                <span>sales@santpatrici.es</span>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1431,6 +2089,10 @@
             <i class="fas fa-home"></i>
             <span data-es="Inicio" data-en="Home" data-fr="Accueil">Inicio</span>
         </a>
+        <a href="#" class="nav-item" data-page="guide" onclick="showPage('guide'); return false;">
+            <i class="fas fa-book-open"></i>
+            <span data-es="Guía" data-en="Guide" data-fr="Guide">Guía</span>
+        </a>
         <a href="#" class="nav-item" data-page="activities" onclick="showPage('activities'); return false;">
             <i class="fas fa-star"></i>
             <span data-es="Actividades" data-en="Activities" data-fr="Activités">Actividades</span>
@@ -1682,6 +2344,11 @@
                     card.style.display = 'none';
                 }
             });
+        }
+
+        // Toggle acordeón de la Guía del Huésped
+        function toggleAccordion(el) {
+            el.classList.toggle('open');
         }
     </script>
 </body>
