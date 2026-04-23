@@ -1212,6 +1212,41 @@
             .nav-item { font-size: 0.6rem; }
             .nav-item i { font-size: 0.95rem; }
         }
+/* ===== FIX: Eliminar espacio vacío en móvil ===== */
+        @media (max-width: 991px) {
+            main {
+                display: flex;
+                flex-direction: column;
+                min-height: calc(100vh - 150px);
+                padding-bottom: 70px;
+            }
+            
+            .page.active {
+                display: flex;
+                flex-direction: column;
+                flex: 1;
+            }
+            
+            #page-home.active {
+                background: linear-gradient(to bottom, transparent 0%, transparent 40%, var(--bg-color) 40%);
+            }
+            
+            #page-home .quick-access {
+                flex: 1;
+            }
+        }
+
+        @media (max-width: 600px) {
+            main {
+                min-height: calc(100vh - 150px);
+            }
+        }
+
+        @media (max-width: 380px) {
+            main {
+                min-height: calc(100vh - 138px);
+            }
+        }
     </style>
 </head>
 <body>
