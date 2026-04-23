@@ -1212,39 +1212,22 @@
             .nav-item { font-size: 0.6rem; }
             .nav-item i { font-size: 0.95rem; }
         }
-/* ===== FIX: Eliminar espacio vacío en móvil ===== */
+/* ===== FIX: Eliminar espacio crema vacío en home móvil ===== */
         @media (max-width: 991px) {
-            main {
-                display: flex;
-                flex-direction: column;
-                min-height: calc(100vh - 150px);
-                padding-bottom: 70px;
+            /* La página home tendrá fondo verde continuando el hero */
+            #page-home {
+                background: var(--primary-color);
             }
             
-            .page.active {
-                display: flex;
-                flex-direction: column;
-                flex: 1;
-            }
-            
-            #page-home.active {
-                background: linear-gradient(to bottom, transparent 0%, transparent 40%, var(--bg-color) 40%);
-            }
-            
+            /* Fondo verde hasta abajo para tapar el crema vacío */
             #page-home .quick-access {
-                flex: 1;
+                padding-bottom: 20px;
+                background: var(--primary-color);
             }
-        }
-
-        @media (max-width: 600px) {
+            
+            /* Reducir padding inferior del main en home */
             main {
-                min-height: calc(100vh - 150px);
-            }
-        }
-
-        @media (max-width: 380px) {
-            main {
-                min-height: calc(100vh - 138px);
+                padding-bottom: 60px;
             }
         }
     </style>
