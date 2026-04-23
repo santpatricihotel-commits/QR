@@ -195,7 +195,6 @@
         /* ===== MAIN ===== */
         main {
             margin-top: 138px;
-            min-height: calc(100vh - 138px);
         }
 
         /* ===== HERO ===== */
@@ -1116,7 +1115,7 @@
             
             .bottom-nav { display: flex; }
             
-            main { padding-bottom: 70px; }
+            main { padding-bottom: 10px; }
 
             .hero { padding: 40px 20px 80px; }
             .hero-logo { height: 160px; }
@@ -1155,15 +1154,13 @@
             .hero .contact-link i { font-size: 1rem; }
 
             /* QUICK ACCESS móvil */
-            .quick-access { padding: 0 12px 30px; margin-top: -40px; }
+            .quick-access { padding: 0 12px 10px; margin-top: -40px; }
             .quick-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
             .quick-card { padding: 18px 8px; gap: 10px; border-radius: 12px; }
             .quick-card.featured { grid-column: span 2; padding: 22px 14px; }
             .quick-icon { width: 44px; height: 44px; font-size: 1.1rem; }
             .quick-title { font-size: 0.85rem; line-height: 1.2; }
-            .quick-desc { display: none; }
-            .quick-card.featured .quick-desc { display: block; font-size: 0.78rem; }
-            .quick-card.featured .quick-title { font-size: 0.98rem; }
+.quick-desc { display: none; }
 
             .container { padding: 0 16px; }
             .section { padding: 30px 0; }
@@ -1293,7 +1290,7 @@
 
             <div class="quick-access">
                 <div class="quick-grid">
-                    <a href="#" class="quick-card featured" onclick="showPage('guide'); return false;">
+                    <a href="#" class="quick-card" onclick="showPage('guide'); return false;">
                         <div class="quick-icon"><i class="fas fa-book-open"></i></div>
                         <div class="quick-title" data-es="Guía del Huésped" data-en="Guest Guide" data-fr="Guide du Client">Guía del Huésped</div>
                         <div class="quick-desc" data-es="Toda la información de su estancia" data-en="All the information for your stay" data-fr="Toutes les infos de votre séjour">Toda la información de su estancia</div>
