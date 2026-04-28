@@ -373,6 +373,11 @@
         .quick-desc {
             font-size: 0.85rem;
             color: var(--text-light);
+/* Forzar Font Awesome para los íconos */
+        .fa, .fas, .far, .fal, .fab {
+            font-family: 'Font Awesome 6 Free', 'Font Awesome 6 Brands' !important;
+            font-weight: 900 !important;
+        }
         }
 
         /* ===== SECCIONES ===== */
@@ -995,8 +1000,9 @@
             flex-direction: column;
             align-items: center;
             text-decoration: none;
-            color: var(--text-light);
-            font-size: 0.7rem;
+            color: var(--text-color);
+            font-size: 0.8rem;
+            font-weight: 600;
             padding: 5px 6px;
             transition: color var(--transition);
             flex: 1;
@@ -1199,9 +1205,13 @@
             .guide-help-box h3 { font-size: 1.2rem; }
             .section-title-small { font-size: 1.25rem; }
 
-            /* Bottom nav con 5 items */
-            .nav-item { font-size: 0.65rem; padding: 5px 2px; }
-            .nav-item i { font-size: 1.05rem; }
+           /* Bottom nav con 5 items */
+            .nav-item { 
+                font-size: 0.72rem; 
+                font-weight: 600;
+                padding: 6px 2px; 
+            }
+            .nav-item i { font-size: 1.15rem; }
         }
 
         @media (max-width: 380px) {
@@ -1214,20 +1224,23 @@
             .quick-icon { width: 40px; height: 40px; font-size: 1rem; }
             .quick-title { font-size: 0.78rem; }
             .hero .contact-link { font-size: 0.75rem; padding: 9px 12px; }
-            .nav-item { font-size: 0.6rem; }
-            .nav-item i { font-size: 0.95rem; }
+            .nav-item { 
+                font-size: 0.68rem;
+                font-weight: 600; 
+            }
+            .nav-item i { font-size: 1.05rem; }
         }
 /* ===== FIX: Eliminar espacio crema vacío en home móvil ===== */
         @media (max-width: 991px) {
             /* La página home tendrá fondo verde continuando el hero */
             #page-home {
                 background: var(--primary-color);
-                min-height: calc(100vh - 138px - 60px); /* altura viewport - header - bottom nav */
+                min-height: auto; /* Dejar que el contenido dicte la altura */
             }
             
-            /* Fondo verde hasta abajo para tapar el crema vacío */
+            /* Fondo verde solo hasta donde termina el contenido */
             #page-home .quick-access {
-                padding-bottom: 60px; /* Espacio para el bottom nav */
+                padding-bottom: 80px; /* Espacio para el bottom nav + respiración */
                 background: var(--primary-color);
             }
             
@@ -1235,6 +1248,7 @@
             main {
                 padding-bottom: 0;
             }
+        }
             
             /* Solo para la página home, sin padding inferior */
             #page-home ~ main,
