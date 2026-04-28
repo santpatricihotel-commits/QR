@@ -1217,17 +1217,24 @@
             /* La página home tendrá fondo verde continuando el hero */
             #page-home {
                 background: var(--primary-color);
+                min-height: calc(100vh - 138px - 60px); /* altura viewport - header - bottom nav */
             }
             
             /* Fondo verde hasta abajo para tapar el crema vacío */
             #page-home .quick-access {
-                padding-bottom: 20px;
+                padding-bottom: 60px; /* Espacio para el bottom nav */
                 background: var(--primary-color);
             }
             
-            /* Reducir padding inferior del main en home */
+            /* Eliminar padding inferior del main en home */
             main {
-                padding-bottom: 60px;
+                padding-bottom: 0;
+            }
+            
+            /* Solo para la página home, sin padding inferior */
+            #page-home ~ main,
+            body:has(#page-home.active) main {
+                padding-bottom: 0;
             }
         }
     </style>
