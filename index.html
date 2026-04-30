@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sant Patrici - Menorca</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-aweso<link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">me/6.4.0/css/all.min.css">
      
@@ -359,6 +359,13 @@
             font-size: 1.6rem;
             transition: var(--transition);
         }
+	
+	.quick-icon i {
+            font-family: 'Font Awesome 6 Free', 'Font Awesome 6 Brands' !important;
+    	    font-weight: 900 !important;
+    	    font-style: normal !important;
+	}
+
         .quick-card:hover .quick-icon {
             transform: scale(1.1) rotate(-5deg);
             background: linear-gradient(135deg, var(--accent-color), var(--accent-dark));
@@ -1165,7 +1172,11 @@
             .hero .contact-link i { font-size: 1rem; }
 
             /* QUICK ACCESS móvil */
-            .quick-access { padding: 0 12px 10px; margin-top: -40px; }
+            .quick-access { 
+    padding: 0 12px 70px; 
+    margin-top: -40px; 
+    margin-bottom: 0;
+}
             .quick-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
             .quick-card { padding: 18px 8px; gap: 10px; border-radius: 12px; }
             .quick-card.featured { grid-column: span 2; padding: 22px 14px; }
@@ -1220,6 +1231,10 @@
             .hero { padding: 18px 12px 55px; }
             main { margin-top: 138px; }
             .quick-grid { gap: 8px; }
+	    .quick-access { 
+    padding-bottom: 70px;
+    margin-bottom: 0;
+}
             .quick-card { padding: 14px 6px; }
             .quick-icon { width: 40px; height: 40px; font-size: 1rem; }
             .quick-title { font-size: 0.78rem; }
@@ -1230,32 +1245,36 @@
             }
             .nav-item i { font-size: 1.05rem; }
         }
-/* ===== FIX: Eliminar espacio crema vacío en home móvil ===== */
-        @media (max-width: 991px) {
-            /* La página home tendrá fondo verde continuando el hero */
-            #page-home {
-                background: var(--primary-color);
-                min-height: auto; /* Dejar que el contenido dicte la altura */
-            }
-            
-            /* Fondo verde solo hasta donde termina el contenido */
-            #page-home .quick-access {
-                padding-bottom: 80px; /* Espacio para el bottom nav + respiración */
-                background: var(--primary-color);
-            }
-            
-            /* Eliminar padding inferior del main en home */
-            main {
-                padding-bottom: 0;
-            }
-        }
-            
-            /* Solo para la página home, sin padding inferior */
-            #page-home ~ main,
-            body:has(#page-home.active) main {
-                padding-bottom: 0;
-            }
-        }
+/* ===== FIX: Eliminar espacio beige en home móvil ===== */
+@media (max-width: 991px) {
+    /* Página home con fondo verde, altura automática */
+    #page-home {
+        background: var(--primary-color);
+        min-height: 0;
+        height: auto;
+    }
+    
+    /* Hero y quick-access con fondo verde */
+    #page-home .hero {
+        background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 50%, var(--primary-light) 100%);
+    }
+    
+    #page-home .quick-access {
+        background: var(--primary-color);
+        padding-bottom: 70px;
+        margin-bottom: 0;
+    }
+    
+    /* Main sin padding inferior en home */
+    main {
+        padding-bottom: 0;
+    }
+    
+    /* Asegurar que el body no muestre beige debajo */
+    body {
+        background: var(--primary-color);
+    }
+}
     </style>
 </head>
 <body>
